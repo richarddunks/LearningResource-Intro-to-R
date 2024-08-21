@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 Regression Analysis | Introduction to R for Crime Analysts</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 Regression Analysis | Introduction to R for Crime Analysts" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 Regression Analysis | Introduction to R for Crime Analysts" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Daniel Hammocks, Senior Data Scientist" />
+
+
+<meta name="date" content="2024-08-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="inferential-statistics.html"/>
+<link rel="next" href="geographic-mapping-and-spatial-analysis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/MOPAC-DS-Square.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#purpose-of-this-book"><i class="fa fa-check"></i>Purpose of this Book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#why-learn-r"><i class="fa fa-check"></i><b>1.2</b> Why Learn R?</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="introduction.html"><a href="introduction.html#flexibility-and-power"><i class="fa fa-check"></i><b>1.2.1</b> Flexibility and Power</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introduction.html"><a href="introduction.html#reproducibility"><i class="fa fa-check"></i><b>1.2.2</b> Reproducibility</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduction.html"><a href="introduction.html#extensive-community-and-package-ecosystem"><i class="fa fa-check"></i><b>1.2.3</b> Extensive Community and Package Ecosystem</a></li>
+<li class="chapter" data-level="1.2.4" data-path="introduction.html"><a href="introduction.html#cost"><i class="fa fa-check"></i><b>1.2.4</b> Cost</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#replicating-spss-functionality-in-r"><i class="fa fa-check"></i><b>1.3</b> Replicating SPSS Functionality in R</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="introduction.html"><a href="introduction.html#data-management"><i class="fa fa-check"></i><b>1.3.1</b> Data Management</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introduction.html"><a href="introduction.html#descriptive-statistics"><i class="fa fa-check"></i><b>1.3.2</b> Descriptive Statistics</a></li>
+<li class="chapter" data-level="1.3.3" data-path="introduction.html"><a href="introduction.html#statistical-tests"><i class="fa fa-check"></i><b>1.3.3</b> Statistical Tests</a></li>
+<li class="chapter" data-level="1.3.4" data-path="introduction.html"><a href="introduction.html#regression-analysis"><i class="fa fa-check"></i><b>1.3.4</b> Regression Analysis</a></li>
+<li class="chapter" data-level="1.3.5" data-path="introduction.html"><a href="introduction.html#data-visualisation"><i class="fa fa-check"></i><b>1.3.5</b> Data Visualisation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#transitioning-from-spss-to-r"><i class="fa fa-check"></i><b>1.4</b> Transitioning from SPSS to R</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction.html"><a href="introduction.html#building-confidence-in-r"><i class="fa fa-check"></i><b>1.4.1</b> Building Confidence in R</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction.html"><a href="introduction.html#leveraging-rs-ecosystem"><i class="fa fa-check"></i><b>1.4.2</b> Leveraging R’s Ecosystem</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#conclusion"><i class="fa fa-check"></i><b>1.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html"><i class="fa fa-check"></i><b>2</b> Getting Started with R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#the-r-environment"><i class="fa fa-check"></i><b>2.1</b> The R Environment</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#overview-of-the-rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> Overview of the RStudio Interface</a></li>
+<li class="chapter" data-level="2.1.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#console-vs.-scripts-vs.-notebooks"><i class="fa fa-check"></i><b>2.1.2</b> Console vs. Scripts vs. Notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#introduction-to-r-packages-and-installing-key-packages"><i class="fa fa-check"></i><b>2.2</b> Introduction to R Packages and Installing Key Packages</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#introduction-to-r-packages"><i class="fa fa-check"></i><b>2.2.1</b> Introduction to R Packages</a></li>
+<li class="chapter" data-level="2.2.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#installing-and-loading-packages"><i class="fa fa-check"></i><b>2.2.2</b> Installing and Loading Packages</a></li>
+<li class="chapter" data-level="2.2.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#key-packages-for-data-analysis"><i class="fa fa-check"></i><b>2.2.3</b> Key Packages for Data Analysis</a></li>
+<li class="chapter" data-level="2.2.4" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#managing-package-dependencies"><i class="fa fa-check"></i><b>2.2.4</b> Managing Package Dependencies</a></li>
+<li class="chapter" data-level="2.2.5" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#summary"><i class="fa fa-check"></i><b>2.2.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#coding-conventions-and-best-practices"><i class="fa fa-check"></i><b>2.3</b> Coding Conventions and Best Practices</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#writing-clean-and-readable-code"><i class="fa fa-check"></i><b>2.3.1</b> Writing Clean and Readable Code</a></li>
+<li class="chapter" data-level="2.3.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#commenting-and-structuring-scripts"><i class="fa fa-check"></i><b>2.3.2</b> Commenting and Structuring Scripts</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#data-types-and-structures"><i class="fa fa-check"></i><b>2.4</b> Data Types and Structures</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#introduction-to-vectors-data-frames-lists-and-factors"><i class="fa fa-check"></i><b>2.4.1</b> Introduction to Vectors, Data Frames, Lists, and Factors</a></li>
+<li class="chapter" data-level="2.4.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#comparing-r-data-types-to-spss-data-types"><i class="fa fa-check"></i><b>2.4.2</b> Comparing R Data Types to SPSS Data Types</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#basic-operations-and-functions-in-r"><i class="fa fa-check"></i><b>2.5</b> Basic Operations and Functions in R</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#arithmetic-operations"><i class="fa fa-check"></i><b>2.5.1</b> Arithmetic Operations</a></li>
+<li class="chapter" data-level="2.5.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#logical-operations"><i class="fa fa-check"></i><b>2.5.2</b> Logical Operations</a></li>
+<li class="chapter" data-level="2.5.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#basic-functions"><i class="fa fa-check"></i><b>2.5.3</b> Basic Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#conclusion-1"><i class="fa fa-check"></i><b>2.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-management-in-r.html"><a href="data-management-in-r.html"><i class="fa fa-check"></i><b>3</b> Data Management in R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#data-import-and-export"><i class="fa fa-check"></i><b>3.1</b> Data Import and Export</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#importing-data"><i class="fa fa-check"></i><b>3.1.1</b> Importing Data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#exporting-data"><i class="fa fa-check"></i><b>3.1.2</b> Exporting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#data-cleaning-and-preparation"><i class="fa fa-check"></i><b>3.2</b> Data Cleaning and Preparation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#handling-missing-data"><i class="fa fa-check"></i><b>3.2.1</b> Handling Missing Data</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#filtering-and-subsetting-data"><i class="fa fa-check"></i><b>3.2.2</b> Filtering and Subsetting Data</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-management-in-r.html"><a href="data-management-in-r.html#data-transformations"><i class="fa fa-check"></i><b>3.2.3</b> Data Transformations</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-management-in-r.html"><a href="data-management-in-r.html#the-dplyr-pipeline"><i class="fa fa-check"></i><b>3.2.4</b> The dplyr Pipeline</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-management-in-r.html"><a href="data-management-in-r.html#working-with-categorical-data"><i class="fa fa-check"></i><b>3.3</b> Working with Categorical Data</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#creating-and-manipulating-factors"><i class="fa fa-check"></i><b>3.3.1</b> Creating and Manipulating Factors</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#recoding-variables"><i class="fa fa-check"></i><b>3.3.2</b> Recoding Variables</a></li>
+<li class="chapter" data-level="3.3.3" data-path="data-management-in-r.html"><a href="data-management-in-r.html#frequency-tables-and-cross-tabulations"><i class="fa fa-check"></i><b>3.3.3</b> Frequency Tables and Cross-Tabulations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-management-in-r.html"><a href="data-management-in-r.html#conclusion-2"><i class="fa fa-check"></i><b>3.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html"><i class="fa fa-check"></i><b>4</b> Connecting to and Accessing a PostgreSQL Database</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#setting-up-the-environment"><i class="fa fa-check"></i><b>4.2</b> Setting Up the Environment</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#installing-necessary-packages"><i class="fa fa-check"></i><b>4.2.1</b> Installing Necessary Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#connecting-to-postgresql-using-rpostgres"><i class="fa fa-check"></i><b>4.3</b> Connecting to PostgreSQL (Using RPostgres)</a></li>
+<li class="chapter" data-level="4.4" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#querying-data-from-postgresql"><i class="fa fa-check"></i><b>4.4</b> Querying Data from PostgreSQL</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#executing-a-query"><i class="fa fa-check"></i><b>4.4.1</b> Executing a Query</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#handling-errors-and-troubleshooting"><i class="fa fa-check"></i><b>4.5</b> Handling Errors and Troubleshooting</a></li>
+<li class="chapter" data-level="4.6" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#conclusion-3"><i class="fa fa-check"></i><b>4.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html"><i class="fa fa-check"></i><b>5</b> Descriptive Statistics and Visualisations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#introduction-to-descriptive-statistics"><i class="fa fa-check"></i><b>5.1</b> Introduction to Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#understanding-descriptive-statistics"><i class="fa fa-check"></i><b>5.1.1</b> Understanding Descriptive Statistics</a></li>
+<li class="chapter" data-level="5.1.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#basic-descriptive-statistics-in-r"><i class="fa fa-check"></i><b>5.1.2</b> Basic Descriptive Statistics in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#creating-visualisations-with-ggplot2"><i class="fa fa-check"></i><b>5.2</b> Creating Visualisations with ggplot2</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#introduction-to-ggplot2"><i class="fa fa-check"></i><b>5.2.1</b> Introduction to ggplot2</a></li>
+<li class="chapter" data-level="5.2.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#creating-basic-plots"><i class="fa fa-check"></i><b>5.2.2</b> Creating Basic Plots</a></li>
+<li class="chapter" data-level="5.2.3" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#customising-your-plots"><i class="fa fa-check"></i><b>5.2.3</b> Customising Your Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#descriptive-statistics-with-dplyr"><i class="fa fa-check"></i><b>5.3</b> Descriptive Statistics with dplyr</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#using-dplyr-to-summarise-data"><i class="fa fa-check"></i><b>5.3.1</b> Using dplyr to Summarise Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#combining-dplyr-with-ggplot2"><i class="fa fa-check"></i><b>5.3.2</b> Combining dplyr with ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#advanced-visualisation-techniques"><i class="fa fa-check"></i><b>5.4</b> Advanced Visualisation Techniques</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#faceting"><i class="fa fa-check"></i><b>5.4.1</b> Faceting</a></li>
+<li class="chapter" data-level="5.4.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#combining-multiple-geoms"><i class="fa fa-check"></i><b>5.4.2</b> Combining Multiple Geoms</a></li>
+<li class="chapter" data-level="5.4.3" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#saving-your-plots"><i class="fa fa-check"></i><b>5.4.3</b> Saving Your Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#conclusion-4"><i class="fa fa-check"></i><b>5.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html"><i class="fa fa-check"></i><b>6</b> Survey Analysis in R</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#introduction-to-survey-data"><i class="fa fa-check"></i><b>6.1</b> Introduction to Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#key-concepts-in-survey-analysis"><i class="fa fa-check"></i><b>6.1.1</b> Key Concepts in Survey Analysis</a></li>
+<li class="chapter" data-level="6.1.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#understanding-survey-data-structures"><i class="fa fa-check"></i><b>6.1.2</b> Understanding Survey Data Structures</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#importing-and-preparing-survey-data"><i class="fa fa-check"></i><b>6.2</b> Importing and Preparing Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#converting-data-for-survey-analysis"><i class="fa fa-check"></i><b>6.2.1</b> Converting Data for Survey Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#descriptive-analysis-of-survey-data"><i class="fa fa-check"></i><b>6.3</b> Descriptive Analysis of Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#calculating-means-and-totals"><i class="fa fa-check"></i><b>6.3.1</b> Calculating Means and Totals</a></li>
+<li class="chapter" data-level="6.3.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#frequencies-and-cross-tabulations"><i class="fa fa-check"></i><b>6.3.2</b> Frequencies and Cross-tabulations</a></li>
+<li class="chapter" data-level="6.3.3" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#comparing-results-with-spss-survey-functions"><i class="fa fa-check"></i><b>6.3.3</b> Comparing Results with SPSS Survey Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#weighting-survey-data"><i class="fa fa-check"></i><b>6.4</b> Weighting Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#applying-weights"><i class="fa fa-check"></i><b>6.4.1</b> Applying Weights</a></li>
+<li class="chapter" data-level="6.4.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#analysing-weighted-survey-data"><i class="fa fa-check"></i><b>6.4.2</b> Analysing Weighted Survey Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#conclusion-5"><i class="fa fa-check"></i><b>6.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="inferential-statistics.html"><a href="inferential-statistics.html"><i class="fa fa-check"></i><b>7</b> Inferential Statistics</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#hypothesis-testing"><i class="fa fa-check"></i><b>7.1</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#t-tests"><i class="fa fa-check"></i><b>7.1.1</b> T-tests</a></li>
+<li class="chapter" data-level="7.1.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#chi-square-tests"><i class="fa fa-check"></i><b>7.1.2</b> Chi-square Tests</a></li>
+<li class="chapter" data-level="7.1.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#anova-analysis-of-variance"><i class="fa fa-check"></i><b>7.1.3</b> ANOVA (Analysis of Variance)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#correlation-analysis"><i class="fa fa-check"></i><b>7.2</b> Correlation Analysis</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#pearson-correlation"><i class="fa fa-check"></i><b>7.2.1</b> Pearson Correlation</a></li>
+<li class="chapter" data-level="7.2.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#spearman-correlation"><i class="fa fa-check"></i><b>7.2.2</b> Spearman Correlation</a></li>
+<li class="chapter" data-level="7.2.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#pearson-vs-spearman"><i class="fa fa-check"></i><b>7.2.3</b> Pearson vs Spearman?</a></li>
+<li class="chapter" data-level="7.2.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#visualising-correlations"><i class="fa fa-check"></i><b>7.2.4</b> Visualising Correlations</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#conclusion-6"><i class="fa fa-check"></i><b>7.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html"><i class="fa fa-check"></i><b>8</b> Regression Analysis</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#introduction-to-regression-analysis"><i class="fa fa-check"></i><b>8.1</b> Introduction to Regression Analysis</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#what-is-linear-regression"><i class="fa fa-check"></i><b>8.1.1</b> What is Linear Regression?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#simple-linear-regression-in-r"><i class="fa fa-check"></i><b>8.2</b> Simple Linear Regression in R</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#performing-simple-linear-regression"><i class="fa fa-check"></i><b>8.2.1</b> Performing Simple Linear Regression</a></li>
+<li class="chapter" data-level="8.2.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#interpreting-the-output"><i class="fa fa-check"></i><b>8.2.2</b> Interpreting the Output</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.3</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#performing-multiple-linear-regression"><i class="fa fa-check"></i><b>8.3.1</b> Performing Multiple Linear Regression</a></li>
+<li class="chapter" data-level="8.3.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#detailed-interpretation-of-the-output"><i class="fa fa-check"></i><b>8.3.2</b> Detailed Interpretation of the Output</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#checking-model-assumptions"><i class="fa fa-check"></i><b>8.4</b> Checking Model Assumptions</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-1-linearity"><i class="fa fa-check"></i><b>8.4.1</b> Assumption 1: Linearity</a></li>
+<li class="chapter" data-level="8.4.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-2-normality-of-residuals"><i class="fa fa-check"></i><b>8.4.2</b> Assumption 2: Normality of Residuals</a></li>
+<li class="chapter" data-level="8.4.3" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-3-homoscedasticity"><i class="fa fa-check"></i><b>8.4.3</b> Assumption 3: Homoscedasticity</a></li>
+<li class="chapter" data-level="8.4.4" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-4-independence-of-errors"><i class="fa fa-check"></i><b>8.4.4</b> Assumption 4: Independence of Errors</a></li>
+<li class="chapter" data-level="8.4.5" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-5-multicollinearity"><i class="fa fa-check"></i><b>8.4.5</b> Assumption 5: Multicollinearity</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#transformations-and-interaction-terms"><i class="fa fa-check"></i><b>8.5</b> Transformations and Interaction Terms</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#when-and-how-to-apply-transformations"><i class="fa fa-check"></i><b>8.5.1</b> When and How to Apply Transformations</a></li>
+<li class="chapter" data-level="8.5.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#using-interaction-terms"><i class="fa fa-check"></i><b>8.5.2</b> Using Interaction Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#logistic-regression"><i class="fa fa-check"></i><b>8.6</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#performing-logistic-regression-in-r"><i class="fa fa-check"></i><b>8.6.1</b> Performing Logistic Regression in R</a></li>
+<li class="chapter" data-level="8.6.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#interpreting-logistic-regression-output"><i class="fa fa-check"></i><b>8.6.2</b> Interpreting Logistic Regression Output</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#checking-model-assumptions-for-logistic-regression"><i class="fa fa-check"></i><b>8.7</b> Checking Model Assumptions for Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-1-linearity-of-the-logit"><i class="fa fa-check"></i><b>8.7.1</b> Assumption 1: Linearity of the Logit</a></li>
+<li class="chapter" data-level="8.7.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-2-independence-of-observations"><i class="fa fa-check"></i><b>8.7.2</b> Assumption 2: Independence of Observations</a></li>
+<li class="chapter" data-level="8.7.3" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-3-absence-of-multicollinearity"><i class="fa fa-check"></i><b>8.7.3</b> Assumption 3: Absence of Multicollinearity</a></li>
+<li class="chapter" data-level="8.7.4" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-4-sufficient-sample-size"><i class="fa fa-check"></i><b>8.7.4</b> Assumption 4: Sufficient Sample Size</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#model-validation-and-diagnostics"><i class="fa fa-check"></i><b>8.8</b> Model Validation and Diagnostics</a>
+<ul>
+<li class="chapter" data-level="8.8.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#cross-validation"><i class="fa fa-check"></i><b>8.8.1</b> Cross-Validation</a></li>
+<li class="chapter" data-level="8.8.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#dealing-with-overfitting"><i class="fa fa-check"></i><b>8.8.2</b> Dealing with Overfitting</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#conclusion-7"><i class="fa fa-check"></i><b>8.9</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html"><i class="fa fa-check"></i><b>9</b> Geographic Mapping and Spatial Analysis</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#introduction-to-geographic-data-in-r"><i class="fa fa-check"></i><b>9.1</b> Introduction to Geographic Data in R</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#understanding-geographic-data-formats"><i class="fa fa-check"></i><b>9.1.1</b> Understanding Geographic Data Formats</a></li>
+<li class="chapter" data-level="9.1.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#importing-and-handling-spatial-data-with-the-sf-package"><i class="fa fa-check"></i><b>9.1.2</b> Importing and Handling Spatial Data with the <code>sf</code> Package</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#geographic-coordinate-systems-and-projections"><i class="fa fa-check"></i><b>9.2</b> Geographic Coordinate Systems and Projections</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#introduction-to-coordinate-systems"><i class="fa fa-check"></i><b>9.2.1</b> Introduction to Coordinate Systems</a></li>
+<li class="chapter" data-level="9.2.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#common-issues-with-coordinate-systems-in-r"><i class="fa fa-check"></i><b>9.2.2</b> Common Issues with Coordinate Systems in R</a></li>
+<li class="chapter" data-level="9.2.3" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#handling-coordinate-systems-in-r"><i class="fa fa-check"></i><b>9.2.3</b> Handling Coordinate Systems in R</a></li>
+<li class="chapter" data-level="9.2.4" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#practical-considerations"><i class="fa fa-check"></i><b>9.2.4</b> Practical Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#creating-basic-maps"><i class="fa fa-check"></i><b>9.3</b> Creating Basic Maps</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#plotting-data-on-maps-using-ggplot2-and-sf"><i class="fa fa-check"></i><b>9.3.1</b> Plotting Data on Maps Using ggplot2 and sf</a></li>
+<li class="chapter" data-level="9.3.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#customising-maps"><i class="fa fa-check"></i><b>9.3.2</b> Customising Maps</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#spatial-analysis"><i class="fa fa-check"></i><b>9.4</b> Spatial Analysis</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#basic-spatial-operations"><i class="fa fa-check"></i><b>9.4.1</b> Basic Spatial Operations</a></li>
+<li class="chapter" data-level="9.4.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#creating-choropleth-maps"><i class="fa fa-check"></i><b>9.4.2</b> Creating Choropleth Maps</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#conclusion-8"><i class="fa fa-check"></i><b>9.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html"><i class="fa fa-check"></i>Exercise Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-2"><i class="fa fa-check"></i>Chapter 2</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-3"><i class="fa fa-check"></i>Chapter 3</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-5"><i class="fa fa-check"></i>Chapter 5</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-6"><i class="fa fa-check"></i>Chapter 6</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-7"><i class="fa fa-check"></i>Chapter 7</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-8"><i class="fa fa-check"></i>Chapter 8</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-9"><i class="fa fa-check"></i>Chapter 9</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R for Crime Analysts</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regression-analysis-1" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">8</span> Regression Analysis<a href="regression-analysis-1.html#regression-analysis-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Regression analysis is one of the most commonly used statistical techniques for exploring relationships between variables. This chapter will walk you through the fundamentals of regression analysis in R, comparing it with similar procedures in SPSS. We will cover simple and multiple linear regression, logistic regression, and the necessary steps to validate your models thoroughly, including checking assumptions, transformations, and handling multicollinearity.</p>
+<div id="introduction-to-regression-analysis" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Introduction to Regression Analysis<a href="regression-analysis-1.html#introduction-to-regression-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Regression analysis aims to model the relationship between a dependent variable (often referred to as the outcome or response variable) and one or more independent variables (predictors). The output of a regression model helps in understanding the influence of predictors on the outcome and can be used for prediction purposes.</p>
+<div id="what-is-linear-regression" class="section level3 hasAnchor" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> What is Linear Regression?<a href="regression-analysis-1.html#what-is-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Linear regression models the relationship between a dependent variable <span class="math inline">\(Y\)</span> and one or more independent variables <span class="math inline">\(X\)</span>. The simplest form is the linear equation:</p>
+<p><span class="math display">\[
+Y = \beta_0 + \beta_1 X_1 + \epsilon
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(Y\)</span> is the dependent variable.</li>
+<li><span class="math inline">\(\beta_0\)</span> is the intercept.</li>
+<li><span class="math inline">\(\beta_1\)</span> is the slope of the line (coefficient of <span class="math inline">\(X_1\)</span>).</li>
+<li><span class="math inline">\(X_1\)</span> is the independent variable.</li>
+<li><span class="math inline">\(\epsilon\)</span> is the error term, representing the difference between observed and predicted values.</li>
+</ul>
+</div>
+</div>
+<div id="simple-linear-regression-in-r" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Simple Linear Regression in R<a href="regression-analysis-1.html#simple-linear-regression-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section we will utilise a fictional dataset on <a href="data/data_vawg.csv">Violence Against Women &amp; Girls (VAWG)</a>. You can download a copy by clicking on the link.</p>
+<div id="performing-simple-linear-regression" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Performing Simple Linear Regression<a href="regression-analysis-1.html#performing-simple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Simple linear regression involves a single independent variable. In R, this is done using the <code>lm()</code> function.</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="regression-analysis-1.html#cb102-1" tabindex="-1"></a><span class="co"># Perform simple linear regression</span></span>
+<span id="cb102-2"><a href="regression-analysis-1.html#cb102-2" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data)</span>
+<span id="cb102-3"><a href="regression-analysis-1.html#cb102-3" tabindex="-1"></a>  </span>
+<span id="cb102-4"><a href="regression-analysis-1.html#cb102-4" tabindex="-1"></a><span class="co"># View the model summary</span></span>
+<span id="cb102-5"><a href="regression-analysis-1.html#cb102-5" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<p><strong>SPSS Equivalent:</strong> In SPSS, linear regression is performed through <strong>Analyse &gt; Regression &gt; Linear…</strong>.</p>
+<p>In this example, we will fit a linear model to predict the number of <code>Reported_VAWG_Incidents</code> in a given geographic area using the <code>Unemployment_Rate</code>.</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="regression-analysis-1.html#cb103-1" tabindex="-1"></a><span class="co"># Load the dataset from csv file</span></span>
+<span id="cb103-2"><a href="regression-analysis-1.html#cb103-2" tabindex="-1"></a>data_vawg <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;data/data_vawg.csv&#39;</span>)</span>
+<span id="cb103-3"><a href="regression-analysis-1.html#cb103-3" tabindex="-1"></a></span>
+<span id="cb103-4"><a href="regression-analysis-1.html#cb103-4" tabindex="-1"></a><span class="co"># Perform simple linear regression</span></span>
+<span id="cb103-5"><a href="regression-analysis-1.html#cb103-5" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Reported_VAWG_Incidents <span class="sc">~</span> Unemployment_Rate, <span class="at">data =</span> data_vawg)</span>
+<span id="cb103-6"><a href="regression-analysis-1.html#cb103-6" tabindex="-1"></a>  </span>
+<span id="cb103-7"><a href="regression-analysis-1.html#cb103-7" tabindex="-1"></a><span class="co"># View the model summary</span></span>
+<span id="cb103-8"><a href="regression-analysis-1.html#cb103-8" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Reported_VAWG_Incidents ~ Unemployment_Rate, data = data_vawg)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -28.883  -7.665   0.156   8.327  36.064 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       132.4752     4.3074  30.755  &lt; 2e-16 ***
+## Unemployment_Rate   2.5977     0.4188   6.203 1.32e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 12.26 on 98 degrees of freedom
+## Multiple R-squared:  0.282,  Adjusted R-squared:  0.2746 
+## F-statistic: 38.48 on 1 and 98 DF,  p-value: 1.321e-08</code></pre>
+</div>
+<div id="interpreting-the-output" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Interpreting the Output<a href="regression-analysis-1.html#interpreting-the-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When you run the <code>summary(model)</code> command, the following elements are crucial:</p>
+<ul>
+<li><p><strong>Coefficients:</strong> These indicate the relationship between the independent variable (Unemployment_Rate) and the dependent variable (VAWG). A positive coefficient for Unemployment Rate suggests that as Unemployment Rate increases, the Number of VAWG Incidents also increases.</p></li>
+<li><p><strong>R-squared:</strong> This statistic tells you the proportion of variance in the dependent variable that can be explained by the dependent variable. An R-squared close to 1 indicates a good fit.</p></li>
+<li><p><strong>P-value:</strong> Associated with the coefficients, the p-value helps you determine whether the relationship between the variables is statistically significant. A p-value less than 0.05 typically indicates significance. We can see – indicated by the three ’***’ – that the relationship between unemployment and the number of incidents is statistically significant.</p></li>
+</ul>
+<p><strong>SPSS Equivalent:</strong> SPSS outputs similar tables with coefficients, R-squared values, and significance levels.</p>
+</div>
+</div>
+<div id="multiple-linear-regression" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Multiple Linear Regression<a href="regression-analysis-1.html#multiple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Multiple linear regression extends simple linear regression by including more than one independent variable.</p>
+<div id="performing-multiple-linear-regression" class="section level3 hasAnchor" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> Performing Multiple Linear Regression<a href="regression-analysis-1.html#performing-multiple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Extending the model is easily completed by increasing the number of terms in the <code>lm()</code> function.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="regression-analysis-1.html#cb105-1" tabindex="-1"></a><span class="co"># Perform multiple linear regression</span></span>
+<span id="cb105-2"><a href="regression-analysis-1.html#cb105-2" tabindex="-1"></a>model_multiple <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3, <span class="at">data =</span> data)</span>
+<span id="cb105-3"><a href="regression-analysis-1.html#cb105-3" tabindex="-1"></a></span>
+<span id="cb105-4"><a href="regression-analysis-1.html#cb105-4" tabindex="-1"></a><span class="co"># View the model summary</span></span>
+<span id="cb105-5"><a href="regression-analysis-1.html#cb105-5" tabindex="-1"></a><span class="fu">summary</span>(model_multiple)</span></code></pre></div>
+<p>In this example we will expand our model to predict the Number of Reported VAWG Incidents by increasing the number of independent variables.</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="regression-analysis-1.html#cb106-1" tabindex="-1"></a><span class="co"># Perform multiple linear regression</span></span>
+<span id="cb106-2"><a href="regression-analysis-1.html#cb106-2" tabindex="-1"></a>model_multiple <span class="ot">&lt;-</span> <span class="fu">lm</span>(Reported_VAWG_Incidents <span class="sc">~</span> Unemployment_Rate <span class="sc">+</span></span>
+<span id="cb106-3"><a href="regression-analysis-1.html#cb106-3" tabindex="-1"></a>                                               Community_Programs <span class="sc">+</span></span>
+<span id="cb106-4"><a href="regression-analysis-1.html#cb106-4" tabindex="-1"></a>                                               Population_Density <span class="sc">+</span></span>
+<span id="cb106-5"><a href="regression-analysis-1.html#cb106-5" tabindex="-1"></a>                                               Police_Patrols,</span>
+<span id="cb106-6"><a href="regression-analysis-1.html#cb106-6" tabindex="-1"></a>                     <span class="at">data =</span> data_vawg)</span>
+<span id="cb106-7"><a href="regression-analysis-1.html#cb106-7" tabindex="-1"></a>  </span>
+<span id="cb106-8"><a href="regression-analysis-1.html#cb106-8" tabindex="-1"></a><span class="co"># View the model summary</span></span>
+<span id="cb106-9"><a href="regression-analysis-1.html#cb106-9" tabindex="-1"></a><span class="fu">summary</span>(model_multiple)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Reported_VAWG_Incidents ~ Unemployment_Rate + Community_Programs + 
+##     Population_Density + Police_Patrols, data = data_vawg)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -26.8934  -5.8510   0.5094   6.1948  26.8093 
+## 
+## Coefficients:
+##                      Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        156.337257   9.142655  17.100  &lt; 2e-16 ***
+## Unemployment_Rate    2.543248   0.359892   7.067 2.64e-10 ***
+## Community_Programs  -2.155397   0.350556  -6.149 1.83e-08 ***
+## Population_Density   0.001013   0.002283   0.443    0.658    
+## Police_Patrols      -0.057337   0.116747  -0.491    0.624    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 10.51 on 95 degrees of freedom
+## Multiple R-squared:  0.4886, Adjusted R-squared:  0.4671 
+## F-statistic: 22.69 on 4 and 95 DF,  p-value: 3.545e-13</code></pre>
+</div>
+<div id="detailed-interpretation-of-the-output" class="section level3 hasAnchor" number="8.3.2">
+<h3><span class="header-section-number">8.3.2</span> Detailed Interpretation of the Output<a href="regression-analysis-1.html#detailed-interpretation-of-the-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p><strong>Coefficients:</strong> Each coefficient represents the effect of a one-unit change in the predictor while holding the other variables constant. For instance, the coefficient for <code>Community_Programs</code> indicates how much the <code>Reported_VAWG_Incidents</code> decreases (or increases with a positive coefficient) with an increase in the number of <code>Community_Programs</code>, assuming the other variables remain unchanged.</p></li>
+<li><p><strong>R-squared and Adjusted R-squared:</strong> R-squared indicates the proportion of variance explained by all predictors. Adjusted R-squared adjusts for the number of predictors in the model, providing a more accurate measure when comparing models with different numbers of predictors.</p></li>
+<li><p><strong>P-values:</strong> Check these for each predictor to determine if they significantly contribute to the model.</p></li>
+</ul>
+</div>
+</div>
+<div id="checking-model-assumptions" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Checking Model Assumptions<a href="regression-analysis-1.html#checking-model-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It’s crucial to check if the assumptions of linear regression are met before trusting the results. This section runs through how to check the various assumptions.</p>
+<p><strong>SPSS Equivalent:</strong> SPSS provides diagnostics to check these assumptions under the Regression dialog, though some assumptions like multicollinearity (VIF) require manual checks through syntax or additional output.</p>
+<div id="assumption-1-linearity" class="section level3 hasAnchor" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> Assumption 1: Linearity<a href="regression-analysis-1.html#assumption-1-linearity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The relationship between the predictors and the outcome should be linear.</p>
+<p><strong>How to Check:</strong> Plot residuals versus fitted values. If the assumption is met, the points should scatter randomly around the horizontal line (y = 0).</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="regression-analysis-1.html#cb108-1" tabindex="-1"></a><span class="co">#Plot residuals vs fitted values</span></span>
+<span id="cb108-2"><a href="regression-analysis-1.html#cb108-2" tabindex="-1"></a><span class="fu">plot</span>(model_multiple<span class="sc">$</span>fitted.values, <span class="fu">resid</span>(model_multiple))</span>
+<span id="cb108-3"><a href="regression-analysis-1.html#cb108-3" tabindex="-1"></a></span>
+<span id="cb108-4"><a href="regression-analysis-1.html#cb108-4" tabindex="-1"></a><span class="co">#Add horizontal line at y = 0</span></span>
+<span id="cb108-5"><a href="regression-analysis-1.html#cb108-5" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
+</div>
+<div id="assumption-2-normality-of-residuals" class="section level3 hasAnchor" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> Assumption 2: Normality of Residuals<a href="regression-analysis-1.html#assumption-2-normality-of-residuals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Residuals (errors) should be normally distributed.</p>
+<p><strong>How to Check:</strong> Create a Q-Q plot. Residuals should closely follow the 45-degree line.</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="regression-analysis-1.html#cb109-1" tabindex="-1"></a><span class="co">#Create a Q-Q plot</span></span>
+<span id="cb109-2"><a href="regression-analysis-1.html#cb109-2" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">resid</span>(model_multiple))</span>
+<span id="cb109-3"><a href="regression-analysis-1.html#cb109-3" tabindex="-1"></a></span>
+<span id="cb109-4"><a href="regression-analysis-1.html#cb109-4" tabindex="-1"></a><span class="co">#Add Q-Q line</span></span>
+<span id="cb109-5"><a href="regression-analysis-1.html#cb109-5" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">resid</span>(model_multiple), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
+</div>
+<div id="assumption-3-homoscedasticity" class="section level3 hasAnchor" number="8.4.3">
+<h3><span class="header-section-number">8.4.3</span> Assumption 3: Homoscedasticity<a href="regression-analysis-1.html#assumption-3-homoscedasticity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Residuals should have constant variance across all levels of the independent variables.</p>
+<p><strong>How to Check:</strong> The Scale-Location plot helps diagnose this. Look for a horizontal line with equally spread points.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="regression-analysis-1.html#cb110-1" tabindex="-1"></a><span class="co">#Plot Scale-Location plot</span></span>
+<span id="cb110-2"><a href="regression-analysis-1.html#cb110-2" tabindex="-1"></a><span class="fu">plot</span>(model_multiple, <span class="at">which =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+</div>
+<div id="assumption-4-independence-of-errors" class="section level3 hasAnchor" number="8.4.4">
+<h3><span class="header-section-number">8.4.4</span> Assumption 4: Independence of Errors<a href="regression-analysis-1.html#assumption-4-independence-of-errors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Errors should be independent of each other.</p>
+<p><strong>How to Check:</strong> The Durbin-Watson test can be performed using the car package.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="regression-analysis-1.html#cb111-1" tabindex="-1"></a><span class="co">#Load the car library</span></span>
+<span id="cb111-2"><a href="regression-analysis-1.html#cb111-2" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb111-3"><a href="regression-analysis-1.html#cb111-3" tabindex="-1"></a></span>
+<span id="cb111-4"><a href="regression-analysis-1.html#cb111-4" tabindex="-1"></a><span class="co">#Run the DurbinWatson test</span></span>
+<span id="cb111-5"><a href="regression-analysis-1.html#cb111-5" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(model_multiple)</span></code></pre></div>
+<pre><code>##  lag Autocorrelation D-W Statistic p-value
+##    1      -0.2217769      2.415587   0.038
+##  Alternative hypothesis: rho != 0</code></pre>
+</div>
+<div id="assumption-5-multicollinearity" class="section level3 hasAnchor" number="8.4.5">
+<h3><span class="header-section-number">8.4.5</span> Assumption 5: Multicollinearity<a href="regression-analysis-1.html#assumption-5-multicollinearity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Predictors should not be too highly correlated with each other, as this can inflate standard errors and make it difficult to determine the effect of each predictor.</p>
+<p><strong>How to Check:</strong> The Variance Inflation Factor (VIF) helps in detecting multicollinearity. VIF values greater than 10 may indicate problematic multicollinearity.</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="regression-analysis-1.html#cb113-1" tabindex="-1"></a><span class="co">#Calculate the Variance Inflation Factors</span></span>
+<span id="cb113-2"><a href="regression-analysis-1.html#cb113-2" tabindex="-1"></a><span class="fu">vif</span>(model_multiple)</span></code></pre></div>
+<pre><code>##  Unemployment_Rate Community_Programs Population_Density     Police_Patrols 
+##           1.005358           1.005636           1.020414           1.021191</code></pre>
+</div>
+</div>
+<div id="transformations-and-interaction-terms" class="section level2 hasAnchor" number="8.5">
+<h2><span class="header-section-number">8.5</span> Transformations and Interaction Terms<a href="regression-analysis-1.html#transformations-and-interaction-terms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="when-and-how-to-apply-transformations" class="section level3 hasAnchor" number="8.5.1">
+<h3><span class="header-section-number">8.5.1</span> When and How to Apply Transformations<a href="regression-analysis-1.html#when-and-how-to-apply-transformations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Transformations can help correct violations of assumptions. For example:</p>
+<p><strong>Log Transformation:</strong> Useful when the relationship between the variables is exponential rather than linear.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="regression-analysis-1.html#cb115-1" tabindex="-1"></a><span class="co">#Linear Model with Log Transformation</span></span>
+<span id="cb115-2"><a href="regression-analysis-1.html#cb115-2" tabindex="-1"></a>model_log <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(y) <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3, <span class="at">data =</span> data)</span>
+<span id="cb115-3"><a href="regression-analysis-1.html#cb115-3" tabindex="-1"></a></span>
+<span id="cb115-4"><a href="regression-analysis-1.html#cb115-4" tabindex="-1"></a><span class="fu">summary</span>(model_log)</span></code></pre></div>
+<p><strong>Square Root Transformation:</strong> Applied to right-skewed data to stabilise variance.</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="regression-analysis-1.html#cb116-1" tabindex="-1"></a><span class="co">#Linear Model with Square Root Transformation</span></span>
+<span id="cb116-2"><a href="regression-analysis-1.html#cb116-2" tabindex="-1"></a>model_sqrt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">sqrt</span>(y) <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3, <span class="at">data =</span> data)</span>
+<span id="cb116-3"><a href="regression-analysis-1.html#cb116-3" tabindex="-1"></a></span>
+<span id="cb116-4"><a href="regression-analysis-1.html#cb116-4" tabindex="-1"></a><span class="fu">summary</span>(model_sqrt)</span></code></pre></div>
+</div>
+<div id="using-interaction-terms" class="section level3 hasAnchor" number="8.5.2">
+<h3><span class="header-section-number">8.5.2</span> Using Interaction Terms<a href="regression-analysis-1.html#using-interaction-terms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Interaction terms allow you to model the combined effect of two or more predictors.</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="regression-analysis-1.html#cb117-1" tabindex="-1"></a><span class="co">#Create Linear Model with Interaction Term</span></span>
+<span id="cb117-2"><a href="regression-analysis-1.html#cb117-2" tabindex="-1"></a>model_interaction <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">*</span> x2, <span class="at">data =</span> data)</span>
+<span id="cb117-3"><a href="regression-analysis-1.html#cb117-3" tabindex="-1"></a><span class="fu">summary</span>(model_interaction)</span></code></pre></div>
+<p><strong>SPSS Equivalent:</strong> SPSS allows adding interaction terms through manual creation or using the Paste option to modify syntax.</p>
+<p>For instance, the effect of <code>Unemployment_Rate</code> on <code>Reported_VAWG_Incidents</code> might depend on the level of <code>Population_Density</code>. Let us include an interaction term between <code>Unemployment_Rate</code> and <code>Population_Density</code>.</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="regression-analysis-1.html#cb118-1" tabindex="-1"></a><span class="co">#Create Linear Model with Interaction Term</span></span>
+<span id="cb118-2"><a href="regression-analysis-1.html#cb118-2" tabindex="-1"></a>model_interaction <span class="ot">&lt;-</span> <span class="fu">lm</span>(Reported_VAWG_Incidents <span class="sc">~</span> Unemployment_Rate <span class="sc">*</span> Population_Density, <span class="at">data =</span> data)</span>
+<span id="cb118-3"><a href="regression-analysis-1.html#cb118-3" tabindex="-1"></a></span>
+<span id="cb118-4"><a href="regression-analysis-1.html#cb118-4" tabindex="-1"></a><span class="fu">summary</span>(model_interaction)</span></code></pre></div>
+<p>The interaction term (Unemployment_Rate:Population_Density) allows us to see how the relationship between Unemployment_Rate and Reported_VAWG_Incidents changes at different levels of Population_Density.</p>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>Residential burglaries are on the up and you want to assess which factors are contributing to the increase. Using the following dataset <a href="data/data_burglaries.csv">data_burglaries</a> perform a multiple linear regression.</p>
+</div>
+</div>
+</div>
+<div id="logistic-regression" class="section level2 hasAnchor" number="8.6">
+<h2><span class="header-section-number">8.6</span> Logistic Regression<a href="regression-analysis-1.html#logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When the dependent variable is binary (e.g., Yes/No, 0/1), logistic regression is appropriate.</p>
+<p>In this section we will utilise a fictional dataset on <a href="data/data_arrests.csv">Police Arrests</a>. You can download a copy by clicking on the link.</p>
+<div id="performing-logistic-regression-in-r" class="section level3 hasAnchor" number="8.6.1">
+<h3><span class="header-section-number">8.6.1</span> Performing Logistic Regression in R<a href="regression-analysis-1.html#performing-logistic-regression-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Logistic regression in R is handled by the <code>glm()</code> function with the family parameter set to <code>binomial</code>.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="regression-analysis-1.html#cb119-1" tabindex="-1"></a><span class="co">#Create a logistic regression model</span></span>
+<span id="cb119-2"><a href="regression-analysis-1.html#cb119-2" tabindex="-1"></a>model_logistic <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> data, <span class="at">family =</span> binomial)</span>
+<span id="cb119-3"><a href="regression-analysis-1.html#cb119-3" tabindex="-1"></a></span>
+<span id="cb119-4"><a href="regression-analysis-1.html#cb119-4" tabindex="-1"></a><span class="fu">summary</span>(model_logistic)</span></code></pre></div>
+<p>For example, we want to analyse the factors that influence whether an arrest is made following a reported crime.</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="regression-analysis-1.html#cb120-1" tabindex="-1"></a><span class="co"># Load the dataset from csv file</span></span>
+<span id="cb120-2"><a href="regression-analysis-1.html#cb120-2" tabindex="-1"></a>data_arrests <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;data/data_arrests.csv&#39;</span>)</span>
+<span id="cb120-3"><a href="regression-analysis-1.html#cb120-3" tabindex="-1"></a></span>
+<span id="cb120-4"><a href="regression-analysis-1.html#cb120-4" tabindex="-1"></a><span class="co">#Note that some of the variables need to be converted to factors</span></span>
+<span id="cb120-5"><a href="regression-analysis-1.html#cb120-5" tabindex="-1"></a>data_arrests<span class="sc">$</span>Crime_Type <span class="ot">=</span> <span class="fu">factor</span>(data_arrests<span class="sc">$</span>Crime_Type)</span>
+<span id="cb120-6"><a href="regression-analysis-1.html#cb120-6" tabindex="-1"></a>data_arrests<span class="sc">$</span>Time_of_Day <span class="ot">=</span> <span class="fu">factor</span>(data_arrests<span class="sc">$</span>Time_of_Day)</span>
+<span id="cb120-7"><a href="regression-analysis-1.html#cb120-7" tabindex="-1"></a></span>
+<span id="cb120-8"><a href="regression-analysis-1.html#cb120-8" tabindex="-1"></a><span class="co">#Create a logistic regression model</span></span>
+<span id="cb120-9"><a href="regression-analysis-1.html#cb120-9" tabindex="-1"></a>model_logistic <span class="ot">&lt;-</span> <span class="fu">glm</span>(Arrest_Made <span class="sc">~</span> Crime_Type <span class="sc">+</span></span>
+<span id="cb120-10"><a href="regression-analysis-1.html#cb120-10" tabindex="-1"></a>                                    Time_of_Day <span class="sc">+</span></span>
+<span id="cb120-11"><a href="regression-analysis-1.html#cb120-11" tabindex="-1"></a>                                    High_Crime_Area <span class="sc">+</span></span>
+<span id="cb120-12"><a href="regression-analysis-1.html#cb120-12" tabindex="-1"></a>                                    Police_On_Duty,</span>
+<span id="cb120-13"><a href="regression-analysis-1.html#cb120-13" tabindex="-1"></a>                      <span class="at">data =</span> data_arrests,</span>
+<span id="cb120-14"><a href="regression-analysis-1.html#cb120-14" tabindex="-1"></a>                      <span class="at">family =</span> binomial)</span>
+<span id="cb120-15"><a href="regression-analysis-1.html#cb120-15" tabindex="-1"></a></span>
+<span id="cb120-16"><a href="regression-analysis-1.html#cb120-16" tabindex="-1"></a><span class="fu">summary</span>(model_logistic)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Arrest_Made ~ Crime_Type + Time_of_Day + High_Crime_Area + 
+##     Police_On_Duty, family = binomial, data = data_arrests)
+## 
+## Coefficients:
+##                    Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)         0.08619    0.70859   0.122    0.903
+## Crime_TypeBurglary  0.23511    0.51006   0.461    0.645
+## Crime_TypeRobbery   0.06021    0.48679   0.124    0.902
+## Crime_TypeTheft    -0.27908    0.48041  -0.581    0.561
+## Time_of_DayNight    0.37125    0.35067   1.059    0.290
+## High_Crime_Area     0.32596    0.35093   0.929    0.353
+## Police_On_Duty      0.08227    0.05779   1.424    0.155
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 210.76  on 199  degrees of freedom
+## Residual deviance: 205.49  on 193  degrees of freedom
+## AIC: 219.49
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+<div id="interpreting-logistic-regression-output" class="section level3 hasAnchor" number="8.6.2">
+<h3><span class="header-section-number">8.6.2</span> Interpreting Logistic Regression Output<a href="regression-analysis-1.html#interpreting-logistic-regression-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>Coefficients:</strong> In logistic regression, the coefficients represent the change in the log odds of the dependent variable for a one-unit increase in the predictor variable. To make the results more interpretable, you can convert the coefficients to odds ratios using the <code>exp()</code> function.</li>
+</ul>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="regression-analysis-1.html#cb122-1" tabindex="-1"></a><span class="co"># Convert coefficients to odds ratios</span></span>
+<span id="cb122-2"><a href="regression-analysis-1.html#cb122-2" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(model_logistic))</span></code></pre></div>
+<pre><code>##        (Intercept) Crime_TypeBurglary  Crime_TypeRobbery    Crime_TypeTheft   Time_of_DayNight    High_Crime_Area     Police_On_Duty 
+##          1.0900091          1.2650521          1.0620617          0.7564795          1.4495484          1.3853646          1.0857535</code></pre>
+<ul>
+<li><p><strong>Odds Ratios:</strong> An odds ratio greater than 1 indicates that as the predictor increases, the odds of the outcome occurring (vs = 1) increase. An odds ratio less than 1 indicates a decrease in the odds.</p></li>
+<li><p><strong>P-values:</strong> Similar to linear regression, p-values help determine whether the predictors are statistically significant. A p-value less than 0.05 typically suggests that the predictor has a significant effect on the outcome.</p></li>
+<li><p><strong>Deviance:</strong> The null deviance represents a model with only the intercept, and the residual deviance represents the model with the predictors. A significant reduction in deviance suggests that the predictors improve the model.</p></li>
+<li><p><strong>AIC (Akaike Information Criterion):</strong> A lower AIC value indicates a better-fitting model, accounting for model complexity.</p></li>
+</ul>
+</div>
+</div>
+<div id="checking-model-assumptions-for-logistic-regression" class="section level2 hasAnchor" number="8.7">
+<h2><span class="header-section-number">8.7</span> Checking Model Assumptions for Logistic Regression<a href="regression-analysis-1.html#checking-model-assumptions-for-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Just like linear regression, logistic regression has assumptions that must be checked to ensure the model’s validity.</p>
+<div id="assumption-1-linearity-of-the-logit" class="section level3 hasAnchor" number="8.7.1">
+<h3><span class="header-section-number">8.7.1</span> Assumption 1: Linearity of the Logit<a href="regression-analysis-1.html#assumption-1-linearity-of-the-logit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The relationship between continuous predictors and the logit of the outcome should be linear. You can check this by plotting the predictor against the logit of the predicted probabilities.</p>
+<p><strong>How to Check:</strong> For each predictor, plot the logit of predicted probabilities against the predictor.</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="regression-analysis-1.html#cb124-1" tabindex="-1"></a><span class="co"># Predicted probabilities</span></span>
+<span id="cb124-2"><a href="regression-analysis-1.html#cb124-2" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_logistic, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb124-3"><a href="regression-analysis-1.html#cb124-3" tabindex="-1"></a></span>
+<span id="cb124-4"><a href="regression-analysis-1.html#cb124-4" tabindex="-1"></a><span class="co"># Logit transformation</span></span>
+<span id="cb124-5"><a href="regression-analysis-1.html#cb124-5" tabindex="-1"></a>logit <span class="ot">&lt;-</span> <span class="fu">log</span>(preds <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> preds))</span>
+<span id="cb124-6"><a href="regression-analysis-1.html#cb124-6" tabindex="-1"></a></span>
+<span id="cb124-7"><a href="regression-analysis-1.html#cb124-7" tabindex="-1"></a><span class="co"># Plot logit vs predictor</span></span>
+<span id="cb124-8"><a href="regression-analysis-1.html#cb124-8" tabindex="-1"></a><span class="fu">plot</span>(data_arrests<span class="sc">$</span>Police_On_Duty, logit,</span>
+<span id="cb124-9"><a href="regression-analysis-1.html#cb124-9" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Police on Duty&quot;</span>,</span>
+<span id="cb124-10"><a href="regression-analysis-1.html#cb124-10" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Logit of Predicted Probability&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<p>If the relationship is not linear, consider transforming the predictor or adding a nonlinear term.</p>
+</div>
+<div id="assumption-2-independence-of-observations" class="section level3 hasAnchor" number="8.7.2">
+<h3><span class="header-section-number">8.7.2</span> Assumption 2: Independence of Observations<a href="regression-analysis-1.html#assumption-2-independence-of-observations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Each observation should be independent. This assumption is more about the study design than something that can be directly tested through the data.</p>
+<p><strong>How to Address:</strong> Ensure that the data collection process does not introduce dependencies between observations.</p>
+</div>
+<div id="assumption-3-absence-of-multicollinearity" class="section level3 hasAnchor" number="8.7.3">
+<h3><span class="header-section-number">8.7.3</span> Assumption 3: Absence of Multicollinearity<a href="regression-analysis-1.html#assumption-3-absence-of-multicollinearity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As with linear regression, multicollinearity can inflate the standard errors of the coefficients, making it hard to assess the effect of each predictor.</p>
+<p><strong>How to Check:</strong> Use the Variance Inflation Factor (VIF) to detect multicollinearity.</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="regression-analysis-1.html#cb125-1" tabindex="-1"></a><span class="co">#Calculate Variance Inflation Factors</span></span>
+<span id="cb125-2"><a href="regression-analysis-1.html#cb125-2" tabindex="-1"></a><span class="fu">vif</span>(model_logistic)</span></code></pre></div>
+<pre><code>##                     GVIF Df GVIF^(1/(2*Df))
+## Crime_Type      1.039076  3        1.006409
+## Time_of_Day     1.025253  1        1.012548
+## High_Crime_Area 1.015725  1        1.007832
+## Police_On_Duty  1.044253  1        1.021887</code></pre>
+<p>Dealing with Multicollinearity: If high VIF values are detected, consider removing or combining correlated predictors.</p>
+</div>
+<div id="assumption-4-sufficient-sample-size" class="section level3 hasAnchor" number="8.7.4">
+<h3><span class="header-section-number">8.7.4</span> Assumption 4: Sufficient Sample Size<a href="regression-analysis-1.html#assumption-4-sufficient-sample-size" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Logistic regression requires a sufficiently large sample size, especially when the outcome is rare. A common rule of thumb is to have at least 10 events per predictor variable.</p>
+<p><strong>How to Address:</strong> Ensure your sample size meets this criterion, particularly for rare outcomes.</p>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>The Police Dispatch Team prioritise some calls as “high-priority” to ensure a faster response and better allocation of resources. You have been tasked with determining what factors lead to a crime being categorised as “high-priority” or not. Using the following dataset <a href="data/data_response.csv">data_response</a> perform a logistic regression to identify which factors affect the high-priority crime decision.</p>
+</div>
+</div>
+</div>
+<div id="model-validation-and-diagnostics" class="section level2 hasAnchor" number="8.8">
+<h2><span class="header-section-number">8.8</span> Model Validation and Diagnostics<a href="regression-analysis-1.html#model-validation-and-diagnostics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>After fitting the regression model and checking assumptions, it’s crucial to evaluate the model’s performance and address any potential issues such as overfitting.</p>
+<div id="cross-validation" class="section level3 hasAnchor" number="8.8.1">
+<h3><span class="header-section-number">8.8.1</span> Cross-Validation<a href="regression-analysis-1.html#cross-validation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Cross-validation helps assess how the model generalises to an independent dataset. In k-fold cross-validation, the dataset is split into k subsets, and the model is trained k times, each time using a different subset as the validation set.</p>
+<p><strong>How to Perform:</strong> The caret package in R provides an easy way to perform cross-validation.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="regression-analysis-1.html#cb127-1" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb127-2"><a href="regression-analysis-1.html#cb127-2" tabindex="-1"></a></span>
+<span id="cb127-3"><a href="regression-analysis-1.html#cb127-3" tabindex="-1"></a><span class="co"># Define cross-validation parameters</span></span>
+<span id="cb127-4"><a href="regression-analysis-1.html#cb127-4" tabindex="-1"></a>train_control <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
+<span id="cb127-5"><a href="regression-analysis-1.html#cb127-5" tabindex="-1"></a></span>
+<span id="cb127-6"><a href="regression-analysis-1.html#cb127-6" tabindex="-1"></a><span class="co"># Train the model using cross-validation</span></span>
+<span id="cb127-7"><a href="regression-analysis-1.html#cb127-7" tabindex="-1"></a>model_cv <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="fu">factor</span>(Arrest_Made) <span class="sc">~</span>  Crime_Type <span class="sc">+</span> Time_of_Day,</span>
+<span id="cb127-8"><a href="regression-analysis-1.html#cb127-8" tabindex="-1"></a>                  <span class="at">data =</span> data_arrests,</span>
+<span id="cb127-9"><a href="regression-analysis-1.html#cb127-9" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">&quot;glm&quot;</span>,</span>
+<span id="cb127-10"><a href="regression-analysis-1.html#cb127-10" tabindex="-1"></a>                  <span class="at">family =</span> binomial,</span>
+<span id="cb127-11"><a href="regression-analysis-1.html#cb127-11" tabindex="-1"></a>                  <span class="at">trControl =</span> train_control)</span>
+<span id="cb127-12"><a href="regression-analysis-1.html#cb127-12" tabindex="-1"></a></span>
+<span id="cb127-13"><a href="regression-analysis-1.html#cb127-13" tabindex="-1"></a><span class="co"># View results</span></span>
+<span id="cb127-14"><a href="regression-analysis-1.html#cb127-14" tabindex="-1"></a><span class="fu">print</span>(model_cv)</span></code></pre></div>
+<pre><code>## Generalized Linear Model 
+## 
+## 200 samples
+##   2 predictor
+##   2 classes: &#39;0&#39;, &#39;1&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 180, 180, 180, 181, 180, 179, ... 
+## Resampling results:
+## 
+##   Accuracy   Kappa
+##   0.7804135  0</code></pre>
+<p>Cross-validation provides estimates of the model’s accuracy and can help prevent overfitting.</p>
+</div>
+<div id="dealing-with-overfitting" class="section level3 hasAnchor" number="8.8.2">
+<h3><span class="header-section-number">8.8.2</span> Dealing with Overfitting<a href="regression-analysis-1.html#dealing-with-overfitting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Overfitting occurs when the model is too complex, capturing noise rather than the underlying pattern. This can lead to poor performance on new data.</p>
+<p><strong>Simplifying the Model:</strong> Reduce the number of predictors or use regularisation techniques like Lasso or Ridge regression.</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="regression-analysis-1.html#cb129-1" tabindex="-1"></a><span class="co"># Example of Lasso regression with glmnet package</span></span>
+<span id="cb129-2"><a href="regression-analysis-1.html#cb129-2" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb129-3"><a href="regression-analysis-1.html#cb129-3" tabindex="-1"></a></span>
+<span id="cb129-4"><a href="regression-analysis-1.html#cb129-4" tabindex="-1"></a><span class="co"># Prepare data for glmnet</span></span>
+<span id="cb129-5"><a href="regression-analysis-1.html#cb129-5" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(data_arrests[, <span class="fu">c</span>(<span class="st">&quot;High_Crime_Area&quot;</span>, <span class="st">&quot;Police_On_Duty&quot;</span>)])</span>
+<span id="cb129-6"><a href="regression-analysis-1.html#cb129-6" tabindex="-1"></a>y <span class="ot">&lt;-</span> data_arrests<span class="sc">$</span>Arrest_Made</span>
+<span id="cb129-7"><a href="regression-analysis-1.html#cb129-7" tabindex="-1"></a></span>
+<span id="cb129-8"><a href="regression-analysis-1.html#cb129-8" tabindex="-1"></a><span class="co"># Fit Lasso model</span></span>
+<span id="cb129-9"><a href="regression-analysis-1.html#cb129-9" tabindex="-1"></a>lasso_model <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(x, y, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb129-10"><a href="regression-analysis-1.html#cb129-10" tabindex="-1"></a></span>
+<span id="cb129-11"><a href="regression-analysis-1.html#cb129-11" tabindex="-1"></a><span class="co"># View best lambda value</span></span>
+<span id="cb129-12"><a href="regression-analysis-1.html#cb129-12" tabindex="-1"></a><span class="fu">print</span>(lasso_model<span class="sc">$</span>lambda.min)</span></code></pre></div>
+<pre><code>## [1] 0.04493421</code></pre>
+<p>Regularisation methods add a penalty to the coefficients, shrinking less important ones towards zero, which helps to prevent overfitting.</p>
+</div>
+</div>
+<div id="conclusion-7" class="section level2 hasAnchor" number="8.9">
+<h2><span class="header-section-number">8.9</span> Conclusion<a href="regression-analysis-1.html#conclusion-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this chapter, you have learned how to perform and interpret linear, multiple linear, and logistic regression in R, as well as how to validate your models and check their assumptions. Regression is a powerful tool, but its effectiveness depends on understanding and ensuring the assumptions are met.</p>
+<p><strong>Key Points:</strong></p>
+<ul>
+<li><strong>Linear and Logistic Regression:</strong> Both types of regression help model relationships, with linear regression suited for continuous outcomes and logistic regression for binary outcomes.</li>
+<li><strong>Model Assumptions:</strong> Checking assumptions is crucial for ensuring your model’s validity.</li>
+<li><strong>Validation:</strong> Techniques like cross-validation help assess model performance and prevent overfitting.</li>
+</ul>
+<p><strong>Comparison with SPSS:</strong>
+R offers more flexibility and control over the modeling process, though the core principles remain consistent.</p>
+<p>In the next chapter, we will explore another critical aspect of data analysis: Geographic Mapping and Spatial Analysis. You’ll learn how to work with geographic data, create maps, and perform spatial analysis in R, building on the skills you’ve developed in regression analysis.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="inferential-statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="geographic-mapping-and-spatial-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/08-regression.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

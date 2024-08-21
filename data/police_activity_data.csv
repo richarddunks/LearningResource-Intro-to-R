@@ -1,0 +1,201 @@
+"IncidentID","Date","Time","IncidentType","ResponseTime","OfficersInvolved","Outcome","Borough","IncidentSeverity"
+"INC001",2024-08-31,"15:32","Burglary",13,1,"No Action","North",1
+"INC002",2024-08-15,"19:15","Public Disturbance",12,4,"Arrest","East",2
+"INC003",2024-08-19,"07:27","Public Disturbance",7,2,"Arrest","West",5
+"INC004",2024-08-14,"02:48","Traffic Stop",14,2,"Warning","South",2
+"INC005",2024-08-03,"03:11","Traffic Stop",13,4,"Warning","East",5
+"INC006",2024-08-10,"19:52","Public Disturbance",7,1,"Arrest","South",3
+"INC007",2024-08-18,"11:27","Burglary",13,1,"Arrest","North",2
+"INC008",2024-08-22,"21:01","Robbery",11,2,"No Action","North",4
+"INC009",2024-08-11,"16:49","Assault",12,4,"No Action","West",5
+"INC010",2024-08-05,"09:11","Public Disturbance",17,5,"Arrest","South",1
+"INC011",2024-08-20,"19:46","Robbery",16,3,"Warning","North",5
+"INC012",2024-08-14,"10:50","Public Disturbance",12,1,"Arrest","North",1
+"INC013",2024-08-22,"22:52","Burglary",13,3,"Arrest","East",1
+"INC014",2024-08-25,"07:05","Assault",9,3,"Warning","South",2
+"INC015",2024-08-26,"13:15","Traffic Stop",6,2,"Report Filed","West",2
+"INC016",2024-08-27,"20:57","Burglary",11,4,"Warning","North",1
+"INC017",2024-08-05,"12:14","Burglary",5,1,"Report Filed","South",3
+"INC018",2024-08-19,"01:18","Traffic Stop",18,3,"Warning","West",1
+"INC019",2024-08-27,"10:58","Assault",20,5,"Arrest","South",2
+"INC020",2024-08-25,"12:02","Robbery",16,5,"Warning","South",3
+"INC021",2024-08-28,"13:45","Public Disturbance",17,5,"Warning","North",1
+"INC022",2024-08-25,"05:32","Traffic Stop",18,2,"Arrest","South",1
+"INC023",2024-08-09,"07:55","Robbery",13,5,"Report Filed","North",2
+"INC024",2024-08-29,"11:32","Public Disturbance",13,5,"No Action","West",4
+"INC025",2024-08-03,"03:47","Traffic Stop",9,1,"Warning","East",5
+"INC026",2024-08-08,"12:10","Burglary",15,5,"Arrest","West",1
+"INC027",2024-08-26,"13:35","Public Disturbance",9,1,"Warning","East",5
+"INC028",2024-08-07,"20:55","Assault",9,2,"No Action","North",2
+"INC029",2024-08-10,"15:43","Robbery",16,1,"Report Filed","South",1
+"INC030",2024-08-09,"22:44","Assault",16,1,"Arrest","East",4
+"INC031",2024-08-30,"00:09","Burglary",8,2,"Warning","South",4
+"INC032",2024-08-19,"07:41","Public Disturbance",10,4,"Report Filed","East",3
+"INC033",2024-08-04,"07:23","Assault",11,5,"No Action","West",2
+"INC034",2024-08-14,"09:27","Public Disturbance",6,2,"Warning","North",4
+"INC035",2024-08-17,"07:38","Burglary",16,2,"Warning","West",3
+"INC036",2024-08-11,"17:17","Burglary",13,2,"No Action","West",3
+"INC037",2024-08-07,"20:16","Assault",7,4,"Arrest","East",2
+"INC038",2024-08-21,"08:19","Robbery",20,5,"Warning","West",1
+"INC039",2024-08-12,"06:58","Assault",13,2,"Arrest","South",4
+"INC040",2024-08-15,"06:08","Burglary",17,3,"No Action","East",5
+"INC041",2024-08-10,"09:52","Burglary",18,1,"Report Filed","East",5
+"INC042",2024-08-13,"23:10","Burglary",18,4,"Report Filed","East",5
+"INC043",2024-08-07,"21:43","Robbery",17,3,"Arrest","North",5
+"INC044",2024-08-09,"22:07","Burglary",15,3,"Report Filed","North",2
+"INC045",2024-08-09,"10:49","Traffic Stop",14,3,"Report Filed","South",2
+"INC046",2024-08-10,"00:04","Assault",9,2,"Report Filed","West",5
+"INC047",2024-08-23,"18:28","Burglary",5,4,"No Action","East",3
+"INC048",2024-08-27,"09:49","Burglary",11,4,"Arrest","North",1
+"INC049",2024-08-28,"20:05","Public Disturbance",10,2,"Arrest","North",2
+"INC050",2024-08-21,"21:09","Public Disturbance",11,3,"Report Filed","South",2
+"INC051",2024-08-07,"12:25","Robbery",8,1,"Warning","North",5
+"INC052",2024-08-21,"10:08","Robbery",10,4,"No Action","North",5
+"INC053",2024-08-27,"10:10","Robbery",11,1,"Report Filed","West",1
+"INC054",2024-08-06,"19:54","Public Disturbance",16,1,"Report Filed","South",1
+"INC055",2024-08-25,"06:05","Robbery",9,4,"Report Filed","West",2
+"INC056",2024-08-02,"22:31","Burglary",7,3,"No Action","North",2
+"INC057",2024-08-29,"19:11","Traffic Stop",5,5,"No Action","East",2
+"INC058",2024-08-05,"23:18","Public Disturbance",17,2,"No Action","North",3
+"INC059",2024-08-08,"08:26","Robbery",12,5,"No Action","South",3
+"INC060",2024-08-12,"08:55","Assault",17,2,"Report Filed","East",5
+"INC061",2024-08-31,"04:31","Burglary",6,4,"Warning","South",1
+"INC062",2024-08-13,"22:26","Robbery",7,2,"No Action","North",3
+"INC063",2024-08-18,"13:29","Burglary",7,2,"No Action","East",2
+"INC064",2024-08-01,"13:54","Traffic Stop",16,4,"Warning","West",5
+"INC065",2024-08-25,"05:03","Burglary",16,4,"No Action","South",1
+"INC066",2024-08-27,"00:23","Traffic Stop",20,1,"Report Filed","South",3
+"INC067",2024-08-25,"09:27","Traffic Stop",14,3,"Warning","North",2
+"INC068",2024-08-06,"16:02","Assault",9,1,"No Action","South",4
+"INC069",2024-08-21,"16:45","Traffic Stop",8,3,"Report Filed","West",1
+"INC070",2024-08-15,"20:39","Robbery",17,3,"No Action","West",1
+"INC071",2024-08-09,"06:05","Assault",16,3,"Warning","West",3
+"INC072",2024-08-15,"20:35","Burglary",8,5,"Report Filed","East",2
+"INC073",2024-08-26,"08:54","Public Disturbance",16,2,"Warning","West",1
+"INC074",2024-08-28,"19:41","Traffic Stop",18,1,"No Action","West",2
+"INC075",2024-08-31,"05:47","Robbery",13,5,"Report Filed","North",3
+"INC076",2024-08-16,"17:58","Public Disturbance",14,3,"Arrest","West",2
+"INC077",2024-08-20,"16:55","Public Disturbance",19,3,"Report Filed","South",4
+"INC078",2024-08-30,"04:29","Robbery",19,3,"Arrest","South",4
+"INC079",2024-08-06,"19:47","Burglary",15,3,"Arrest","West",2
+"INC080",2024-08-11,"02:51","Burglary",6,1,"Report Filed","East",1
+"INC081",2024-08-08,"13:09","Robbery",17,3,"No Action","North",2
+"INC082",2024-08-22,"00:24","Traffic Stop",12,3,"No Action","East",3
+"INC083",2024-08-22,"01:37","Public Disturbance",11,2,"No Action","West",4
+"INC084",2024-08-07,"03:50","Assault",9,5,"Report Filed","North",5
+"INC085",2024-08-31,"09:35","Burglary",9,5,"Arrest","North",3
+"INC086",2024-08-16,"00:40","Robbery",11,2,"Arrest","West",3
+"INC087",2024-08-17,"04:24","Robbery",19,5,"No Action","South",2
+"INC088",2024-08-22,"20:03","Robbery",9,2,"Report Filed","East",3
+"INC089",2024-08-18,"07:14","Traffic Stop",14,3,"No Action","East",4
+"INC090",2024-08-17,"22:51","Assault",8,1,"Report Filed","North",1
+"INC091",2024-08-02,"20:21","Assault",8,3,"No Action","South",3
+"INC092",2024-08-04,"12:52","Traffic Stop",16,3,"Arrest","West",2
+"INC093",2024-08-13,"17:48","Public Disturbance",10,5,"Arrest","South",1
+"INC094",2024-08-05,"09:23","Robbery",7,5,"Arrest","East",5
+"INC095",2024-08-22,"05:38","Traffic Stop",6,2,"Arrest","West",4
+"INC096",2024-08-31,"06:46","Traffic Stop",19,4,"Arrest","West",5
+"INC097",2024-08-19,"08:59","Burglary",14,3,"No Action","West",2
+"INC098",2024-08-25,"15:36","Public Disturbance",7,5,"Report Filed","South",2
+"INC099",2024-08-20,"16:45","Public Disturbance",13,1,"Warning","West",1
+"INC100",2024-08-22,"20:53","Burglary",13,1,"No Action","West",3
+"INC101",2024-08-25,"12:46","Burglary",17,5,"Report Filed","South",3
+"INC102",2024-08-14,"20:14","Burglary",16,3,"No Action","North",5
+"INC103",2024-08-25,"07:15","Public Disturbance",14,2,"No Action","North",3
+"INC104",2024-08-23,"20:18","Public Disturbance",16,5,"No Action","North",3
+"INC105",2024-08-03,"06:07","Robbery",16,4,"Arrest","North",4
+"INC106",2024-08-08,"19:30","Assault",11,1,"Warning","North",3
+"INC107",2024-08-16,"17:57","Assault",9,5,"Warning","West",3
+"INC108",2024-08-30,"16:36","Robbery",13,5,"Report Filed","North",1
+"INC109",2024-08-12,"00:38","Assault",9,1,"No Action","East",1
+"INC110",2024-08-31,"01:51","Burglary",17,1,"No Action","North",4
+"INC111",2024-08-25,"16:47","Traffic Stop",11,5,"Warning","East",4
+"INC112",2024-08-14,"01:59","Public Disturbance",6,4,"Arrest","North",5
+"INC113",2024-08-30,"12:15","Traffic Stop",19,5,"Arrest","North",4
+"INC114",2024-08-03,"23:08","Burglary",8,4,"Arrest","North",1
+"INC115",2024-08-14,"16:10","Assault",11,5,"No Action","East",3
+"INC116",2024-08-29,"02:42","Robbery",14,5,"Report Filed","South",3
+"INC117",2024-08-07,"17:50","Robbery",14,1,"Arrest","North",5
+"INC118",2024-08-03,"01:29","Burglary",10,2,"Warning","East",1
+"INC119",2024-08-23,"04:09","Public Disturbance",7,5,"Report Filed","East",3
+"INC120",2024-08-22,"11:54","Burglary",19,1,"Warning","North",1
+"INC121",2024-08-26,"12:33","Robbery",14,5,"Report Filed","North",3
+"INC122",2024-08-15,"09:56","Traffic Stop",16,4,"Warning","East",4
+"INC123",2024-08-21,"05:37","Robbery",19,3,"Arrest","East",5
+"INC124",2024-08-05,"09:19","Public Disturbance",13,4,"Warning","South",2
+"INC125",2024-08-08,"09:45","Public Disturbance",11,3,"No Action","South",5
+"INC126",2024-08-19,"05:13","Robbery",6,1,"No Action","North",5
+"INC127",2024-08-10,"15:05","Traffic Stop",18,1,"Report Filed","North",4
+"INC128",2024-08-18,"15:17","Traffic Stop",13,1,"Arrest","West",3
+"INC129",2024-08-10,"02:01","Assault",8,5,"Report Filed","East",4
+"INC130",2024-08-12,"03:55","Public Disturbance",11,1,"No Action","North",2
+"INC131",2024-08-02,"02:07","Public Disturbance",8,4,"No Action","South",5
+"INC132",2024-08-10,"22:10","Burglary",12,5,"No Action","North",4
+"INC133",2024-08-22,"02:20","Traffic Stop",9,2,"Arrest","West",4
+"INC134",2024-08-31,"15:56","Assault",7,1,"Warning","North",5
+"INC135",2024-08-12,"01:06","Traffic Stop",6,4,"Warning","South",4
+"INC136",2024-08-20,"14:50","Robbery",15,5,"Warning","East",3
+"INC137",2024-08-14,"22:22","Assault",9,3,"Report Filed","East",1
+"INC138",2024-08-17,"02:07","Public Disturbance",7,1,"Report Filed","South",4
+"INC139",2024-08-30,"08:58","Traffic Stop",20,4,"Warning","West",2
+"INC140",2024-08-14,"06:09","Traffic Stop",11,4,"Arrest","North",5
+"INC141",2024-08-22,"08:36","Assault",11,1,"Warning","South",3
+"INC142",2024-08-03,"03:16","Assault",15,1,"Arrest","North",5
+"INC143",2024-08-08,"01:54","Robbery",19,3,"Warning","South",5
+"INC144",2024-08-14,"21:05","Assault",8,4,"Report Filed","South",4
+"INC145",2024-08-19,"11:39","Burglary",13,5,"Arrest","North",3
+"INC146",2024-08-30,"08:51","Robbery",16,1,"Warning","South",3
+"INC147",2024-08-15,"10:05","Burglary",11,1,"Arrest","North",2
+"INC148",2024-08-24,"06:46","Public Disturbance",6,5,"No Action","East",4
+"INC149",2024-08-17,"12:27","Assault",15,3,"Warning","South",5
+"INC150",2024-08-23,"04:31","Public Disturbance",5,4,"Report Filed","East",2
+"INC151",2024-08-11,"10:48","Assault",8,3,"Arrest","North",2
+"INC152",2024-08-07,"00:34","Assault",15,2,"Arrest","West",3
+"INC153",2024-08-29,"18:27","Traffic Stop",18,2,"Report Filed","North",3
+"INC154",2024-08-15,"11:46","Assault",17,4,"Arrest","East",5
+"INC155",2024-08-23,"01:19","Traffic Stop",7,3,"Warning","South",1
+"INC156",2024-08-26,"20:00","Traffic Stop",11,2,"Report Filed","South",5
+"INC157",2024-08-06,"16:04","Burglary",17,4,"Arrest","South",2
+"INC158",2024-08-14,"11:10","Burglary",15,4,"Report Filed","East",3
+"INC159",2024-08-31,"02:46","Public Disturbance",14,5,"Arrest","North",3
+"INC160",2024-08-07,"17:19","Burglary",7,5,"No Action","East",4
+"INC161",2024-08-27,"14:01","Public Disturbance",13,1,"Report Filed","North",5
+"INC162",2024-08-10,"21:47","Burglary",12,5,"Warning","South",1
+"INC163",2024-08-05,"02:54","Assault",16,3,"Report Filed","South",5
+"INC164",2024-08-06,"18:50","Burglary",5,2,"No Action","South",2
+"INC165",2024-08-16,"17:09","Traffic Stop",8,1,"Report Filed","West",2
+"INC166",2024-08-24,"16:50","Traffic Stop",18,1,"No Action","West",1
+"INC167",2024-08-21,"05:58","Robbery",7,3,"No Action","South",5
+"INC168",2024-08-23,"09:48","Assault",20,2,"Warning","North",5
+"INC169",2024-08-11,"07:06","Robbery",11,2,"Arrest","West",3
+"INC170",2024-08-04,"09:37","Traffic Stop",18,3,"No Action","South",5
+"INC171",2024-08-12,"12:43","Burglary",18,5,"Warning","South",3
+"INC172",2024-08-14,"19:35","Traffic Stop",12,5,"Arrest","East",1
+"INC173",2024-08-28,"05:52","Robbery",16,5,"No Action","West",4
+"INC174",2024-08-29,"19:22","Assault",12,4,"Warning","East",2
+"INC175",2024-08-19,"19:50","Public Disturbance",20,1,"No Action","South",4
+"INC176",2024-08-25,"08:33","Assault",6,2,"No Action","East",4
+"INC177",2024-08-07,"15:23","Burglary",7,4,"Report Filed","South",5
+"INC178",2024-08-22,"07:03","Assault",17,5,"No Action","East",1
+"INC179",2024-08-26,"06:53","Traffic Stop",13,2,"No Action","North",4
+"INC180",2024-08-09,"09:28","Traffic Stop",11,4,"Report Filed","North",2
+"INC181",2024-08-07,"16:57","Assault",20,1,"Report Filed","East",4
+"INC182",2024-08-02,"17:22","Assault",9,5,"Warning","West",4
+"INC183",2024-08-16,"07:58","Robbery",13,4,"Report Filed","North",3
+"INC184",2024-08-13,"18:10","Public Disturbance",6,5,"No Action","West",3
+"INC185",2024-08-19,"09:53","Assault",17,2,"Report Filed","South",1
+"INC186",2024-08-24,"22:32","Traffic Stop",11,5,"No Action","South",2
+"INC187",2024-08-20,"10:53","Burglary",17,4,"No Action","West",2
+"INC188",2024-08-15,"16:55","Public Disturbance",8,1,"Warning","East",4
+"INC189",2024-08-07,"11:50","Traffic Stop",19,2,"Arrest","East",2
+"INC190",2024-08-04,"01:49","Assault",10,2,"Arrest","North",3
+"INC191",2024-08-01,"18:58","Burglary",13,2,"Report Filed","West",4
+"INC192",2024-08-08,"12:47","Robbery",7,5,"Report Filed","East",3
+"INC193",2024-08-30,"12:02","Robbery",18,5,"Warning","East",1
+"INC194",2024-08-30,"18:32","Traffic Stop",19,3,"Warning","West",4
+"INC195",2024-08-20,"21:29","Burglary",6,2,"No Action","East",4
+"INC196",2024-08-25,"09:33","Assault",12,2,"Arrest","North",5
+"INC197",2024-08-16,"15:01","Traffic Stop",8,3,"Arrest","South",1
+"INC198",2024-08-24,"04:39","Burglary",18,3,"Arrest","East",3
+"INC199",2024-08-22,"03:57","Burglary",13,3,"Report Filed","West",2
+"INC200",2024-08-11,"17:19","Assault",5,4,"Arrest","North",2

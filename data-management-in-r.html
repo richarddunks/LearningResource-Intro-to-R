@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Data Management in R | Introduction to R for Crime Analysts</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Data Management in R | Introduction to R for Crime Analysts" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Data Management in R | Introduction to R for Crime Analysts" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Daniel Hammocks, Senior Data Scientist" />
+
+
+<meta name="date" content="2024-08-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="getting-started-with-r.html"/>
+<link rel="next" href="connecting-to-and-accessing-a-postgresql-database.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/MOPAC-DS-Square.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#purpose-of-this-book"><i class="fa fa-check"></i>Purpose of this Book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#why-learn-r"><i class="fa fa-check"></i><b>1.2</b> Why Learn R?</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="introduction.html"><a href="introduction.html#flexibility-and-power"><i class="fa fa-check"></i><b>1.2.1</b> Flexibility and Power</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introduction.html"><a href="introduction.html#reproducibility"><i class="fa fa-check"></i><b>1.2.2</b> Reproducibility</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduction.html"><a href="introduction.html#extensive-community-and-package-ecosystem"><i class="fa fa-check"></i><b>1.2.3</b> Extensive Community and Package Ecosystem</a></li>
+<li class="chapter" data-level="1.2.4" data-path="introduction.html"><a href="introduction.html#cost"><i class="fa fa-check"></i><b>1.2.4</b> Cost</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#replicating-spss-functionality-in-r"><i class="fa fa-check"></i><b>1.3</b> Replicating SPSS Functionality in R</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="introduction.html"><a href="introduction.html#data-management"><i class="fa fa-check"></i><b>1.3.1</b> Data Management</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introduction.html"><a href="introduction.html#descriptive-statistics"><i class="fa fa-check"></i><b>1.3.2</b> Descriptive Statistics</a></li>
+<li class="chapter" data-level="1.3.3" data-path="introduction.html"><a href="introduction.html#statistical-tests"><i class="fa fa-check"></i><b>1.3.3</b> Statistical Tests</a></li>
+<li class="chapter" data-level="1.3.4" data-path="introduction.html"><a href="introduction.html#regression-analysis"><i class="fa fa-check"></i><b>1.3.4</b> Regression Analysis</a></li>
+<li class="chapter" data-level="1.3.5" data-path="introduction.html"><a href="introduction.html#data-visualisation"><i class="fa fa-check"></i><b>1.3.5</b> Data Visualisation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#transitioning-from-spss-to-r"><i class="fa fa-check"></i><b>1.4</b> Transitioning from SPSS to R</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction.html"><a href="introduction.html#building-confidence-in-r"><i class="fa fa-check"></i><b>1.4.1</b> Building Confidence in R</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction.html"><a href="introduction.html#leveraging-rs-ecosystem"><i class="fa fa-check"></i><b>1.4.2</b> Leveraging R’s Ecosystem</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#conclusion"><i class="fa fa-check"></i><b>1.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html"><i class="fa fa-check"></i><b>2</b> Getting Started with R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#the-r-environment"><i class="fa fa-check"></i><b>2.1</b> The R Environment</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#overview-of-the-rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> Overview of the RStudio Interface</a></li>
+<li class="chapter" data-level="2.1.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#console-vs.-scripts-vs.-notebooks"><i class="fa fa-check"></i><b>2.1.2</b> Console vs. Scripts vs. Notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#introduction-to-r-packages-and-installing-key-packages"><i class="fa fa-check"></i><b>2.2</b> Introduction to R Packages and Installing Key Packages</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#introduction-to-r-packages"><i class="fa fa-check"></i><b>2.2.1</b> Introduction to R Packages</a></li>
+<li class="chapter" data-level="2.2.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#installing-and-loading-packages"><i class="fa fa-check"></i><b>2.2.2</b> Installing and Loading Packages</a></li>
+<li class="chapter" data-level="2.2.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#key-packages-for-data-analysis"><i class="fa fa-check"></i><b>2.2.3</b> Key Packages for Data Analysis</a></li>
+<li class="chapter" data-level="2.2.4" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#managing-package-dependencies"><i class="fa fa-check"></i><b>2.2.4</b> Managing Package Dependencies</a></li>
+<li class="chapter" data-level="2.2.5" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#summary"><i class="fa fa-check"></i><b>2.2.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#coding-conventions-and-best-practices"><i class="fa fa-check"></i><b>2.3</b> Coding Conventions and Best Practices</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#writing-clean-and-readable-code"><i class="fa fa-check"></i><b>2.3.1</b> Writing Clean and Readable Code</a></li>
+<li class="chapter" data-level="2.3.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#commenting-and-structuring-scripts"><i class="fa fa-check"></i><b>2.3.2</b> Commenting and Structuring Scripts</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#data-types-and-structures"><i class="fa fa-check"></i><b>2.4</b> Data Types and Structures</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#introduction-to-vectors-data-frames-lists-and-factors"><i class="fa fa-check"></i><b>2.4.1</b> Introduction to Vectors, Data Frames, Lists, and Factors</a></li>
+<li class="chapter" data-level="2.4.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#comparing-r-data-types-to-spss-data-types"><i class="fa fa-check"></i><b>2.4.2</b> Comparing R Data Types to SPSS Data Types</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#basic-operations-and-functions-in-r"><i class="fa fa-check"></i><b>2.5</b> Basic Operations and Functions in R</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#arithmetic-operations"><i class="fa fa-check"></i><b>2.5.1</b> Arithmetic Operations</a></li>
+<li class="chapter" data-level="2.5.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#logical-operations"><i class="fa fa-check"></i><b>2.5.2</b> Logical Operations</a></li>
+<li class="chapter" data-level="2.5.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#basic-functions"><i class="fa fa-check"></i><b>2.5.3</b> Basic Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#conclusion-1"><i class="fa fa-check"></i><b>2.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-management-in-r.html"><a href="data-management-in-r.html"><i class="fa fa-check"></i><b>3</b> Data Management in R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#data-import-and-export"><i class="fa fa-check"></i><b>3.1</b> Data Import and Export</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#importing-data"><i class="fa fa-check"></i><b>3.1.1</b> Importing Data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#exporting-data"><i class="fa fa-check"></i><b>3.1.2</b> Exporting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#data-cleaning-and-preparation"><i class="fa fa-check"></i><b>3.2</b> Data Cleaning and Preparation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#handling-missing-data"><i class="fa fa-check"></i><b>3.2.1</b> Handling Missing Data</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#filtering-and-subsetting-data"><i class="fa fa-check"></i><b>3.2.2</b> Filtering and Subsetting Data</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-management-in-r.html"><a href="data-management-in-r.html#data-transformations"><i class="fa fa-check"></i><b>3.2.3</b> Data Transformations</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-management-in-r.html"><a href="data-management-in-r.html#the-dplyr-pipeline"><i class="fa fa-check"></i><b>3.2.4</b> The dplyr Pipeline</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-management-in-r.html"><a href="data-management-in-r.html#working-with-categorical-data"><i class="fa fa-check"></i><b>3.3</b> Working with Categorical Data</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#creating-and-manipulating-factors"><i class="fa fa-check"></i><b>3.3.1</b> Creating and Manipulating Factors</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#recoding-variables"><i class="fa fa-check"></i><b>3.3.2</b> Recoding Variables</a></li>
+<li class="chapter" data-level="3.3.3" data-path="data-management-in-r.html"><a href="data-management-in-r.html#frequency-tables-and-cross-tabulations"><i class="fa fa-check"></i><b>3.3.3</b> Frequency Tables and Cross-Tabulations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-management-in-r.html"><a href="data-management-in-r.html#conclusion-2"><i class="fa fa-check"></i><b>3.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html"><i class="fa fa-check"></i><b>4</b> Connecting to and Accessing a PostgreSQL Database</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#setting-up-the-environment"><i class="fa fa-check"></i><b>4.2</b> Setting Up the Environment</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#installing-necessary-packages"><i class="fa fa-check"></i><b>4.2.1</b> Installing Necessary Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#connecting-to-postgresql-using-rpostgres"><i class="fa fa-check"></i><b>4.3</b> Connecting to PostgreSQL (Using RPostgres)</a></li>
+<li class="chapter" data-level="4.4" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#querying-data-from-postgresql"><i class="fa fa-check"></i><b>4.4</b> Querying Data from PostgreSQL</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#executing-a-query"><i class="fa fa-check"></i><b>4.4.1</b> Executing a Query</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#handling-errors-and-troubleshooting"><i class="fa fa-check"></i><b>4.5</b> Handling Errors and Troubleshooting</a></li>
+<li class="chapter" data-level="4.6" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#conclusion-3"><i class="fa fa-check"></i><b>4.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html"><i class="fa fa-check"></i><b>5</b> Descriptive Statistics and Visualisations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#introduction-to-descriptive-statistics"><i class="fa fa-check"></i><b>5.1</b> Introduction to Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#understanding-descriptive-statistics"><i class="fa fa-check"></i><b>5.1.1</b> Understanding Descriptive Statistics</a></li>
+<li class="chapter" data-level="5.1.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#basic-descriptive-statistics-in-r"><i class="fa fa-check"></i><b>5.1.2</b> Basic Descriptive Statistics in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#creating-visualisations-with-ggplot2"><i class="fa fa-check"></i><b>5.2</b> Creating Visualisations with ggplot2</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#introduction-to-ggplot2"><i class="fa fa-check"></i><b>5.2.1</b> Introduction to ggplot2</a></li>
+<li class="chapter" data-level="5.2.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#creating-basic-plots"><i class="fa fa-check"></i><b>5.2.2</b> Creating Basic Plots</a></li>
+<li class="chapter" data-level="5.2.3" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#customising-your-plots"><i class="fa fa-check"></i><b>5.2.3</b> Customising Your Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#descriptive-statistics-with-dplyr"><i class="fa fa-check"></i><b>5.3</b> Descriptive Statistics with dplyr</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#using-dplyr-to-summarise-data"><i class="fa fa-check"></i><b>5.3.1</b> Using dplyr to Summarise Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#combining-dplyr-with-ggplot2"><i class="fa fa-check"></i><b>5.3.2</b> Combining dplyr with ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#advanced-visualisation-techniques"><i class="fa fa-check"></i><b>5.4</b> Advanced Visualisation Techniques</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#faceting"><i class="fa fa-check"></i><b>5.4.1</b> Faceting</a></li>
+<li class="chapter" data-level="5.4.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#combining-multiple-geoms"><i class="fa fa-check"></i><b>5.4.2</b> Combining Multiple Geoms</a></li>
+<li class="chapter" data-level="5.4.3" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#saving-your-plots"><i class="fa fa-check"></i><b>5.4.3</b> Saving Your Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#conclusion-4"><i class="fa fa-check"></i><b>5.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html"><i class="fa fa-check"></i><b>6</b> Survey Analysis in R</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#introduction-to-survey-data"><i class="fa fa-check"></i><b>6.1</b> Introduction to Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#key-concepts-in-survey-analysis"><i class="fa fa-check"></i><b>6.1.1</b> Key Concepts in Survey Analysis</a></li>
+<li class="chapter" data-level="6.1.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#understanding-survey-data-structures"><i class="fa fa-check"></i><b>6.1.2</b> Understanding Survey Data Structures</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#importing-and-preparing-survey-data"><i class="fa fa-check"></i><b>6.2</b> Importing and Preparing Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#converting-data-for-survey-analysis"><i class="fa fa-check"></i><b>6.2.1</b> Converting Data for Survey Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#descriptive-analysis-of-survey-data"><i class="fa fa-check"></i><b>6.3</b> Descriptive Analysis of Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#calculating-means-and-totals"><i class="fa fa-check"></i><b>6.3.1</b> Calculating Means and Totals</a></li>
+<li class="chapter" data-level="6.3.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#frequencies-and-cross-tabulations"><i class="fa fa-check"></i><b>6.3.2</b> Frequencies and Cross-tabulations</a></li>
+<li class="chapter" data-level="6.3.3" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#comparing-results-with-spss-survey-functions"><i class="fa fa-check"></i><b>6.3.3</b> Comparing Results with SPSS Survey Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#weighting-survey-data"><i class="fa fa-check"></i><b>6.4</b> Weighting Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#applying-weights"><i class="fa fa-check"></i><b>6.4.1</b> Applying Weights</a></li>
+<li class="chapter" data-level="6.4.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#analysing-weighted-survey-data"><i class="fa fa-check"></i><b>6.4.2</b> Analysing Weighted Survey Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#conclusion-5"><i class="fa fa-check"></i><b>6.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="inferential-statistics.html"><a href="inferential-statistics.html"><i class="fa fa-check"></i><b>7</b> Inferential Statistics</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#hypothesis-testing"><i class="fa fa-check"></i><b>7.1</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#t-tests"><i class="fa fa-check"></i><b>7.1.1</b> T-tests</a></li>
+<li class="chapter" data-level="7.1.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#chi-square-tests"><i class="fa fa-check"></i><b>7.1.2</b> Chi-square Tests</a></li>
+<li class="chapter" data-level="7.1.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#anova-analysis-of-variance"><i class="fa fa-check"></i><b>7.1.3</b> ANOVA (Analysis of Variance)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#correlation-analysis"><i class="fa fa-check"></i><b>7.2</b> Correlation Analysis</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#pearson-correlation"><i class="fa fa-check"></i><b>7.2.1</b> Pearson Correlation</a></li>
+<li class="chapter" data-level="7.2.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#spearman-correlation"><i class="fa fa-check"></i><b>7.2.2</b> Spearman Correlation</a></li>
+<li class="chapter" data-level="7.2.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#pearson-vs-spearman"><i class="fa fa-check"></i><b>7.2.3</b> Pearson vs Spearman?</a></li>
+<li class="chapter" data-level="7.2.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#visualising-correlations"><i class="fa fa-check"></i><b>7.2.4</b> Visualising Correlations</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#conclusion-6"><i class="fa fa-check"></i><b>7.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html"><i class="fa fa-check"></i><b>8</b> Regression Analysis</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#introduction-to-regression-analysis"><i class="fa fa-check"></i><b>8.1</b> Introduction to Regression Analysis</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#what-is-linear-regression"><i class="fa fa-check"></i><b>8.1.1</b> What is Linear Regression?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#simple-linear-regression-in-r"><i class="fa fa-check"></i><b>8.2</b> Simple Linear Regression in R</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#performing-simple-linear-regression"><i class="fa fa-check"></i><b>8.2.1</b> Performing Simple Linear Regression</a></li>
+<li class="chapter" data-level="8.2.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#interpreting-the-output"><i class="fa fa-check"></i><b>8.2.2</b> Interpreting the Output</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.3</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#performing-multiple-linear-regression"><i class="fa fa-check"></i><b>8.3.1</b> Performing Multiple Linear Regression</a></li>
+<li class="chapter" data-level="8.3.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#detailed-interpretation-of-the-output"><i class="fa fa-check"></i><b>8.3.2</b> Detailed Interpretation of the Output</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#checking-model-assumptions"><i class="fa fa-check"></i><b>8.4</b> Checking Model Assumptions</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-1-linearity"><i class="fa fa-check"></i><b>8.4.1</b> Assumption 1: Linearity</a></li>
+<li class="chapter" data-level="8.4.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-2-normality-of-residuals"><i class="fa fa-check"></i><b>8.4.2</b> Assumption 2: Normality of Residuals</a></li>
+<li class="chapter" data-level="8.4.3" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-3-homoscedasticity"><i class="fa fa-check"></i><b>8.4.3</b> Assumption 3: Homoscedasticity</a></li>
+<li class="chapter" data-level="8.4.4" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-4-independence-of-errors"><i class="fa fa-check"></i><b>8.4.4</b> Assumption 4: Independence of Errors</a></li>
+<li class="chapter" data-level="8.4.5" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-5-multicollinearity"><i class="fa fa-check"></i><b>8.4.5</b> Assumption 5: Multicollinearity</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#transformations-and-interaction-terms"><i class="fa fa-check"></i><b>8.5</b> Transformations and Interaction Terms</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#when-and-how-to-apply-transformations"><i class="fa fa-check"></i><b>8.5.1</b> When and How to Apply Transformations</a></li>
+<li class="chapter" data-level="8.5.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#using-interaction-terms"><i class="fa fa-check"></i><b>8.5.2</b> Using Interaction Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#logistic-regression"><i class="fa fa-check"></i><b>8.6</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#performing-logistic-regression-in-r"><i class="fa fa-check"></i><b>8.6.1</b> Performing Logistic Regression in R</a></li>
+<li class="chapter" data-level="8.6.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#interpreting-logistic-regression-output"><i class="fa fa-check"></i><b>8.6.2</b> Interpreting Logistic Regression Output</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#checking-model-assumptions-for-logistic-regression"><i class="fa fa-check"></i><b>8.7</b> Checking Model Assumptions for Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-1-linearity-of-the-logit"><i class="fa fa-check"></i><b>8.7.1</b> Assumption 1: Linearity of the Logit</a></li>
+<li class="chapter" data-level="8.7.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-2-independence-of-observations"><i class="fa fa-check"></i><b>8.7.2</b> Assumption 2: Independence of Observations</a></li>
+<li class="chapter" data-level="8.7.3" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-3-absence-of-multicollinearity"><i class="fa fa-check"></i><b>8.7.3</b> Assumption 3: Absence of Multicollinearity</a></li>
+<li class="chapter" data-level="8.7.4" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-4-sufficient-sample-size"><i class="fa fa-check"></i><b>8.7.4</b> Assumption 4: Sufficient Sample Size</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#model-validation-and-diagnostics"><i class="fa fa-check"></i><b>8.8</b> Model Validation and Diagnostics</a>
+<ul>
+<li class="chapter" data-level="8.8.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#cross-validation"><i class="fa fa-check"></i><b>8.8.1</b> Cross-Validation</a></li>
+<li class="chapter" data-level="8.8.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#dealing-with-overfitting"><i class="fa fa-check"></i><b>8.8.2</b> Dealing with Overfitting</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#conclusion-7"><i class="fa fa-check"></i><b>8.9</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html"><i class="fa fa-check"></i><b>9</b> Geographic Mapping and Spatial Analysis</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#introduction-to-geographic-data-in-r"><i class="fa fa-check"></i><b>9.1</b> Introduction to Geographic Data in R</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#understanding-geographic-data-formats"><i class="fa fa-check"></i><b>9.1.1</b> Understanding Geographic Data Formats</a></li>
+<li class="chapter" data-level="9.1.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#importing-and-handling-spatial-data-with-the-sf-package"><i class="fa fa-check"></i><b>9.1.2</b> Importing and Handling Spatial Data with the <code>sf</code> Package</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#geographic-coordinate-systems-and-projections"><i class="fa fa-check"></i><b>9.2</b> Geographic Coordinate Systems and Projections</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#introduction-to-coordinate-systems"><i class="fa fa-check"></i><b>9.2.1</b> Introduction to Coordinate Systems</a></li>
+<li class="chapter" data-level="9.2.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#common-issues-with-coordinate-systems-in-r"><i class="fa fa-check"></i><b>9.2.2</b> Common Issues with Coordinate Systems in R</a></li>
+<li class="chapter" data-level="9.2.3" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#handling-coordinate-systems-in-r"><i class="fa fa-check"></i><b>9.2.3</b> Handling Coordinate Systems in R</a></li>
+<li class="chapter" data-level="9.2.4" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#practical-considerations"><i class="fa fa-check"></i><b>9.2.4</b> Practical Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#creating-basic-maps"><i class="fa fa-check"></i><b>9.3</b> Creating Basic Maps</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#plotting-data-on-maps-using-ggplot2-and-sf"><i class="fa fa-check"></i><b>9.3.1</b> Plotting Data on Maps Using ggplot2 and sf</a></li>
+<li class="chapter" data-level="9.3.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#customising-maps"><i class="fa fa-check"></i><b>9.3.2</b> Customising Maps</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#spatial-analysis"><i class="fa fa-check"></i><b>9.4</b> Spatial Analysis</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#basic-spatial-operations"><i class="fa fa-check"></i><b>9.4.1</b> Basic Spatial Operations</a></li>
+<li class="chapter" data-level="9.4.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#creating-choropleth-maps"><i class="fa fa-check"></i><b>9.4.2</b> Creating Choropleth Maps</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#conclusion-8"><i class="fa fa-check"></i><b>9.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html"><i class="fa fa-check"></i>Exercise Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-2"><i class="fa fa-check"></i>Chapter 2</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-3"><i class="fa fa-check"></i>Chapter 3</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-5"><i class="fa fa-check"></i>Chapter 5</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-6"><i class="fa fa-check"></i>Chapter 6</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-7"><i class="fa fa-check"></i>Chapter 7</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-8"><i class="fa fa-check"></i>Chapter 8</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-9"><i class="fa fa-check"></i>Chapter 9</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R for Crime Analysts</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-management-in-r" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Data Management in R<a href="data-management-in-r.html#data-management-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="data-import-and-export" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Data Import and Export<a href="data-management-in-r.html#data-import-and-export" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Effective data management is crucial for any analysis. In this section, we’ll explore how to import data from various formats, such as SPSS, Excel, and CSV files, and how to export your cleaned and prepared data to different formats. We will also compare the R methods to their SPSS equivalents.</p>
+<div id="importing-data" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Importing Data<a href="data-management-in-r.html#importing-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R offers several packages to import data from different sources:</p>
+<p><strong>SPSS Files:</strong> Use the <code>haven</code> package to import SPSS data files (<code>.sav</code>).</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-management-in-r.html#cb16-1" tabindex="-1"></a><span class="co"># Load the haven package</span></span>
+<span id="cb16-2"><a href="data-management-in-r.html#cb16-2" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb16-3"><a href="data-management-in-r.html#cb16-3" tabindex="-1"></a>  </span>
+<span id="cb16-4"><a href="data-management-in-r.html#cb16-4" tabindex="-1"></a><span class="co"># Import SPSS data file</span></span>
+<span id="cb16-5"><a href="data-management-in-r.html#cb16-5" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">&quot;path_to_your_file.sav&quot;</span>)</span></code></pre></div>
+<p>SPSS Equivalent: In SPSS, you would use the File &gt; Open &gt; Data menu or the GET FILE command.</p>
+<p><strong>Excel Files:</strong> Use the <code>readxl</code> package to import Excel files (<code>.xlsx</code>).</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-management-in-r.html#cb17-1" tabindex="-1"></a><span class="co"># Load the readxl package</span></span>
+<span id="cb17-2"><a href="data-management-in-r.html#cb17-2" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb17-3"><a href="data-management-in-r.html#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="data-management-in-r.html#cb17-4" tabindex="-1"></a><span class="co"># Import Excel file</span></span>
+<span id="cb17-5"><a href="data-management-in-r.html#cb17-5" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;path_to_your_file.xlsx&quot;</span>)</span></code></pre></div>
+<p>SPSS Equivalent: You would typically use File &gt; Open &gt; Data with Excel files in SPSS.</p>
+<p><strong>CSV Files:</strong> Use base R’s <code>read.csv()</code> function or the readr package for more advanced options.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-management-in-r.html#cb18-1" tabindex="-1"></a><span class="co"># Base R method to import CSV file</span></span>
+<span id="cb18-2"><a href="data-management-in-r.html#cb18-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;path_to_your_file.csv&quot;</span>)</span></code></pre></div>
+<p>SPSS Equivalent: In SPSS, importing CSV files can be done via File &gt; Open &gt; Data or with the GET DATA command.</p>
+</div>
+<div id="exporting-data" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Exporting Data<a href="data-management-in-r.html#exporting-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After cleaning and analysing your data, you may need to export it to various formats:</p>
+<p><strong>To SPSS Format:</strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="data-management-in-r.html#cb19-1" tabindex="-1"></a><span class="co"># Export data to SPSS format</span></span>
+<span id="cb19-2"><a href="data-management-in-r.html#cb19-2" tabindex="-1"></a><span class="fu">write_sav</span>(data, <span class="st">&quot;path_to_your_file.sav&quot;</span>)</span></code></pre></div>
+<p>SPSS Equivalent: Use File &gt; Save As in SPSS to export data.</p>
+<p><strong>To Excel Format:</strong></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-management-in-r.html#cb20-1" tabindex="-1"></a><span class="co"># Load the openxlsx package</span></span>
+<span id="cb20-2"><a href="data-management-in-r.html#cb20-2" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb20-3"><a href="data-management-in-r.html#cb20-3" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="data-management-in-r.html#cb20-4" tabindex="-1"></a><span class="co">#Export data to Excel format using openxlsx package</span></span>
+<span id="cb20-5"><a href="data-management-in-r.html#cb20-5" tabindex="-1"></a><span class="fu">write.xlsx</span>(data, <span class="st">&quot;path_to_your_file.xlsx&quot;</span>)</span></code></pre></div>
+<p>SPSS Equivalent: Use File &gt; Save As in SPSS with Excel files.</p>
+<p><strong>To CSV Format:</strong></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="data-management-in-r.html#cb21-1" tabindex="-1"></a><span class="co"># Export data to CSV format</span></span>
+<span id="cb21-2"><a href="data-management-in-r.html#cb21-2" tabindex="-1"></a><span class="fu">write.csv</span>(data, <span class="st">&quot;path_to_your_file.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>SPSS Equivalent: In SPSS, you can use File &gt; Save As to save data as a CSV file.</p>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>Go to <a href="https://data.police.uk/data/" class="uri">https://data.police.uk/data/</a> and download a CSV file of Metropolitan Police Service data for January 2024. Load the CSV file into a R dataframe called <code>data_mps</code>. How many observations and variables are there?</p>
+<ul>
+<li><em>Hint: You can find this in the environment pane.</em></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="data-cleaning-and-preparation" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Data Cleaning and Preparation<a href="data-management-in-r.html#data-cleaning-and-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Data cleaning is an essential step in preparing your data for analysis. This section covers handling missing data, recoding variables, filtering, subsetting, and performing data transformations. We’ll introduce the <code>dplyr</code> package, which is one of the most popular R packages for data manipulation.</p>
+<div id="handling-missing-data" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Handling Missing Data<a href="data-management-in-r.html#handling-missing-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Identify Missing Data:</strong></p>
+<p>We can find missing data by looking for not available (NA) information. The sum command is used to give us an indication of how many missing pieces of data there are.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data-management-in-r.html#cb22-1" tabindex="-1"></a><span class="co"># Check for missing data</span></span>
+<span id="cb22-2"><a href="data-management-in-r.html#cb22-2" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(data_mps))</span>
+<span id="cb22-3"><a href="data-management-in-r.html#cb22-3" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="data-management-in-r.html#cb22-4" tabindex="-1"></a><span class="co"># Check for missing data in a specific column</span></span>
+<span id="cb22-5"><a href="data-management-in-r.html#cb22-5" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(data_mps<span class="sc">$</span>Month))</span></code></pre></div>
+<p>SPSS Equivalent: Use the MISSING VALUES command or the Data &gt; Define Missing Values menu.</p>
+<p><strong>Handling Missing Data:</strong></p>
+<p>There are numerous approaches for handling missing data. Here we will cover the simplest methods.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="data-management-in-r.html#cb23-1" tabindex="-1"></a><span class="co"># Remove any rows with missing data</span></span>
+<span id="cb23-2"><a href="data-management-in-r.html#cb23-2" tabindex="-1"></a>data_mps_clean <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(data_mps)</span>
+<span id="cb23-3"><a href="data-management-in-r.html#cb23-3" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="data-management-in-r.html#cb23-4" tabindex="-1"></a><span class="co"># Remove any columns with missing data</span></span>
+<span id="cb23-5"><a href="data-management-in-r.html#cb23-5" tabindex="-1"></a>data_mps_clean <span class="ot">&lt;-</span> data_mps[, <span class="fu">colSums</span>(<span class="fu">is.na</span>(data_mps)) <span class="sc">==</span> <span class="dv">0</span>]</span>
+<span id="cb23-6"><a href="data-management-in-r.html#cb23-6" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="data-management-in-r.html#cb23-7" tabindex="-1"></a><span class="co"># Replace missing values with a specific value, such as 0.</span></span>
+<span id="cb23-8"><a href="data-management-in-r.html#cb23-8" tabindex="-1"></a>data_mps[<span class="fu">is.na</span>(data_mps)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb23-9"><a href="data-management-in-r.html#cb23-9" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="data-management-in-r.html#cb23-10" tabindex="-1"></a><span class="co">#Replace missing values with a column value (e.g. Mode, Mean, ...)</span></span>
+<span id="cb23-11"><a href="data-management-in-r.html#cb23-11" tabindex="-1"></a>data_mps<span class="sc">$</span>Latitude[<span class="fu">is.na</span>(data_mps<span class="sc">$</span>Latitude)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(data_mps<span class="sc">$</span>Latitude, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>SPSS Equivalent: Use the RECODE command or the Transform &gt; Replace Missing Values function.</p>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>Some of the commands above are composite commands encompassing multiple functions. Can you break them down to understand what each part of the function is doing?</p>
+</div>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>In the examples above, in the second example we replaced all missing values with 0. We also replaced any missing latitudes with the average latitude across the dataset in the fourth example. Were these the best imputation choices? What method would you have chosen for dealing with outliers?</p>
+</div>
+</div>
+<div id="filtering-and-subsetting-data" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Filtering and Subsetting Data<a href="data-management-in-r.html#filtering-and-subsetting-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Filtering and subsetting data allow you to focus on specific observations of interest.</p>
+<p><strong>Filtering Data in R:</strong></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data-management-in-r.html#cb24-1" tabindex="-1"></a><span class="co"># Filter data where a variable equals a specific value</span></span>
+<span id="cb24-2"><a href="data-management-in-r.html#cb24-2" tabindex="-1"></a>data_filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(data, variable <span class="sc">==</span> <span class="st">&quot;value&quot;</span>)</span></code></pre></div>
+<p>SPSS Equivalent: Use the SELECT IF command…</p>
+<pre><code>SELECT IF (variable = value).</code></pre>
+<p><strong>Subsetting Data in R:</strong></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-management-in-r.html#cb26-1" tabindex="-1"></a><span class="co"># Subset columns in R</span></span>
+<span id="cb26-2"><a href="data-management-in-r.html#cb26-2" tabindex="-1"></a>data_subset <span class="ot">&lt;-</span> <span class="fu">select</span>(data, column1, column2)</span></code></pre></div>
+<p>SPSS Equivalent: Use the MATCH FILES / KEEP command or Data &gt; Select Cases.</p>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>The <code>Context</code> column is full of <code>NA</code> values. Can you subset the dataset to remove this column? Can you then filter the dataset to create a new dataframe called <code>data_mps_drugs</code> containing only crimes with the Crime Type recorded as ‘Drugs’.</p>
+<ul>
+<li><em>Hint: You do not need to list all of the columns you want to keep. Can you find a way to mention only the colum you want to drop?</em></li>
+</ul>
+</div>
+</div>
+<div id="data-transformations" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Data Transformations<a href="data-management-in-r.html#data-transformations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Data transformations involve creating new variables or modifying existing ones. This can include mathematical operations, merging datasets, and more.</p>
+<p><strong>Creating New Variables:</strong></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-management-in-r.html#cb27-1" tabindex="-1"></a><span class="co"># Create a new variable</span></span>
+<span id="cb27-2"><a href="data-management-in-r.html#cb27-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="data-management-in-r.html#cb27-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">new_variable =</span> old_variable1 <span class="sc">+</span> old_variable2)</span></code></pre></div>
+<p>SPSS Equivalent: Use the COMPUTE command:</p>
+<pre><code>COMPUTE new_variable = old_variable1 + old_variable2.</code></pre>
+<p><strong>Merging Datasets:</strong></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="data-management-in-r.html#cb29-1" tabindex="-1"></a><span class="co"># Merge two datasets by a common key</span></span>
+<span id="cb29-2"><a href="data-management-in-r.html#cb29-2" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> <span class="fu">merge</span>(data1, data2, <span class="at">by =</span> <span class="st">&quot;common_column&quot;</span>)</span></code></pre></div>
+<p>SPSS Equivalent: Use the MATCH FILES command.</p>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>How would you merge two datasets if they didn’t have a common key?</p>
+<ul>
+<li><em>Hint: Google is your friend!</em></li>
+</ul>
+</div>
+</div>
+<div id="the-dplyr-pipeline" class="section level3 hasAnchor" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> The dplyr Pipeline<a href="data-management-in-r.html#the-dplyr-pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You may have noticed in the previous section that we snuck in a funny looking bit of code – the pipeline operator, <code>%&gt;%</code> – when creating a new variable. The <code>dplyr</code> package uses the pipeline operator <code>%&gt;%</code> to streamline the process of applying a sequence of operations to data frames. The <code>%&gt;%</code> operator allows you to pass the result of one function directly into the next function, creating a clear and readable chain of commands.</p>
+<p><strong>Pipe Data:</strong> The object on the left side of %&gt;% is passed as the first argument to the function on the right side.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-management-in-r.html#cb30-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="cf">function</span>()</span></code></pre></div>
+<p><strong>Chaining Multiple Operations:</strong> You can chain multiple functions together, where the output of each function becomes the input for the next. This allows you to perform multiple operations on your data frame without needing to create intermediate variables.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="data-management-in-r.html#cb31-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="data-management-in-r.html#cb31-2" tabindex="-1"></a>  <span class="fu">function1</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="data-management-in-r.html#cb31-3" tabindex="-1"></a>  <span class="fu">function2</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb31-4"><a href="data-management-in-r.html#cb31-4" tabindex="-1"></a>  <span class="fu">function3</span>()</span></code></pre></div>
+<p><strong>Benefits</strong>
+- <strong>Readability:</strong> Makes code more readable by laying out operations in a clear, top-down sequence.
+- <strong>Efficiency:</strong> Reduces the need for temporary variables or nested function calls.</p>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>Using the original <code>data_mps</code> dataframe can you recreate the <code>data_mps_drugs</code> dataframe using the <code>dplyr</code> pipeline operator with the relevant <code>select</code> and <code>filter</code> commands?</p>
+</div>
+</div>
+</div>
+<div id="working-with-categorical-data" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Working with Categorical Data<a href="data-management-in-r.html#working-with-categorical-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Categorical data, or factors in R, are a common type of data in survey analysis. Understanding how to manipulate and analyse this type of data is essential.</p>
+<div id="creating-and-manipulating-factors" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Creating and Manipulating Factors<a href="data-management-in-r.html#creating-and-manipulating-factors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Factors in R are used to represent categorical data and can be ordered or unordered. Here’s how to create and manipulate them:</p>
+<p><strong>Creating a Factor:</strong></p>
+<p>When creating a categorical factor variable you can manually specify the levels to provide an ordering or you can leave it blank to produce an unordered categorical variable.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="data-management-in-r.html#cb32-1" tabindex="-1"></a><span class="co"># Create a factor variable</span></span>
+<span id="cb32-2"><a href="data-management-in-r.html#cb32-2" tabindex="-1"></a>data<span class="sc">$</span>factor_variable <span class="ot">&lt;-</span> <span class="fu">factor</span>(data<span class="sc">$</span>categorical_variable,</span>
+<span id="cb32-3"><a href="data-management-in-r.html#cb32-3" tabindex="-1"></a>                               <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Category 1&quot;</span>, <span class="st">&quot;Category 2&quot;</span>, <span class="st">&quot;Category 3&quot;</span>))</span></code></pre></div>
+<p>SPSS Equivalent: This is similar to defining value labels and assigning them in SPSS.</p>
+<p><strong>Reordering Factor Levels:</strong></p>
+<p>You can reorder the factor levels by respecifying the ordering.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="data-management-in-r.html#cb33-1" tabindex="-1"></a><span class="co"># Reorder levels of a factor</span></span>
+<span id="cb33-2"><a href="data-management-in-r.html#cb33-2" tabindex="-1"></a>data<span class="sc">$</span>factor_variable <span class="ot">&lt;-</span> <span class="fu">factor</span>(data<span class="sc">$</span>factor_variable,</span>
+<span id="cb33-3"><a href="data-management-in-r.html#cb33-3" tabindex="-1"></a>                               <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Category 3&quot;</span>, <span class="st">&quot;Category 1&quot;</span>, <span class="st">&quot;Category 2&quot;</span>))</span></code></pre></div>
+<p>SPSS Equivalent: Use the VARIABLE LEVELS command.</p>
+</div>
+<div id="recoding-variables" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Recoding Variables<a href="data-management-in-r.html#recoding-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Recoding variables is a common task, such as transforming a continuous variable into a categorical one.</p>
+<p><strong>Recoding Variables in R:</strong></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="data-management-in-r.html#cb34-1" tabindex="-1"></a><span class="co">#Load the dplyr library</span></span>
+<span id="cb34-2"><a href="data-management-in-r.html#cb34-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb34-3"><a href="data-management-in-r.html#cb34-3" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="data-management-in-r.html#cb34-4" tabindex="-1"></a><span class="co"># Recoding a variable using dplyr</span></span>
+<span id="cb34-5"><a href="data-management-in-r.html#cb34-5" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb34-6"><a href="data-management-in-r.html#cb34-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">new_variable =</span> <span class="fu">recode</span>(old_variable,</span>
+<span id="cb34-7"><a href="data-management-in-r.html#cb34-7" tabindex="-1"></a>                               <span class="st">&quot;1&quot;</span> <span class="ot">=</span> <span class="st">&quot;Category 1&quot;</span>,</span>
+<span id="cb34-8"><a href="data-management-in-r.html#cb34-8" tabindex="-1"></a>                               <span class="st">&quot;2&quot;</span> <span class="ot">=</span> <span class="st">&quot;Category 2&quot;</span>))</span></code></pre></div>
+<p>SPSS Equivalent: Use the RECODE command…</p>
+<pre><code>RECODE old_variable (1=&#39;Category 1&#39;) (2=&#39;Category 2&#39;) INTO new_variable.</code></pre>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>Using the unfiltered <code>data_mps</code> dataset. Convert the Crime Type columns into a factor.</p>
+</div>
+</div>
+<div id="frequency-tables-and-cross-tabulations" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Frequency Tables and Cross-Tabulations<a href="data-management-in-r.html#frequency-tables-and-cross-tabulations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Understanding the distribution of categorical data is often done through frequency tables and cross-tabulations.</p>
+<p><strong>Frequency Tables:</strong></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="data-management-in-r.html#cb36-1" tabindex="-1"></a><span class="co"># Create a frequency table</span></span>
+<span id="cb36-2"><a href="data-management-in-r.html#cb36-2" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>factor_variable)</span></code></pre></div>
+<p>SPSS Equivalent: Use the FREQUENCIES command:</p>
+<pre><code>FREQUENCIES VARIABLES=factor_variable.</code></pre>
+<p><strong>Cross-Tabulations:</strong></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="data-management-in-r.html#cb38-1" tabindex="-1"></a><span class="co"># Create a cross-tabulation</span></span>
+<span id="cb38-2"><a href="data-management-in-r.html#cb38-2" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>factor_variable1, data<span class="sc">$</span>factor_variable2)</span></code></pre></div>
+<p>SPSS Equivalent: Use the CROSSTABS command:</p>
+<pre><code>CROSSTABS /TABLES=factor_variable1 BY factor_variable2.</code></pre>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>Convert the Last Outcome Category to a categorical variable and view a cross-tabulation of the outcomes with the crime types. Which Crime Type has the highest number of Complete Investigations Where No Suspect Was Identified?</p>
+</div>
+</div>
+</div>
+<div id="conclusion-2" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Conclusion<a href="data-management-in-r.html#conclusion-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this chapter, we’ve covered essential data management tasks in R, including importing and exporting data, cleaning and preparing data, and working with categorical data. By comparing these processes with their SPSS equivalents, you can see how R can effectively replace or complement SPSS in your analytical workflow. In the next chapter, we’ll delve into descriptive statistics and data visualizations in R, continuing to build your skills in this versatile programming language.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="getting-started-with-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="connecting-to-and-accessing-a-postgresql-database.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-data.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

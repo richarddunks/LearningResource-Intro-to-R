@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9 Geographic Mapping and Spatial Analysis | Introduction to R for Crime Analysts</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9 Geographic Mapping and Spatial Analysis | Introduction to R for Crime Analysts" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9 Geographic Mapping and Spatial Analysis | Introduction to R for Crime Analysts" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Daniel Hammocks, Senior Data Scientist" />
+
+
+<meta name="date" content="2024-08-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="regression-analysis-1.html"/>
+<link rel="next" href="exercise-answers.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/MOPAC-DS-Square.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#purpose-of-this-book"><i class="fa fa-check"></i>Purpose of this Book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#why-learn-r"><i class="fa fa-check"></i><b>1.2</b> Why Learn R?</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="introduction.html"><a href="introduction.html#flexibility-and-power"><i class="fa fa-check"></i><b>1.2.1</b> Flexibility and Power</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introduction.html"><a href="introduction.html#reproducibility"><i class="fa fa-check"></i><b>1.2.2</b> Reproducibility</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduction.html"><a href="introduction.html#extensive-community-and-package-ecosystem"><i class="fa fa-check"></i><b>1.2.3</b> Extensive Community and Package Ecosystem</a></li>
+<li class="chapter" data-level="1.2.4" data-path="introduction.html"><a href="introduction.html#cost"><i class="fa fa-check"></i><b>1.2.4</b> Cost</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#replicating-spss-functionality-in-r"><i class="fa fa-check"></i><b>1.3</b> Replicating SPSS Functionality in R</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="introduction.html"><a href="introduction.html#data-management"><i class="fa fa-check"></i><b>1.3.1</b> Data Management</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introduction.html"><a href="introduction.html#descriptive-statistics"><i class="fa fa-check"></i><b>1.3.2</b> Descriptive Statistics</a></li>
+<li class="chapter" data-level="1.3.3" data-path="introduction.html"><a href="introduction.html#statistical-tests"><i class="fa fa-check"></i><b>1.3.3</b> Statistical Tests</a></li>
+<li class="chapter" data-level="1.3.4" data-path="introduction.html"><a href="introduction.html#regression-analysis"><i class="fa fa-check"></i><b>1.3.4</b> Regression Analysis</a></li>
+<li class="chapter" data-level="1.3.5" data-path="introduction.html"><a href="introduction.html#data-visualisation"><i class="fa fa-check"></i><b>1.3.5</b> Data Visualisation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#transitioning-from-spss-to-r"><i class="fa fa-check"></i><b>1.4</b> Transitioning from SPSS to R</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction.html"><a href="introduction.html#building-confidence-in-r"><i class="fa fa-check"></i><b>1.4.1</b> Building Confidence in R</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction.html"><a href="introduction.html#leveraging-rs-ecosystem"><i class="fa fa-check"></i><b>1.4.2</b> Leveraging R’s Ecosystem</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#conclusion"><i class="fa fa-check"></i><b>1.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html"><i class="fa fa-check"></i><b>2</b> Getting Started with R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#the-r-environment"><i class="fa fa-check"></i><b>2.1</b> The R Environment</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#overview-of-the-rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> Overview of the RStudio Interface</a></li>
+<li class="chapter" data-level="2.1.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#console-vs.-scripts-vs.-notebooks"><i class="fa fa-check"></i><b>2.1.2</b> Console vs. Scripts vs. Notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#introduction-to-r-packages-and-installing-key-packages"><i class="fa fa-check"></i><b>2.2</b> Introduction to R Packages and Installing Key Packages</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#introduction-to-r-packages"><i class="fa fa-check"></i><b>2.2.1</b> Introduction to R Packages</a></li>
+<li class="chapter" data-level="2.2.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#installing-and-loading-packages"><i class="fa fa-check"></i><b>2.2.2</b> Installing and Loading Packages</a></li>
+<li class="chapter" data-level="2.2.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#key-packages-for-data-analysis"><i class="fa fa-check"></i><b>2.2.3</b> Key Packages for Data Analysis</a></li>
+<li class="chapter" data-level="2.2.4" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#managing-package-dependencies"><i class="fa fa-check"></i><b>2.2.4</b> Managing Package Dependencies</a></li>
+<li class="chapter" data-level="2.2.5" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#summary"><i class="fa fa-check"></i><b>2.2.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#coding-conventions-and-best-practices"><i class="fa fa-check"></i><b>2.3</b> Coding Conventions and Best Practices</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#writing-clean-and-readable-code"><i class="fa fa-check"></i><b>2.3.1</b> Writing Clean and Readable Code</a></li>
+<li class="chapter" data-level="2.3.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#commenting-and-structuring-scripts"><i class="fa fa-check"></i><b>2.3.2</b> Commenting and Structuring Scripts</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#data-types-and-structures"><i class="fa fa-check"></i><b>2.4</b> Data Types and Structures</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#introduction-to-vectors-data-frames-lists-and-factors"><i class="fa fa-check"></i><b>2.4.1</b> Introduction to Vectors, Data Frames, Lists, and Factors</a></li>
+<li class="chapter" data-level="2.4.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#comparing-r-data-types-to-spss-data-types"><i class="fa fa-check"></i><b>2.4.2</b> Comparing R Data Types to SPSS Data Types</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#basic-operations-and-functions-in-r"><i class="fa fa-check"></i><b>2.5</b> Basic Operations and Functions in R</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#arithmetic-operations"><i class="fa fa-check"></i><b>2.5.1</b> Arithmetic Operations</a></li>
+<li class="chapter" data-level="2.5.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#logical-operations"><i class="fa fa-check"></i><b>2.5.2</b> Logical Operations</a></li>
+<li class="chapter" data-level="2.5.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#basic-functions"><i class="fa fa-check"></i><b>2.5.3</b> Basic Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#conclusion-1"><i class="fa fa-check"></i><b>2.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-management-in-r.html"><a href="data-management-in-r.html"><i class="fa fa-check"></i><b>3</b> Data Management in R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#data-import-and-export"><i class="fa fa-check"></i><b>3.1</b> Data Import and Export</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#importing-data"><i class="fa fa-check"></i><b>3.1.1</b> Importing Data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#exporting-data"><i class="fa fa-check"></i><b>3.1.2</b> Exporting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#data-cleaning-and-preparation"><i class="fa fa-check"></i><b>3.2</b> Data Cleaning and Preparation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#handling-missing-data"><i class="fa fa-check"></i><b>3.2.1</b> Handling Missing Data</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#filtering-and-subsetting-data"><i class="fa fa-check"></i><b>3.2.2</b> Filtering and Subsetting Data</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-management-in-r.html"><a href="data-management-in-r.html#data-transformations"><i class="fa fa-check"></i><b>3.2.3</b> Data Transformations</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-management-in-r.html"><a href="data-management-in-r.html#the-dplyr-pipeline"><i class="fa fa-check"></i><b>3.2.4</b> The dplyr Pipeline</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-management-in-r.html"><a href="data-management-in-r.html#working-with-categorical-data"><i class="fa fa-check"></i><b>3.3</b> Working with Categorical Data</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#creating-and-manipulating-factors"><i class="fa fa-check"></i><b>3.3.1</b> Creating and Manipulating Factors</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#recoding-variables"><i class="fa fa-check"></i><b>3.3.2</b> Recoding Variables</a></li>
+<li class="chapter" data-level="3.3.3" data-path="data-management-in-r.html"><a href="data-management-in-r.html#frequency-tables-and-cross-tabulations"><i class="fa fa-check"></i><b>3.3.3</b> Frequency Tables and Cross-Tabulations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-management-in-r.html"><a href="data-management-in-r.html#conclusion-2"><i class="fa fa-check"></i><b>3.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html"><i class="fa fa-check"></i><b>4</b> Connecting to and Accessing a PostgreSQL Database</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#setting-up-the-environment"><i class="fa fa-check"></i><b>4.2</b> Setting Up the Environment</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#installing-necessary-packages"><i class="fa fa-check"></i><b>4.2.1</b> Installing Necessary Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#connecting-to-postgresql-using-rpostgres"><i class="fa fa-check"></i><b>4.3</b> Connecting to PostgreSQL (Using RPostgres)</a></li>
+<li class="chapter" data-level="4.4" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#querying-data-from-postgresql"><i class="fa fa-check"></i><b>4.4</b> Querying Data from PostgreSQL</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#executing-a-query"><i class="fa fa-check"></i><b>4.4.1</b> Executing a Query</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#handling-errors-and-troubleshooting"><i class="fa fa-check"></i><b>4.5</b> Handling Errors and Troubleshooting</a></li>
+<li class="chapter" data-level="4.6" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#conclusion-3"><i class="fa fa-check"></i><b>4.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html"><i class="fa fa-check"></i><b>5</b> Descriptive Statistics and Visualisations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#introduction-to-descriptive-statistics"><i class="fa fa-check"></i><b>5.1</b> Introduction to Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#understanding-descriptive-statistics"><i class="fa fa-check"></i><b>5.1.1</b> Understanding Descriptive Statistics</a></li>
+<li class="chapter" data-level="5.1.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#basic-descriptive-statistics-in-r"><i class="fa fa-check"></i><b>5.1.2</b> Basic Descriptive Statistics in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#creating-visualisations-with-ggplot2"><i class="fa fa-check"></i><b>5.2</b> Creating Visualisations with ggplot2</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#introduction-to-ggplot2"><i class="fa fa-check"></i><b>5.2.1</b> Introduction to ggplot2</a></li>
+<li class="chapter" data-level="5.2.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#creating-basic-plots"><i class="fa fa-check"></i><b>5.2.2</b> Creating Basic Plots</a></li>
+<li class="chapter" data-level="5.2.3" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#customising-your-plots"><i class="fa fa-check"></i><b>5.2.3</b> Customising Your Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#descriptive-statistics-with-dplyr"><i class="fa fa-check"></i><b>5.3</b> Descriptive Statistics with dplyr</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#using-dplyr-to-summarise-data"><i class="fa fa-check"></i><b>5.3.1</b> Using dplyr to Summarise Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#combining-dplyr-with-ggplot2"><i class="fa fa-check"></i><b>5.3.2</b> Combining dplyr with ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#advanced-visualisation-techniques"><i class="fa fa-check"></i><b>5.4</b> Advanced Visualisation Techniques</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#faceting"><i class="fa fa-check"></i><b>5.4.1</b> Faceting</a></li>
+<li class="chapter" data-level="5.4.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#combining-multiple-geoms"><i class="fa fa-check"></i><b>5.4.2</b> Combining Multiple Geoms</a></li>
+<li class="chapter" data-level="5.4.3" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#saving-your-plots"><i class="fa fa-check"></i><b>5.4.3</b> Saving Your Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#conclusion-4"><i class="fa fa-check"></i><b>5.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html"><i class="fa fa-check"></i><b>6</b> Survey Analysis in R</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#introduction-to-survey-data"><i class="fa fa-check"></i><b>6.1</b> Introduction to Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#key-concepts-in-survey-analysis"><i class="fa fa-check"></i><b>6.1.1</b> Key Concepts in Survey Analysis</a></li>
+<li class="chapter" data-level="6.1.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#understanding-survey-data-structures"><i class="fa fa-check"></i><b>6.1.2</b> Understanding Survey Data Structures</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#importing-and-preparing-survey-data"><i class="fa fa-check"></i><b>6.2</b> Importing and Preparing Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#converting-data-for-survey-analysis"><i class="fa fa-check"></i><b>6.2.1</b> Converting Data for Survey Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#descriptive-analysis-of-survey-data"><i class="fa fa-check"></i><b>6.3</b> Descriptive Analysis of Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#calculating-means-and-totals"><i class="fa fa-check"></i><b>6.3.1</b> Calculating Means and Totals</a></li>
+<li class="chapter" data-level="6.3.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#frequencies-and-cross-tabulations"><i class="fa fa-check"></i><b>6.3.2</b> Frequencies and Cross-tabulations</a></li>
+<li class="chapter" data-level="6.3.3" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#comparing-results-with-spss-survey-functions"><i class="fa fa-check"></i><b>6.3.3</b> Comparing Results with SPSS Survey Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#weighting-survey-data"><i class="fa fa-check"></i><b>6.4</b> Weighting Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#applying-weights"><i class="fa fa-check"></i><b>6.4.1</b> Applying Weights</a></li>
+<li class="chapter" data-level="6.4.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#analysing-weighted-survey-data"><i class="fa fa-check"></i><b>6.4.2</b> Analysing Weighted Survey Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#conclusion-5"><i class="fa fa-check"></i><b>6.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="inferential-statistics.html"><a href="inferential-statistics.html"><i class="fa fa-check"></i><b>7</b> Inferential Statistics</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#hypothesis-testing"><i class="fa fa-check"></i><b>7.1</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#t-tests"><i class="fa fa-check"></i><b>7.1.1</b> T-tests</a></li>
+<li class="chapter" data-level="7.1.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#chi-square-tests"><i class="fa fa-check"></i><b>7.1.2</b> Chi-square Tests</a></li>
+<li class="chapter" data-level="7.1.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#anova-analysis-of-variance"><i class="fa fa-check"></i><b>7.1.3</b> ANOVA (Analysis of Variance)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#correlation-analysis"><i class="fa fa-check"></i><b>7.2</b> Correlation Analysis</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#pearson-correlation"><i class="fa fa-check"></i><b>7.2.1</b> Pearson Correlation</a></li>
+<li class="chapter" data-level="7.2.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#spearman-correlation"><i class="fa fa-check"></i><b>7.2.2</b> Spearman Correlation</a></li>
+<li class="chapter" data-level="7.2.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#pearson-vs-spearman"><i class="fa fa-check"></i><b>7.2.3</b> Pearson vs Spearman?</a></li>
+<li class="chapter" data-level="7.2.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#visualising-correlations"><i class="fa fa-check"></i><b>7.2.4</b> Visualising Correlations</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#conclusion-6"><i class="fa fa-check"></i><b>7.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html"><i class="fa fa-check"></i><b>8</b> Regression Analysis</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#introduction-to-regression-analysis"><i class="fa fa-check"></i><b>8.1</b> Introduction to Regression Analysis</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#what-is-linear-regression"><i class="fa fa-check"></i><b>8.1.1</b> What is Linear Regression?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#simple-linear-regression-in-r"><i class="fa fa-check"></i><b>8.2</b> Simple Linear Regression in R</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#performing-simple-linear-regression"><i class="fa fa-check"></i><b>8.2.1</b> Performing Simple Linear Regression</a></li>
+<li class="chapter" data-level="8.2.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#interpreting-the-output"><i class="fa fa-check"></i><b>8.2.2</b> Interpreting the Output</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.3</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#performing-multiple-linear-regression"><i class="fa fa-check"></i><b>8.3.1</b> Performing Multiple Linear Regression</a></li>
+<li class="chapter" data-level="8.3.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#detailed-interpretation-of-the-output"><i class="fa fa-check"></i><b>8.3.2</b> Detailed Interpretation of the Output</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#checking-model-assumptions"><i class="fa fa-check"></i><b>8.4</b> Checking Model Assumptions</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-1-linearity"><i class="fa fa-check"></i><b>8.4.1</b> Assumption 1: Linearity</a></li>
+<li class="chapter" data-level="8.4.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-2-normality-of-residuals"><i class="fa fa-check"></i><b>8.4.2</b> Assumption 2: Normality of Residuals</a></li>
+<li class="chapter" data-level="8.4.3" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-3-homoscedasticity"><i class="fa fa-check"></i><b>8.4.3</b> Assumption 3: Homoscedasticity</a></li>
+<li class="chapter" data-level="8.4.4" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-4-independence-of-errors"><i class="fa fa-check"></i><b>8.4.4</b> Assumption 4: Independence of Errors</a></li>
+<li class="chapter" data-level="8.4.5" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-5-multicollinearity"><i class="fa fa-check"></i><b>8.4.5</b> Assumption 5: Multicollinearity</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#transformations-and-interaction-terms"><i class="fa fa-check"></i><b>8.5</b> Transformations and Interaction Terms</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#when-and-how-to-apply-transformations"><i class="fa fa-check"></i><b>8.5.1</b> When and How to Apply Transformations</a></li>
+<li class="chapter" data-level="8.5.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#using-interaction-terms"><i class="fa fa-check"></i><b>8.5.2</b> Using Interaction Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#logistic-regression"><i class="fa fa-check"></i><b>8.6</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#performing-logistic-regression-in-r"><i class="fa fa-check"></i><b>8.6.1</b> Performing Logistic Regression in R</a></li>
+<li class="chapter" data-level="8.6.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#interpreting-logistic-regression-output"><i class="fa fa-check"></i><b>8.6.2</b> Interpreting Logistic Regression Output</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#checking-model-assumptions-for-logistic-regression"><i class="fa fa-check"></i><b>8.7</b> Checking Model Assumptions for Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-1-linearity-of-the-logit"><i class="fa fa-check"></i><b>8.7.1</b> Assumption 1: Linearity of the Logit</a></li>
+<li class="chapter" data-level="8.7.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-2-independence-of-observations"><i class="fa fa-check"></i><b>8.7.2</b> Assumption 2: Independence of Observations</a></li>
+<li class="chapter" data-level="8.7.3" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-3-absence-of-multicollinearity"><i class="fa fa-check"></i><b>8.7.3</b> Assumption 3: Absence of Multicollinearity</a></li>
+<li class="chapter" data-level="8.7.4" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-4-sufficient-sample-size"><i class="fa fa-check"></i><b>8.7.4</b> Assumption 4: Sufficient Sample Size</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#model-validation-and-diagnostics"><i class="fa fa-check"></i><b>8.8</b> Model Validation and Diagnostics</a>
+<ul>
+<li class="chapter" data-level="8.8.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#cross-validation"><i class="fa fa-check"></i><b>8.8.1</b> Cross-Validation</a></li>
+<li class="chapter" data-level="8.8.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#dealing-with-overfitting"><i class="fa fa-check"></i><b>8.8.2</b> Dealing with Overfitting</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#conclusion-7"><i class="fa fa-check"></i><b>8.9</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html"><i class="fa fa-check"></i><b>9</b> Geographic Mapping and Spatial Analysis</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#introduction-to-geographic-data-in-r"><i class="fa fa-check"></i><b>9.1</b> Introduction to Geographic Data in R</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#understanding-geographic-data-formats"><i class="fa fa-check"></i><b>9.1.1</b> Understanding Geographic Data Formats</a></li>
+<li class="chapter" data-level="9.1.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#importing-and-handling-spatial-data-with-the-sf-package"><i class="fa fa-check"></i><b>9.1.2</b> Importing and Handling Spatial Data with the <code>sf</code> Package</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#geographic-coordinate-systems-and-projections"><i class="fa fa-check"></i><b>9.2</b> Geographic Coordinate Systems and Projections</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#introduction-to-coordinate-systems"><i class="fa fa-check"></i><b>9.2.1</b> Introduction to Coordinate Systems</a></li>
+<li class="chapter" data-level="9.2.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#common-issues-with-coordinate-systems-in-r"><i class="fa fa-check"></i><b>9.2.2</b> Common Issues with Coordinate Systems in R</a></li>
+<li class="chapter" data-level="9.2.3" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#handling-coordinate-systems-in-r"><i class="fa fa-check"></i><b>9.2.3</b> Handling Coordinate Systems in R</a></li>
+<li class="chapter" data-level="9.2.4" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#practical-considerations"><i class="fa fa-check"></i><b>9.2.4</b> Practical Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#creating-basic-maps"><i class="fa fa-check"></i><b>9.3</b> Creating Basic Maps</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#plotting-data-on-maps-using-ggplot2-and-sf"><i class="fa fa-check"></i><b>9.3.1</b> Plotting Data on Maps Using ggplot2 and sf</a></li>
+<li class="chapter" data-level="9.3.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#customising-maps"><i class="fa fa-check"></i><b>9.3.2</b> Customising Maps</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#spatial-analysis"><i class="fa fa-check"></i><b>9.4</b> Spatial Analysis</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#basic-spatial-operations"><i class="fa fa-check"></i><b>9.4.1</b> Basic Spatial Operations</a></li>
+<li class="chapter" data-level="9.4.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#creating-choropleth-maps"><i class="fa fa-check"></i><b>9.4.2</b> Creating Choropleth Maps</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#conclusion-8"><i class="fa fa-check"></i><b>9.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html"><i class="fa fa-check"></i>Exercise Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-2"><i class="fa fa-check"></i>Chapter 2</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-3"><i class="fa fa-check"></i>Chapter 3</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-5"><i class="fa fa-check"></i>Chapter 5</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-6"><i class="fa fa-check"></i>Chapter 6</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-7"><i class="fa fa-check"></i>Chapter 7</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-8"><i class="fa fa-check"></i>Chapter 8</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-9"><i class="fa fa-check"></i>Chapter 9</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R for Crime Analysts</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="geographic-mapping-and-spatial-analysis" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">9</span> Geographic Mapping and Spatial Analysis<a href="geographic-mapping-and-spatial-analysis.html#geographic-mapping-and-spatial-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction-to-geographic-data-in-r" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Introduction to Geographic Data in R<a href="geographic-mapping-and-spatial-analysis.html#introduction-to-geographic-data-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Geographic mapping and spatial analysis allow you to visualise data in a geographical context, which can be crucial for identifying patterns, trends, and relationships. In this chapter, we’ll explore how to work with geographic data in R, create basic maps, and perform simple spatial analyses.</p>
+<p>SPSS lacks built-in support for geographic data formats, so users typically rely on external tools like GIS software for spatial analysis. R, however, provides comprehensive tools to manage and analyse spatial data within the same environment you use for statistical analysis.</p>
+<div id="understanding-geographic-data-formats" class="section level3 hasAnchor" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Understanding Geographic Data Formats<a href="geographic-mapping-and-spatial-analysis.html#understanding-geographic-data-formats" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Geographic data comes in various formats. The most common formats you’ll encounter in R are:</p>
+<ul>
+<li><p><strong>Shapefiles:</strong> A popular format for geographic data that consists of multiple files (<code>.shp</code>, <code>.shx</code>, <code>.dbf</code>) that store geometry and attribute information.</p></li>
+<li><p><strong>GeoJSON:</strong> A JSON format that encodes a variety of geographic data structures.</p></li>
+<li><p><strong>Other Formats:</strong> Other formats include <code>KML</code>, <code>GPX</code>, and spatial databases, all of which can be handled in R.</p></li>
+</ul>
+</div>
+<div id="importing-and-handling-spatial-data-with-the-sf-package" class="section level3 hasAnchor" number="9.1.2">
+<h3><span class="header-section-number">9.1.2</span> Importing and Handling Spatial Data with the <code>sf</code> Package<a href="geographic-mapping-and-spatial-analysis.html#importing-and-handling-spatial-data-with-the-sf-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>sf</code> (simple features) package in R is designed for working with spatial data. It simplifies the process of importing, manipulating, and analysing geographic data.</p>
+<p><strong>Installing and Loading the <code>sf</code> Package</strong>:</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="geographic-mapping-and-spatial-analysis.html#cb131-1" tabindex="-1"></a><span class="co">#Install the sf packages</span></span>
+<span id="cb131-2"><a href="geographic-mapping-and-spatial-analysis.html#cb131-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;sf&quot;</span>)</span>
+<span id="cb131-3"><a href="geographic-mapping-and-spatial-analysis.html#cb131-3" tabindex="-1"></a></span>
+<span id="cb131-4"><a href="geographic-mapping-and-spatial-analysis.html#cb131-4" tabindex="-1"></a><span class="co">#Load the sf package</span></span>
+<span id="cb131-5"><a href="geographic-mapping-and-spatial-analysis.html#cb131-5" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
+<p><strong>Importing Shapefiles:</strong></p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="geographic-mapping-and-spatial-analysis.html#cb132-1" tabindex="-1"></a><span class="co"># Import a shapefile</span></span>
+<span id="cb132-2"><a href="geographic-mapping-and-spatial-analysis.html#cb132-2" tabindex="-1"></a>spatial_data <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;path_to_your_shapefile.shp&quot;</span>)</span></code></pre></div>
+<p><strong>Importing GeoJSON Files:</strong></p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="geographic-mapping-and-spatial-analysis.html#cb133-1" tabindex="-1"></a><span class="co"># Import a GeoJSON file</span></span>
+<span id="cb133-2"><a href="geographic-mapping-and-spatial-analysis.html#cb133-2" tabindex="-1"></a>spatial_data <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;path_to_your_geojson.geojson&quot;</span>)</span></code></pre></div>
+<p><strong>Exploring Spatial Data:</strong>
+You can explore Spatial Data by using the <code>head()</code> command and preview the base shapefile by using the <code>plot()</code> command.</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="geographic-mapping-and-spatial-analysis.html#cb134-1" tabindex="-1"></a><span class="co"># View the structure of the spatial data</span></span>
+<span id="cb134-2"><a href="geographic-mapping-and-spatial-analysis.html#cb134-2" tabindex="-1"></a><span class="fu">head</span>(spatial_data)</span>
+<span id="cb134-3"><a href="geographic-mapping-and-spatial-analysis.html#cb134-3" tabindex="-1"></a><span class="co"># Plot the spatial data</span></span>
+<span id="cb134-4"><a href="geographic-mapping-and-spatial-analysis.html#cb134-4" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(spatial_data))</span></code></pre></div>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>Recreate these steps using the 2018 London Wards Shapefiles available at <a href="https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london">Statistical GIS Boundary Files for London</a>. You should get the output shown below.</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="geographic-coordinate-systems-and-projections" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Geographic Coordinate Systems and Projections<a href="geographic-mapping-and-spatial-analysis.html#geographic-coordinate-systems-and-projections" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="introduction-to-coordinate-systems" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Introduction to Coordinate Systems<a href="geographic-mapping-and-spatial-analysis.html#introduction-to-coordinate-systems" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When working with spatial data, it’s essential to understand the concept of geographic coordinate systems (GCS) and map projections. A geographic coordinate system uses latitude and longitude to define locations on the Earth’s surface. However, because the Earth is a three-dimensional shape (approximately an ellipsoid), representing it on a two-dimensional map requires a transformation, known as a map projection.</p>
+<ul>
+<li><strong>Latitude and Longitude:</strong> These are the most common coordinates, often expressed in degrees. Latitude lines run parallel to the Equator, while longitude lines run from pole to pole.</li>
+<li><strong>Projections:</strong> Map projections are methods of flattening the Earth’s surface onto a plane. Each projection distorts some aspect of the Earth’s surface (such as area, shape, distance, or direction), so choosing the correct projection is crucial for accurate spatial analysis.</li>
+</ul>
+</div>
+<div id="common-issues-with-coordinate-systems-in-r" class="section level3 hasAnchor" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Common Issues with Coordinate Systems in R<a href="geographic-mapping-and-spatial-analysis.html#common-issues-with-coordinate-systems-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When working with spatial data in R, you might encounter issues related to coordinate systems, particularly when combining datasets from different sources. Here are some common problems:</p>
+<ul>
+<li><strong>Mismatched Coordinate Systems:</strong> If you try to combine or overlay spatial data from different sources that use different coordinate systems, the data might not align correctly. For example, one dataset might use a geographic coordinate system (e.g., WGS84), while another uses a projected coordinate system (e.g., UTM).</li>
+<li><strong>Unprojected Data:</strong> Spatial data might be in a geographic coordinate system (unprojected) rather than a projected system, which can cause distortions, especially when measuring distances or areas.</li>
+<li><strong>CRS (Coordinate Reference System) Errors:</strong> Sometimes, the coordinate reference system (CRS) of a spatial object might not be correctly defined, leading to misalignments or errors in analysis.</li>
+</ul>
+</div>
+<div id="handling-coordinate-systems-in-r" class="section level3 hasAnchor" number="9.2.3">
+<h3><span class="header-section-number">9.2.3</span> Handling Coordinate Systems in R<a href="geographic-mapping-and-spatial-analysis.html#handling-coordinate-systems-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>sf</code> package in R provides tools to handle these issues effectively.</p>
+<p><strong>Checking and Setting CRS:</strong> When you load spatial data, it’s essential to check and, if necessary, set the correct CRS. You can use the <code>st_crs()</code> function to check the CRS of an <code>sf</code> object and <code>st_set_crs()</code> to set it to a specific coordinate system.</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="geographic-mapping-and-spatial-analysis.html#cb135-1" tabindex="-1"></a><span class="co"># Checking the CRS</span></span>
+<span id="cb135-2"><a href="geographic-mapping-and-spatial-analysis.html#cb135-2" tabindex="-1"></a><span class="fu">st_crs</span>(spatial_data)</span>
+<span id="cb135-3"><a href="geographic-mapping-and-spatial-analysis.html#cb135-3" tabindex="-1"></a></span>
+<span id="cb135-4"><a href="geographic-mapping-and-spatial-analysis.html#cb135-4" tabindex="-1"></a><span class="co"># Setting the CRS to WGS84 (EPSG:4326)</span></span>
+<span id="cb135-5"><a href="geographic-mapping-and-spatial-analysis.html#cb135-5" tabindex="-1"></a>spatial_data <span class="ot">&lt;-</span> <span class="fu">st_set_crs</span>(spatial_data, <span class="dv">4326</span>)</span></code></pre></div>
+<p><strong>Transforming CRS:</strong> If you need to align datasets with different CRSs, you can transform them using the <code>st_transform()</code> function.</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="geographic-mapping-and-spatial-analysis.html#cb136-1" tabindex="-1"></a><span class="co"># Transforming to WGS84 (EPSG:4326)</span></span>
+<span id="cb136-2"><a href="geographic-mapping-and-spatial-analysis.html#cb136-2" tabindex="-1"></a>spatial_data_utm <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(spatial_data, <span class="dv">4326</span>)</span></code></pre></div>
+<p><strong>Dealing with Unprojected Data:</strong> If your data is in a geographic coordinate system (e.g., WGS84) and you need to perform distance calculations, you should transform it to a suitable projected coordinate system first to avoid distortions.</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="geographic-mapping-and-spatial-analysis.html#cb137-1" tabindex="-1"></a><span class="co"># Transforming to a suitable projection for distance calculation</span></span>
+<span id="cb137-2"><a href="geographic-mapping-and-spatial-analysis.html#cb137-2" tabindex="-1"></a>spatial_data_projected <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(spatial_data, <span class="dv">32633</span>)</span></code></pre></div>
+</div>
+<div id="practical-considerations" class="section level3 hasAnchor" number="9.2.4">
+<h3><span class="header-section-number">9.2.4</span> Practical Considerations<a href="geographic-mapping-and-spatial-analysis.html#practical-considerations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p><strong>Choosing the Right Projection:</strong> The choice of projection depends on the geographic extent of your data and the type of analysis you are performing. For local or regional analyses, UTM (Universal Transverse Mercator) is often a good choice because it minimises distortion within each zone.</p></li>
+<li><p><strong>Reprojecting Data for Visualisation:</strong> When creating maps, you might need to reproject your data to a coordinate system that balances area, shape, and distance for your specific region.</p></li>
+</ul>
+<p>By understanding and correctly handling geographic coordinate systems, you can ensure that your spatial analyses in R are accurate and meaningful. This step is crucial in applications like crime mapping, where precision in geographic location can directly impact the insights drawn from the data.</p>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>Go to the <a href="https://epsg.io/">EPSG</a> website and explore the different coordinate options available for the United Kingdom. What is the EPSG code of the British National Grid projection?</p>
+</div>
+</div>
+</div>
+<div id="creating-basic-maps" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Creating Basic Maps<a href="geographic-mapping-and-spatial-analysis.html#creating-basic-maps" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R provides powerful tools for creating maps. This section will show you how to plot your spatial data and customise maps using <code>ggplot2</code> and the <code>sf</code> package.</p>
+<div id="plotting-data-on-maps-using-ggplot2-and-sf" class="section level3 hasAnchor" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Plotting Data on Maps Using ggplot2 and sf<a href="geographic-mapping-and-spatial-analysis.html#plotting-data-on-maps-using-ggplot2-and-sf" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>ggplot2</code>, in combination with <code>sf</code>, makes it easy to create visually appealing maps.</p>
+<p><strong>Creating a Simple Map:</strong></p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="geographic-mapping-and-spatial-analysis.html#cb138-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb138-2"><a href="geographic-mapping-and-spatial-analysis.html#cb138-2" tabindex="-1"></a></span>
+<span id="cb138-3"><a href="geographic-mapping-and-spatial-analysis.html#cb138-3" tabindex="-1"></a><span class="co"># Create a basic map</span></span>
+<span id="cb138-4"><a href="geographic-mapping-and-spatial-analysis.html#cb138-4" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> spatial_data) <span class="sc">+</span></span>
+<span id="cb138-5"><a href="geographic-mapping-and-spatial-analysis.html#cb138-5" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb138-6"><a href="geographic-mapping-and-spatial-analysis.html#cb138-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
+<p><strong>Adding Data Points to a Map:</strong></p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="geographic-mapping-and-spatial-analysis.html#cb139-1" tabindex="-1"></a><span class="co"># Assuming data_points is a data frame with longitude and latitude columns</span></span>
+<span id="cb139-2"><a href="geographic-mapping-and-spatial-analysis.html#cb139-2" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb139-3"><a href="geographic-mapping-and-spatial-analysis.html#cb139-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> spatial_data) <span class="sc">+</span></span>
+<span id="cb139-4"><a href="geographic-mapping-and-spatial-analysis.html#cb139-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> data_points, <span class="fu">aes</span>(<span class="at">x =</span> longitude, <span class="at">y =</span> latitude), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb139-5"><a href="geographic-mapping-and-spatial-analysis.html#cb139-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>Use the London 2018 Ward Shapefile to create a map of London using <code>ggplot2</code>. Add a light blue point at (51.503618787766060, .09860017990274424) to represent the MOPAC offices. These coordinates were taken from Google Maps which uses a WGS84 projection which may differ from the projection used by the London Shapefile.</p>
+<ul>
+<li><em>Hint I: You will need to make a dataframe.</em></li>
+<li><em>Hint II: coord_sf() ensures that all layers use a common CRS.</em></li>
+</ul>
+</div>
+</div>
+<div id="customising-maps" class="section level3 hasAnchor" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> Customising Maps<a href="geographic-mapping-and-spatial-analysis.html#customising-maps" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Customising maps allows you to enhance their readability and aesthetic appeal.</p>
+<p><strong>Customizing Colors and Labels:</strong></p>
+<p><code>gglot2</code> makes it simple to change the map titles, labels, and axes.</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="geographic-mapping-and-spatial-analysis.html#cb140-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> spatial_data) <span class="sc">+</span></span>
+<span id="cb140-2"><a href="geographic-mapping-and-spatial-analysis.html#cb140-2" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> some_attribute)) <span class="sc">+</span></span>
+<span id="cb140-3"><a href="geographic-mapping-and-spatial-analysis.html#cb140-3" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb140-4"><a href="geographic-mapping-and-spatial-analysis.html#cb140-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Your Map Title&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Legend Title&quot;</span>) <span class="sc">+</span></span>
+<span id="cb140-5"><a href="geographic-mapping-and-spatial-analysis.html#cb140-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p>For example, we can colour each ward by its size in hectares.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="geographic-mapping-and-spatial-analysis.html#cb141-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> spatial_data) <span class="sc">+</span></span>
+<span id="cb141-2"><a href="geographic-mapping-and-spatial-analysis.html#cb141-2" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> HECTARES)) <span class="sc">+</span></span>
+<span id="cb141-3"><a href="geographic-mapping-and-spatial-analysis.html#cb141-3" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb141-4"><a href="geographic-mapping-and-spatial-analysis.html#cb141-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;London Ward Map Coloured by Ward Size&quot;</span>, <span class="at">fill =</span> <span class="st">&#39;HECTARES&#39;</span>) <span class="sc">+</span></span>
+<span id="cb141-5"><a href="geographic-mapping-and-spatial-analysis.html#cb141-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><strong>Adding Scales and Legends:</strong></p>
+<p>Geographic maps in R are fully customisable. The following example demonstrates one way how the colouring and formatting can be adjusted.</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="geographic-mapping-and-spatial-analysis.html#cb142-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> spatial_data) <span class="sc">+</span></span>
+<span id="cb142-2"><a href="geographic-mapping-and-spatial-analysis.html#cb142-2" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> HECTARES)) <span class="sc">+</span></span>
+<span id="cb142-3"><a href="geographic-mapping-and-spatial-analysis.html#cb142-3" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb142-4"><a href="geographic-mapping-and-spatial-analysis.html#cb142-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;London Ward Map Coloured by Ward Size&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;HECTARES&quot;</span>) <span class="sc">+</span></span>
+<span id="cb142-5"><a href="geographic-mapping-and-spatial-analysis.html#cb142-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb142-6"><a href="geographic-mapping-and-spatial-analysis.html#cb142-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
+</div>
+</div>
+<div id="spatial-analysis" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Spatial Analysis<a href="geographic-mapping-and-spatial-analysis.html#spatial-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Spatial analysis involves examining geographic patterns, relationships, and trends within your data. R allows you to perform various spatial operations that can enhance your geographic analysis.</p>
+<div id="basic-spatial-operations" class="section level3 hasAnchor" number="9.4.1">
+<h3><span class="header-section-number">9.4.1</span> Basic Spatial Operations<a href="geographic-mapping-and-spatial-analysis.html#basic-spatial-operations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Point-in-Polygon:</strong>
+Given a list of points you may want to identify which polygon they fall in. This can easily be done using the <code>st_within</code> command.</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="geographic-mapping-and-spatial-analysis.html#cb143-1" tabindex="-1"></a><span class="co"># Check if points fall within polygons</span></span>
+<span id="cb143-2"><a href="geographic-mapping-and-spatial-analysis.html#cb143-2" tabindex="-1"></a>points_in_polygons <span class="ot">&lt;-</span> <span class="fu">st_within</span>(data_points, spatial_data)</span>
+<span id="cb143-3"><a href="geographic-mapping-and-spatial-analysis.html#cb143-3" tabindex="-1"></a><span class="fu">print</span>(points_in_polygons)</span></code></pre></div>
+<p>For example, let us randomly create some points across London and then identify which ward they occur in.</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="geographic-mapping-and-spatial-analysis.html#cb144-1" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb144-2"><a href="geographic-mapping-and-spatial-analysis.html#cb144-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb144-3"><a href="geographic-mapping-and-spatial-analysis.html#cb144-3" tabindex="-1"></a></span>
+<span id="cb144-4"><a href="geographic-mapping-and-spatial-analysis.html#cb144-4" tabindex="-1"></a><span class="co"># Number of points to generate</span></span>
+<span id="cb144-5"><a href="geographic-mapping-and-spatial-analysis.html#cb144-5" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb144-6"><a href="geographic-mapping-and-spatial-analysis.html#cb144-6" tabindex="-1"></a></span>
+<span id="cb144-7"><a href="geographic-mapping-and-spatial-analysis.html#cb144-7" tabindex="-1"></a><span class="co"># Generate random latitude and longitude points within the bounding box of London</span></span>
+<span id="cb144-8"><a href="geographic-mapping-and-spatial-analysis.html#cb144-8" tabindex="-1"></a><span class="co"># Approximate bounding box for London: </span></span>
+<span id="cb144-9"><a href="geographic-mapping-and-spatial-analysis.html#cb144-9" tabindex="-1"></a><span class="co"># Latitude: 51.286760 to 51.691874</span></span>
+<span id="cb144-10"><a href="geographic-mapping-and-spatial-analysis.html#cb144-10" tabindex="-1"></a><span class="co"># Longitude: -0.510375 to 0.334015</span></span>
+<span id="cb144-11"><a href="geographic-mapping-and-spatial-analysis.html#cb144-11" tabindex="-1"></a></span>
+<span id="cb144-12"><a href="geographic-mapping-and-spatial-analysis.html#cb144-12" tabindex="-1"></a>latitudes <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="fl">51.286760</span>, <span class="at">max =</span> <span class="fl">51.691874</span>)</span>
+<span id="cb144-13"><a href="geographic-mapping-and-spatial-analysis.html#cb144-13" tabindex="-1"></a>longitudes <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="sc">-</span><span class="fl">0.510375</span>, <span class="at">max =</span> <span class="fl">0.334015</span>)</span>
+<span id="cb144-14"><a href="geographic-mapping-and-spatial-analysis.html#cb144-14" tabindex="-1"></a></span>
+<span id="cb144-15"><a href="geographic-mapping-and-spatial-analysis.html#cb144-15" tabindex="-1"></a><span class="co"># Create a dataframe</span></span>
+<span id="cb144-16"><a href="geographic-mapping-and-spatial-analysis.html#cb144-16" tabindex="-1"></a>london_coords <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb144-17"><a href="geographic-mapping-and-spatial-analysis.html#cb144-17" tabindex="-1"></a>  <span class="at">Latitude =</span> latitudes,</span>
+<span id="cb144-18"><a href="geographic-mapping-and-spatial-analysis.html#cb144-18" tabindex="-1"></a>  <span class="at">Longitude =</span> longitudes</span>
+<span id="cb144-19"><a href="geographic-mapping-and-spatial-analysis.html#cb144-19" tabindex="-1"></a>)</span>
+<span id="cb144-20"><a href="geographic-mapping-and-spatial-analysis.html#cb144-20" tabindex="-1"></a></span>
+<span id="cb144-21"><a href="geographic-mapping-and-spatial-analysis.html#cb144-21" tabindex="-1"></a><span class="co"># View the first few rows of the dataframe</span></span>
+<span id="cb144-22"><a href="geographic-mapping-and-spatial-analysis.html#cb144-22" tabindex="-1"></a><span class="fu">head</span>(london_coords)</span></code></pre></div>
+<pre><code>##   Latitude    Longitude
+## 1 51.40326 -0.308797130
+## 2 51.60611  0.302231262
+## 3 51.45244 -0.002587795
+## 4 51.64448 -0.075489049
+## 5 51.66776 -0.170446096
+## 6 51.30522  0.232896377</code></pre>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="geographic-mapping-and-spatial-analysis.html#cb146-1" tabindex="-1"></a><span class="co"># Convert the dataframe to a spatial sf object</span></span>
+<span id="cb146-2"><a href="geographic-mapping-and-spatial-analysis.html#cb146-2" tabindex="-1"></a>london_coords_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(london_coords, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;Longitude&quot;</span>, <span class="st">&quot;Latitude&quot;</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb146-3"><a href="geographic-mapping-and-spatial-analysis.html#cb146-3" tabindex="-1"></a></span>
+<span id="cb146-4"><a href="geographic-mapping-and-spatial-analysis.html#cb146-4" tabindex="-1"></a><span class="do">## Check if points fall within polygons</span></span>
+<span id="cb146-5"><a href="geographic-mapping-and-spatial-analysis.html#cb146-5" tabindex="-1"></a><span class="co">#Before we can do this both spatial objects need to be in the same CRS</span></span>
+<span id="cb146-6"><a href="geographic-mapping-and-spatial-analysis.html#cb146-6" tabindex="-1"></a>spatial_data_wsg <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(spatial_data, <span class="dv">4326</span>)</span>
+<span id="cb146-7"><a href="geographic-mapping-and-spatial-analysis.html#cb146-7" tabindex="-1"></a><span class="co">#Check if points fall in polygon</span></span>
+<span id="cb146-8"><a href="geographic-mapping-and-spatial-analysis.html#cb146-8" tabindex="-1"></a>points_in_polygons <span class="ot">&lt;-</span> <span class="fu">st_within</span>(london_coords_sf, spatial_data_wsg)</span>
+<span id="cb146-9"><a href="geographic-mapping-and-spatial-analysis.html#cb146-9" tabindex="-1"></a></span>
+<span id="cb146-10"><a href="geographic-mapping-and-spatial-analysis.html#cb146-10" tabindex="-1"></a><span class="co">#Print the results</span></span>
+<span id="cb146-11"><a href="geographic-mapping-and-spatial-analysis.html#cb146-11" tabindex="-1"></a><span class="fu">print</span>(points_in_polygons)</span></code></pre></div>
+<pre><code>## Sparse geometry binary predicate list of length 200, where the predicate was `within&#39;
+## first 10 elements:
+##  1: 392
+##  2: (empty)
+##  3: 269
+##  4: 325
+##  5: 311
+##  6: (empty)
+##  7: 465
+##  8: (empty)
+##  9: 87
+##  10: 84</code></pre>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="geographic-mapping-and-spatial-analysis.html#cb148-1" tabindex="-1"></a><span class="co">#The results are not very informative so we can replace the number with the area Name</span></span>
+<span id="cb148-2"><a href="geographic-mapping-and-spatial-analysis.html#cb148-2" tabindex="-1"></a><span class="co"># Extract the names of the areas where each point is located</span></span>
+<span id="cb148-3"><a href="geographic-mapping-and-spatial-analysis.html#cb148-3" tabindex="-1"></a>area_names <span class="ot">&lt;-</span> <span class="fu">sapply</span>(points_in_polygons, <span class="cf">function</span>(x) <span class="cf">if</span>(<span class="fu">length</span>(x) <span class="sc">&gt;</span> <span class="dv">0</span>) spatial_data_wsg<span class="sc">$</span>NAME[x] <span class="cf">else</span> <span class="cn">NA</span>)</span>
+<span id="cb148-4"><a href="geographic-mapping-and-spatial-analysis.html#cb148-4" tabindex="-1"></a></span>
+<span id="cb148-5"><a href="geographic-mapping-and-spatial-analysis.html#cb148-5" tabindex="-1"></a><span class="co"># Add the area names to the original points dataframe</span></span>
+<span id="cb148-6"><a href="geographic-mapping-and-spatial-analysis.html#cb148-6" tabindex="-1"></a>london_coords_sf<span class="sc">$</span>NAME <span class="ot">&lt;-</span> area_names</span>
+<span id="cb148-7"><a href="geographic-mapping-and-spatial-analysis.html#cb148-7" tabindex="-1"></a></span>
+<span id="cb148-8"><a href="geographic-mapping-and-spatial-analysis.html#cb148-8" tabindex="-1"></a><span class="co"># View the updated dataframe with area names</span></span>
+<span id="cb148-9"><a href="geographic-mapping-and-spatial-analysis.html#cb148-9" tabindex="-1"></a><span class="fu">head</span>(london_coords_sf)</span></code></pre></div>
+<pre><code>## Simple feature collection with 6 features and 1 field
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: -0.3087971 ymin: 51.30522 xmax: 0.3022313 ymax: 51.66776
+## Geodetic CRS:  WGS 84
+##                        geometry             NAME
+## 1   POINT (-0.3087971 51.40326)     Hampton Wick
+## 2    POINT (0.3022313 51.60611)             &lt;NA&gt;
+## 3 POINT (-0.002587795 51.45244) Lewisham Central
+## 4  POINT (-0.07548905 51.64448)   Bush Hill Park
+## 5   POINT (-0.1704461 51.66776)      Cockfosters
+## 6    POINT (0.2328964 51.30522)             &lt;NA&gt;</code></pre>
+<p><strong>Distance Calculations:</strong></p>
+<p>You can calculate the distance between two sets of points by using the <code>st_distance</code> command.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="geographic-mapping-and-spatial-analysis.html#cb150-1" tabindex="-1"></a><span class="co"># Calculate distances between points</span></span>
+<span id="cb150-2"><a href="geographic-mapping-and-spatial-analysis.html#cb150-2" tabindex="-1"></a>distances <span class="ot">&lt;-</span> <span class="fu">st_distance</span>(data_points, reference_points)</span>
+<span id="cb150-3"><a href="geographic-mapping-and-spatial-analysis.html#cb150-3" tabindex="-1"></a><span class="co"># Print the distances</span></span>
+<span id="cb150-4"><a href="geographic-mapping-and-spatial-analysis.html#cb150-4" tabindex="-1"></a><span class="fu">print</span>(distances)</span></code></pre></div>
+<p>Note that the input should be a spatial object. Remember, you can convert a dataframe of points into a spatial object using the <code>st_as_sf</code> function.</p>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>The British Transport Police have provided you with a number of crimes reported at varying locations across London. You need to identify which <strong>Borough</strong> they have occurred in.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Longitude</th>
+<th>Latitude</th>
+<th>Borough</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-0.19611111405556494</td>
+<td>51.375258353438184</td>
+<td>?</td>
+</tr>
+<tr class="even">
+<td>-0.30174186589110447</td>
+<td>51.46320906930937</td>
+<td>?</td>
+</tr>
+<tr class="odd">
+<td>-0.19565513135661436</td>
+<td>51.487172486590836</td>
+<td>?</td>
+</tr>
+<tr class="even">
+<td>-0.13840606266909572</td>
+<td>51.46153797665847</td>
+<td>?</td>
+</tr>
+<tr class="odd">
+<td>-0.09291579752832058</td>
+<td>51.37534709116438</td>
+<td>?</td>
+</tr>
+<tr class="even">
+<td>-0.13321537011710344</td>
+<td>51.528459469086386</td>
+<td>?</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="creating-choropleth-maps" class="section level3 hasAnchor" number="9.4.2">
+<h3><span class="header-section-number">9.4.2</span> Creating Choropleth Maps<a href="geographic-mapping-and-spatial-analysis.html#creating-choropleth-maps" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Choropleth maps are a powerful way to visualise data across geographic areas. Here’s how to create them in R:</p>
+<p><strong>Basic Choropleth Map:</strong></p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="geographic-mapping-and-spatial-analysis.html#cb151-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> spatial_data) <span class="sc">+</span></span>
+<span id="cb151-2"><a href="geographic-mapping-and-spatial-analysis.html#cb151-2" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> your_variable)) <span class="sc">+</span></span>
+<span id="cb151-3"><a href="geographic-mapping-and-spatial-analysis.html#cb151-3" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb151-4"><a href="geographic-mapping-and-spatial-analysis.html#cb151-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Choropleth Map&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Your Variable&quot;</span>) <span class="sc">+</span></span>
+<span id="cb151-5"><a href="geographic-mapping-and-spatial-analysis.html#cb151-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p>The <a href="data/ward_profiles.csv">Ward Profiles Dataset</a> provides a wealth of demographic and related data for each ward in Greater London. We can merge (remember back to chapter 3?) this dataset with our spatial data to provide informative spatial maps.</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="geographic-mapping-and-spatial-analysis.html#cb152-1" tabindex="-1"></a><span class="co">#Load the ward profiles dataset</span></span>
+<span id="cb152-2"><a href="geographic-mapping-and-spatial-analysis.html#cb152-2" tabindex="-1"></a>ward_profiles <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;data/ward_profiles.csv&#39;</span>)</span>
+<span id="cb152-3"><a href="geographic-mapping-and-spatial-analysis.html#cb152-3" tabindex="-1"></a></span>
+<span id="cb152-4"><a href="geographic-mapping-and-spatial-analysis.html#cb152-4" tabindex="-1"></a><span class="co">#Join the demographic data to the Spatial dataset</span></span>
+<span id="cb152-5"><a href="geographic-mapping-and-spatial-analysis.html#cb152-5" tabindex="-1"></a>spatial_data <span class="ot">&lt;-</span> <span class="fu">merge</span>(spatial_data, ward_profiles, <span class="at">by.x =</span> <span class="st">&quot;LAGSSCODE&quot;</span>, <span class="at">by.y =</span> <span class="st">&quot;New.code&quot;</span>)</span>
+<span id="cb152-6"><a href="geographic-mapping-and-spatial-analysis.html#cb152-6" tabindex="-1"></a></span>
+<span id="cb152-7"><a href="geographic-mapping-and-spatial-analysis.html#cb152-7" tabindex="-1"></a><span class="co">#Create a Choropleth map of Employment Rates</span></span>
+<span id="cb152-8"><a href="geographic-mapping-and-spatial-analysis.html#cb152-8" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> spatial_data) <span class="sc">+</span></span>
+<span id="cb152-9"><a href="geographic-mapping-and-spatial-analysis.html#cb152-9" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Employment.rate..<span class="dv">16</span>.<span class="dv">64</span>....<span class="dv">2011</span>)) <span class="sc">+</span></span>
+<span id="cb152-10"><a href="geographic-mapping-and-spatial-analysis.html#cb152-10" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb152-11"><a href="geographic-mapping-and-spatial-analysis.html#cb152-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Choropleth Map of Employment Rates Across London&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Employment Rate&quot;</span>) <span class="sc">+</span></span>
+<span id="cb152-12"><a href="geographic-mapping-and-spatial-analysis.html#cb152-12" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>Create a choropleth map of London visualising the <code>Turnout.at.Mayoral.election...2012</code>.</p>
+<ul>
+<li><em>Hint: Make sure to check the variable type</em></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="conclusion-8" class="section level2 hasAnchor" number="9.5">
+<h2><span class="header-section-number">9.5</span> Conclusion<a href="geographic-mapping-and-spatial-analysis.html#conclusion-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this chapter, we’ve explored the basics of geographic mapping and spatial analysis in R. You’ve learned how to import and manage geographic data, create basic maps, and perform spatial analysis tasks such as point-in-polygon operations and distance calculations. We’ve also seen how to create and customise choropleth maps. By mastering these skills, you’ll be able to extend your data analysis into the spatial domain, something that isn’t directly possible within SPSS.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regression-analysis-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercise-answers.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/09-spatial.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

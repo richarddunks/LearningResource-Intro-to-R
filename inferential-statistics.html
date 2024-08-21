@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Inferential Statistics | Introduction to R for Crime Analysts</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Inferential Statistics | Introduction to R for Crime Analysts" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Inferential Statistics | Introduction to R for Crime Analysts" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Daniel Hammocks, Senior Data Scientist" />
+
+
+<meta name="date" content="2024-08-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="survey-analysis-in-r.html"/>
+<link rel="next" href="regression-analysis-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/MOPAC-DS-Square.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#purpose-of-this-book"><i class="fa fa-check"></i>Purpose of this Book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#why-learn-r"><i class="fa fa-check"></i><b>1.2</b> Why Learn R?</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="introduction.html"><a href="introduction.html#flexibility-and-power"><i class="fa fa-check"></i><b>1.2.1</b> Flexibility and Power</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introduction.html"><a href="introduction.html#reproducibility"><i class="fa fa-check"></i><b>1.2.2</b> Reproducibility</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduction.html"><a href="introduction.html#extensive-community-and-package-ecosystem"><i class="fa fa-check"></i><b>1.2.3</b> Extensive Community and Package Ecosystem</a></li>
+<li class="chapter" data-level="1.2.4" data-path="introduction.html"><a href="introduction.html#cost"><i class="fa fa-check"></i><b>1.2.4</b> Cost</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#replicating-spss-functionality-in-r"><i class="fa fa-check"></i><b>1.3</b> Replicating SPSS Functionality in R</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="introduction.html"><a href="introduction.html#data-management"><i class="fa fa-check"></i><b>1.3.1</b> Data Management</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introduction.html"><a href="introduction.html#descriptive-statistics"><i class="fa fa-check"></i><b>1.3.2</b> Descriptive Statistics</a></li>
+<li class="chapter" data-level="1.3.3" data-path="introduction.html"><a href="introduction.html#statistical-tests"><i class="fa fa-check"></i><b>1.3.3</b> Statistical Tests</a></li>
+<li class="chapter" data-level="1.3.4" data-path="introduction.html"><a href="introduction.html#regression-analysis"><i class="fa fa-check"></i><b>1.3.4</b> Regression Analysis</a></li>
+<li class="chapter" data-level="1.3.5" data-path="introduction.html"><a href="introduction.html#data-visualisation"><i class="fa fa-check"></i><b>1.3.5</b> Data Visualisation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#transitioning-from-spss-to-r"><i class="fa fa-check"></i><b>1.4</b> Transitioning from SPSS to R</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction.html"><a href="introduction.html#building-confidence-in-r"><i class="fa fa-check"></i><b>1.4.1</b> Building Confidence in R</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction.html"><a href="introduction.html#leveraging-rs-ecosystem"><i class="fa fa-check"></i><b>1.4.2</b> Leveraging R’s Ecosystem</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#conclusion"><i class="fa fa-check"></i><b>1.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html"><i class="fa fa-check"></i><b>2</b> Getting Started with R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#the-r-environment"><i class="fa fa-check"></i><b>2.1</b> The R Environment</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#overview-of-the-rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> Overview of the RStudio Interface</a></li>
+<li class="chapter" data-level="2.1.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#console-vs.-scripts-vs.-notebooks"><i class="fa fa-check"></i><b>2.1.2</b> Console vs. Scripts vs. Notebooks</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#introduction-to-r-packages-and-installing-key-packages"><i class="fa fa-check"></i><b>2.2</b> Introduction to R Packages and Installing Key Packages</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#introduction-to-r-packages"><i class="fa fa-check"></i><b>2.2.1</b> Introduction to R Packages</a></li>
+<li class="chapter" data-level="2.2.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#installing-and-loading-packages"><i class="fa fa-check"></i><b>2.2.2</b> Installing and Loading Packages</a></li>
+<li class="chapter" data-level="2.2.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#key-packages-for-data-analysis"><i class="fa fa-check"></i><b>2.2.3</b> Key Packages for Data Analysis</a></li>
+<li class="chapter" data-level="2.2.4" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#managing-package-dependencies"><i class="fa fa-check"></i><b>2.2.4</b> Managing Package Dependencies</a></li>
+<li class="chapter" data-level="2.2.5" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#summary"><i class="fa fa-check"></i><b>2.2.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#coding-conventions-and-best-practices"><i class="fa fa-check"></i><b>2.3</b> Coding Conventions and Best Practices</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#writing-clean-and-readable-code"><i class="fa fa-check"></i><b>2.3.1</b> Writing Clean and Readable Code</a></li>
+<li class="chapter" data-level="2.3.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#commenting-and-structuring-scripts"><i class="fa fa-check"></i><b>2.3.2</b> Commenting and Structuring Scripts</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#data-types-and-structures"><i class="fa fa-check"></i><b>2.4</b> Data Types and Structures</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#introduction-to-vectors-data-frames-lists-and-factors"><i class="fa fa-check"></i><b>2.4.1</b> Introduction to Vectors, Data Frames, Lists, and Factors</a></li>
+<li class="chapter" data-level="2.4.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#comparing-r-data-types-to-spss-data-types"><i class="fa fa-check"></i><b>2.4.2</b> Comparing R Data Types to SPSS Data Types</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#basic-operations-and-functions-in-r"><i class="fa fa-check"></i><b>2.5</b> Basic Operations and Functions in R</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#arithmetic-operations"><i class="fa fa-check"></i><b>2.5.1</b> Arithmetic Operations</a></li>
+<li class="chapter" data-level="2.5.2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#logical-operations"><i class="fa fa-check"></i><b>2.5.2</b> Logical Operations</a></li>
+<li class="chapter" data-level="2.5.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#basic-functions"><i class="fa fa-check"></i><b>2.5.3</b> Basic Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html#conclusion-1"><i class="fa fa-check"></i><b>2.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-management-in-r.html"><a href="data-management-in-r.html"><i class="fa fa-check"></i><b>3</b> Data Management in R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#data-import-and-export"><i class="fa fa-check"></i><b>3.1</b> Data Import and Export</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#importing-data"><i class="fa fa-check"></i><b>3.1.1</b> Importing Data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#exporting-data"><i class="fa fa-check"></i><b>3.1.2</b> Exporting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#data-cleaning-and-preparation"><i class="fa fa-check"></i><b>3.2</b> Data Cleaning and Preparation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#handling-missing-data"><i class="fa fa-check"></i><b>3.2.1</b> Handling Missing Data</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#filtering-and-subsetting-data"><i class="fa fa-check"></i><b>3.2.2</b> Filtering and Subsetting Data</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-management-in-r.html"><a href="data-management-in-r.html#data-transformations"><i class="fa fa-check"></i><b>3.2.3</b> Data Transformations</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-management-in-r.html"><a href="data-management-in-r.html#the-dplyr-pipeline"><i class="fa fa-check"></i><b>3.2.4</b> The dplyr Pipeline</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-management-in-r.html"><a href="data-management-in-r.html#working-with-categorical-data"><i class="fa fa-check"></i><b>3.3</b> Working with Categorical Data</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-management-in-r.html"><a href="data-management-in-r.html#creating-and-manipulating-factors"><i class="fa fa-check"></i><b>3.3.1</b> Creating and Manipulating Factors</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data-management-in-r.html"><a href="data-management-in-r.html#recoding-variables"><i class="fa fa-check"></i><b>3.3.2</b> Recoding Variables</a></li>
+<li class="chapter" data-level="3.3.3" data-path="data-management-in-r.html"><a href="data-management-in-r.html#frequency-tables-and-cross-tabulations"><i class="fa fa-check"></i><b>3.3.3</b> Frequency Tables and Cross-Tabulations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-management-in-r.html"><a href="data-management-in-r.html#conclusion-2"><i class="fa fa-check"></i><b>3.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html"><i class="fa fa-check"></i><b>4</b> Connecting to and Accessing a PostgreSQL Database</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#setting-up-the-environment"><i class="fa fa-check"></i><b>4.2</b> Setting Up the Environment</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#installing-necessary-packages"><i class="fa fa-check"></i><b>4.2.1</b> Installing Necessary Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#connecting-to-postgresql-using-rpostgres"><i class="fa fa-check"></i><b>4.3</b> Connecting to PostgreSQL (Using RPostgres)</a></li>
+<li class="chapter" data-level="4.4" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#querying-data-from-postgresql"><i class="fa fa-check"></i><b>4.4</b> Querying Data from PostgreSQL</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#executing-a-query"><i class="fa fa-check"></i><b>4.4.1</b> Executing a Query</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#handling-errors-and-troubleshooting"><i class="fa fa-check"></i><b>4.5</b> Handling Errors and Troubleshooting</a></li>
+<li class="chapter" data-level="4.6" data-path="connecting-to-and-accessing-a-postgresql-database.html"><a href="connecting-to-and-accessing-a-postgresql-database.html#conclusion-3"><i class="fa fa-check"></i><b>4.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html"><i class="fa fa-check"></i><b>5</b> Descriptive Statistics and Visualisations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#introduction-to-descriptive-statistics"><i class="fa fa-check"></i><b>5.1</b> Introduction to Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#understanding-descriptive-statistics"><i class="fa fa-check"></i><b>5.1.1</b> Understanding Descriptive Statistics</a></li>
+<li class="chapter" data-level="5.1.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#basic-descriptive-statistics-in-r"><i class="fa fa-check"></i><b>5.1.2</b> Basic Descriptive Statistics in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#creating-visualisations-with-ggplot2"><i class="fa fa-check"></i><b>5.2</b> Creating Visualisations with ggplot2</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#introduction-to-ggplot2"><i class="fa fa-check"></i><b>5.2.1</b> Introduction to ggplot2</a></li>
+<li class="chapter" data-level="5.2.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#creating-basic-plots"><i class="fa fa-check"></i><b>5.2.2</b> Creating Basic Plots</a></li>
+<li class="chapter" data-level="5.2.3" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#customising-your-plots"><i class="fa fa-check"></i><b>5.2.3</b> Customising Your Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#descriptive-statistics-with-dplyr"><i class="fa fa-check"></i><b>5.3</b> Descriptive Statistics with dplyr</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#using-dplyr-to-summarise-data"><i class="fa fa-check"></i><b>5.3.1</b> Using dplyr to Summarise Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#combining-dplyr-with-ggplot2"><i class="fa fa-check"></i><b>5.3.2</b> Combining dplyr with ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#advanced-visualisation-techniques"><i class="fa fa-check"></i><b>5.4</b> Advanced Visualisation Techniques</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#faceting"><i class="fa fa-check"></i><b>5.4.1</b> Faceting</a></li>
+<li class="chapter" data-level="5.4.2" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#combining-multiple-geoms"><i class="fa fa-check"></i><b>5.4.2</b> Combining Multiple Geoms</a></li>
+<li class="chapter" data-level="5.4.3" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#saving-your-plots"><i class="fa fa-check"></i><b>5.4.3</b> Saving Your Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="descriptive-statistics-and-visualisations.html"><a href="descriptive-statistics-and-visualisations.html#conclusion-4"><i class="fa fa-check"></i><b>5.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html"><i class="fa fa-check"></i><b>6</b> Survey Analysis in R</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#introduction-to-survey-data"><i class="fa fa-check"></i><b>6.1</b> Introduction to Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#key-concepts-in-survey-analysis"><i class="fa fa-check"></i><b>6.1.1</b> Key Concepts in Survey Analysis</a></li>
+<li class="chapter" data-level="6.1.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#understanding-survey-data-structures"><i class="fa fa-check"></i><b>6.1.2</b> Understanding Survey Data Structures</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#importing-and-preparing-survey-data"><i class="fa fa-check"></i><b>6.2</b> Importing and Preparing Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#converting-data-for-survey-analysis"><i class="fa fa-check"></i><b>6.2.1</b> Converting Data for Survey Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#descriptive-analysis-of-survey-data"><i class="fa fa-check"></i><b>6.3</b> Descriptive Analysis of Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#calculating-means-and-totals"><i class="fa fa-check"></i><b>6.3.1</b> Calculating Means and Totals</a></li>
+<li class="chapter" data-level="6.3.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#frequencies-and-cross-tabulations"><i class="fa fa-check"></i><b>6.3.2</b> Frequencies and Cross-tabulations</a></li>
+<li class="chapter" data-level="6.3.3" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#comparing-results-with-spss-survey-functions"><i class="fa fa-check"></i><b>6.3.3</b> Comparing Results with SPSS Survey Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#weighting-survey-data"><i class="fa fa-check"></i><b>6.4</b> Weighting Survey Data</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#applying-weights"><i class="fa fa-check"></i><b>6.4.1</b> Applying Weights</a></li>
+<li class="chapter" data-level="6.4.2" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#analysing-weighted-survey-data"><i class="fa fa-check"></i><b>6.4.2</b> Analysing Weighted Survey Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="survey-analysis-in-r.html"><a href="survey-analysis-in-r.html#conclusion-5"><i class="fa fa-check"></i><b>6.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="inferential-statistics.html"><a href="inferential-statistics.html"><i class="fa fa-check"></i><b>7</b> Inferential Statistics</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#hypothesis-testing"><i class="fa fa-check"></i><b>7.1</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#t-tests"><i class="fa fa-check"></i><b>7.1.1</b> T-tests</a></li>
+<li class="chapter" data-level="7.1.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#chi-square-tests"><i class="fa fa-check"></i><b>7.1.2</b> Chi-square Tests</a></li>
+<li class="chapter" data-level="7.1.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#anova-analysis-of-variance"><i class="fa fa-check"></i><b>7.1.3</b> ANOVA (Analysis of Variance)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#correlation-analysis"><i class="fa fa-check"></i><b>7.2</b> Correlation Analysis</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#pearson-correlation"><i class="fa fa-check"></i><b>7.2.1</b> Pearson Correlation</a></li>
+<li class="chapter" data-level="7.2.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#spearman-correlation"><i class="fa fa-check"></i><b>7.2.2</b> Spearman Correlation</a></li>
+<li class="chapter" data-level="7.2.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#pearson-vs-spearman"><i class="fa fa-check"></i><b>7.2.3</b> Pearson vs Spearman?</a></li>
+<li class="chapter" data-level="7.2.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#visualising-correlations"><i class="fa fa-check"></i><b>7.2.4</b> Visualising Correlations</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#conclusion-6"><i class="fa fa-check"></i><b>7.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html"><i class="fa fa-check"></i><b>8</b> Regression Analysis</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#introduction-to-regression-analysis"><i class="fa fa-check"></i><b>8.1</b> Introduction to Regression Analysis</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#what-is-linear-regression"><i class="fa fa-check"></i><b>8.1.1</b> What is Linear Regression?</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#simple-linear-regression-in-r"><i class="fa fa-check"></i><b>8.2</b> Simple Linear Regression in R</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#performing-simple-linear-regression"><i class="fa fa-check"></i><b>8.2.1</b> Performing Simple Linear Regression</a></li>
+<li class="chapter" data-level="8.2.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#interpreting-the-output"><i class="fa fa-check"></i><b>8.2.2</b> Interpreting the Output</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.3</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#performing-multiple-linear-regression"><i class="fa fa-check"></i><b>8.3.1</b> Performing Multiple Linear Regression</a></li>
+<li class="chapter" data-level="8.3.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#detailed-interpretation-of-the-output"><i class="fa fa-check"></i><b>8.3.2</b> Detailed Interpretation of the Output</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#checking-model-assumptions"><i class="fa fa-check"></i><b>8.4</b> Checking Model Assumptions</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-1-linearity"><i class="fa fa-check"></i><b>8.4.1</b> Assumption 1: Linearity</a></li>
+<li class="chapter" data-level="8.4.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-2-normality-of-residuals"><i class="fa fa-check"></i><b>8.4.2</b> Assumption 2: Normality of Residuals</a></li>
+<li class="chapter" data-level="8.4.3" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-3-homoscedasticity"><i class="fa fa-check"></i><b>8.4.3</b> Assumption 3: Homoscedasticity</a></li>
+<li class="chapter" data-level="8.4.4" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-4-independence-of-errors"><i class="fa fa-check"></i><b>8.4.4</b> Assumption 4: Independence of Errors</a></li>
+<li class="chapter" data-level="8.4.5" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-5-multicollinearity"><i class="fa fa-check"></i><b>8.4.5</b> Assumption 5: Multicollinearity</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#transformations-and-interaction-terms"><i class="fa fa-check"></i><b>8.5</b> Transformations and Interaction Terms</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#when-and-how-to-apply-transformations"><i class="fa fa-check"></i><b>8.5.1</b> When and How to Apply Transformations</a></li>
+<li class="chapter" data-level="8.5.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#using-interaction-terms"><i class="fa fa-check"></i><b>8.5.2</b> Using Interaction Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#logistic-regression"><i class="fa fa-check"></i><b>8.6</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#performing-logistic-regression-in-r"><i class="fa fa-check"></i><b>8.6.1</b> Performing Logistic Regression in R</a></li>
+<li class="chapter" data-level="8.6.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#interpreting-logistic-regression-output"><i class="fa fa-check"></i><b>8.6.2</b> Interpreting Logistic Regression Output</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#checking-model-assumptions-for-logistic-regression"><i class="fa fa-check"></i><b>8.7</b> Checking Model Assumptions for Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-1-linearity-of-the-logit"><i class="fa fa-check"></i><b>8.7.1</b> Assumption 1: Linearity of the Logit</a></li>
+<li class="chapter" data-level="8.7.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-2-independence-of-observations"><i class="fa fa-check"></i><b>8.7.2</b> Assumption 2: Independence of Observations</a></li>
+<li class="chapter" data-level="8.7.3" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-3-absence-of-multicollinearity"><i class="fa fa-check"></i><b>8.7.3</b> Assumption 3: Absence of Multicollinearity</a></li>
+<li class="chapter" data-level="8.7.4" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#assumption-4-sufficient-sample-size"><i class="fa fa-check"></i><b>8.7.4</b> Assumption 4: Sufficient Sample Size</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#model-validation-and-diagnostics"><i class="fa fa-check"></i><b>8.8</b> Model Validation and Diagnostics</a>
+<ul>
+<li class="chapter" data-level="8.8.1" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#cross-validation"><i class="fa fa-check"></i><b>8.8.1</b> Cross-Validation</a></li>
+<li class="chapter" data-level="8.8.2" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#dealing-with-overfitting"><i class="fa fa-check"></i><b>8.8.2</b> Dealing with Overfitting</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="regression-analysis-1.html"><a href="regression-analysis-1.html#conclusion-7"><i class="fa fa-check"></i><b>8.9</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html"><i class="fa fa-check"></i><b>9</b> Geographic Mapping and Spatial Analysis</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#introduction-to-geographic-data-in-r"><i class="fa fa-check"></i><b>9.1</b> Introduction to Geographic Data in R</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#understanding-geographic-data-formats"><i class="fa fa-check"></i><b>9.1.1</b> Understanding Geographic Data Formats</a></li>
+<li class="chapter" data-level="9.1.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#importing-and-handling-spatial-data-with-the-sf-package"><i class="fa fa-check"></i><b>9.1.2</b> Importing and Handling Spatial Data with the <code>sf</code> Package</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#geographic-coordinate-systems-and-projections"><i class="fa fa-check"></i><b>9.2</b> Geographic Coordinate Systems and Projections</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#introduction-to-coordinate-systems"><i class="fa fa-check"></i><b>9.2.1</b> Introduction to Coordinate Systems</a></li>
+<li class="chapter" data-level="9.2.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#common-issues-with-coordinate-systems-in-r"><i class="fa fa-check"></i><b>9.2.2</b> Common Issues with Coordinate Systems in R</a></li>
+<li class="chapter" data-level="9.2.3" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#handling-coordinate-systems-in-r"><i class="fa fa-check"></i><b>9.2.3</b> Handling Coordinate Systems in R</a></li>
+<li class="chapter" data-level="9.2.4" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#practical-considerations"><i class="fa fa-check"></i><b>9.2.4</b> Practical Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#creating-basic-maps"><i class="fa fa-check"></i><b>9.3</b> Creating Basic Maps</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#plotting-data-on-maps-using-ggplot2-and-sf"><i class="fa fa-check"></i><b>9.3.1</b> Plotting Data on Maps Using ggplot2 and sf</a></li>
+<li class="chapter" data-level="9.3.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#customising-maps"><i class="fa fa-check"></i><b>9.3.2</b> Customising Maps</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#spatial-analysis"><i class="fa fa-check"></i><b>9.4</b> Spatial Analysis</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#basic-spatial-operations"><i class="fa fa-check"></i><b>9.4.1</b> Basic Spatial Operations</a></li>
+<li class="chapter" data-level="9.4.2" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#creating-choropleth-maps"><i class="fa fa-check"></i><b>9.4.2</b> Creating Choropleth Maps</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="geographic-mapping-and-spatial-analysis.html"><a href="geographic-mapping-and-spatial-analysis.html#conclusion-8"><i class="fa fa-check"></i><b>9.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html"><i class="fa fa-check"></i>Exercise Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-2"><i class="fa fa-check"></i>Chapter 2</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-3"><i class="fa fa-check"></i>Chapter 3</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-5"><i class="fa fa-check"></i>Chapter 5</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-6"><i class="fa fa-check"></i>Chapter 6</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-7"><i class="fa fa-check"></i>Chapter 7</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-8"><i class="fa fa-check"></i>Chapter 8</a></li>
+<li class="chapter" data-level="" data-path="exercise-answers.html"><a href="exercise-answers.html#chapter-9"><i class="fa fa-check"></i>Chapter 9</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R for Crime Analysts</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="inferential-statistics" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Inferential Statistics<a href="inferential-statistics.html#inferential-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this chapter, we’ll explore the basics of inferential statistics, focusing on hypothesis testing and correlation analysis. We will walk through how to perform these tests in R, compare them to similar processes in SPSS, and understand how to interpret the results.</p>
+<div id="hypothesis-testing" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Hypothesis Testing<a href="inferential-statistics.html#hypothesis-testing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Hypothesis testing is a fundamental aspect of inferential statistics, allowing you to draw conclusions about populations based on sample data. In R, common hypothesis tests like t-tests, chi-square tests, and ANOVA are straightforward to perform. Let’s look at each in detail.</p>
+<div id="t-tests" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> T-tests<a href="inferential-statistics.html#t-tests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A t-test is used to determine if there is a significant difference between the means of two groups. This test is equivalent to the COMPARE MEANS function in SPSS.</p>
+<div id="one-sample-t-test" class="section level4 hasAnchor" number="7.1.1.1">
+<h4><span class="header-section-number">7.1.1.1</span> One-sample t-test<a href="inferential-statistics.html#one-sample-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A one-sample t-test compares the mean of a single group against a known value (e.g., a population mean).</p>
+<p>For example, let us look at the number of days each officer in the Serious Crime Unit has taken absence this year and compare it to the average number of days across all officers last year. We want to know if the mean differs from last year.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="inferential-statistics.html#cb81-1" tabindex="-1"></a><span class="co"># Example: One-sample t-test</span></span>
+<span id="cb81-2"><a href="inferential-statistics.html#cb81-2" tabindex="-1"></a><span class="co"># Testing if the mean of a sample is significantly different from 50</span></span>
+<span id="cb81-3"><a href="inferential-statistics.html#cb81-3" tabindex="-1"></a></span>
+<span id="cb81-4"><a href="inferential-statistics.html#cb81-4" tabindex="-1"></a>data_officerabsencedays <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">48</span>, <span class="dv">50</span>, <span class="dv">52</span>, <span class="dv">51</span>, <span class="dv">49</span>, <span class="dv">47</span>, <span class="dv">53</span>, <span class="dv">50</span>, <span class="dv">52</span>, <span class="dv">48</span>)</span>
+<span id="cb81-5"><a href="inferential-statistics.html#cb81-5" tabindex="-1"></a></span>
+<span id="cb81-6"><a href="inferential-statistics.html#cb81-6" tabindex="-1"></a><span class="fu">t.test</span>(data_officerabsencedays, <span class="at">mu =</span> <span class="dv">50</span>)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  data_officerabsencedays
+## t = 0, df = 9, p-value = 1
+## alternative hypothesis: true mean is not equal to 50
+## 95 percent confidence interval:
+##  48.56929 51.43071
+## sample estimates:
+## mean of x 
+##        50</code></pre>
+</div>
+<div id="independent-two-sample-t-test" class="section level4 hasAnchor" number="7.1.1.2">
+<h4><span class="header-section-number">7.1.1.2</span> Independent two-sample t-test<a href="inferential-statistics.html#independent-two-sample-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>An independent t-test compares the means of two independent groups.</p>
+<p>For example, let us review the Stop and Search data for Merton and Kingston across a 6 month period. We want to know if the average number of stop and searches differs between the two boroughs.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="inferential-statistics.html#cb83-1" tabindex="-1"></a><span class="co"># Example: Independent two-sample t-test</span></span>
+<span id="cb83-2"><a href="inferential-statistics.html#cb83-2" tabindex="-1"></a><span class="co"># Comparing scores of two independent groups</span></span>
+<span id="cb83-3"><a href="inferential-statistics.html#cb83-3" tabindex="-1"></a></span>
+<span id="cb83-4"><a href="inferential-statistics.html#cb83-4" tabindex="-1"></a>data_stopsearch_merton <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">53</span>, <span class="dv">55</span>, <span class="dv">68</span>, <span class="dv">65</span>, <span class="dv">72</span>, <span class="dv">63</span>)</span>
+<span id="cb83-5"><a href="inferential-statistics.html#cb83-5" tabindex="-1"></a>data_Stopsearch_kingston <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">59</span>, <span class="dv">69</span>, <span class="dv">65</span>, <span class="dv">70</span>, <span class="dv">75</span>, <span class="dv">67</span>)</span>
+<span id="cb83-6"><a href="inferential-statistics.html#cb83-6" tabindex="-1"></a></span>
+<span id="cb83-7"><a href="inferential-statistics.html#cb83-7" tabindex="-1"></a><span class="fu">t.test</span>(data_stopsearch_merton, data_Stopsearch_kingston)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  data_stopsearch_merton and data_Stopsearch_kingston
+## t = -1.2967, df = 9.1156, p-value = 0.2266
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -13.249305   3.582638
+## sample estimates:
+## mean of x mean of y 
+##  62.66667  67.50000</code></pre>
+</div>
+<div id="paired-t-test" class="section level4 hasAnchor" number="7.1.1.3">
+<h4><span class="header-section-number">7.1.1.3</span> Paired t-test<a href="inferential-statistics.html#paired-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A paired t-test compares means from the same group at different times (e.g., before and after a treatment).</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="inferential-statistics.html#cb85-1" tabindex="-1"></a><span class="co"># Example: Paired t-test</span></span>
+<span id="cb85-2"><a href="inferential-statistics.html#cb85-2" tabindex="-1"></a><span class="co"># Comparing pre- and post-treatment scores for the same group</span></span>
+<span id="cb85-3"><a href="inferential-statistics.html#cb85-3" tabindex="-1"></a>pre_treatment <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">102</span>, <span class="dv">104</span>, <span class="dv">106</span>, <span class="dv">108</span>)</span>
+<span id="cb85-4"><a href="inferential-statistics.html#cb85-4" tabindex="-1"></a>post_treatment <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">110</span>, <span class="dv">111</span>, <span class="dv">115</span>, <span class="dv">117</span>, <span class="dv">120</span>)</span>
+<span id="cb85-5"><a href="inferential-statistics.html#cb85-5" tabindex="-1"></a><span class="fu">t.test</span>(pre_treatment, post_treatment, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  pre_treatment and post_treatment
+## t = -20.788, df = 4, p-value = 3.164e-05
+## alternative hypothesis: true mean difference is not equal to 0
+## 95 percent confidence interval:
+##  -12.015715  -9.184285
+## sample estimates:
+## mean difference 
+##           -10.6</code></pre>
+</div>
+<div id="interpreting-t-test-results" class="section level4 hasAnchor" number="7.1.1.4">
+<h4><span class="header-section-number">7.1.1.4</span> Interpreting T-Test Results<a href="inferential-statistics.html#interpreting-t-test-results" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>T-Value:</strong> Indicates the size of the difference relative to the variation in your sample data.</li>
+<li><strong>P-Value:</strong> Tells you whether the observed difference is statistically significant. A p-value less than 0.05 typically indicates statistical significance.</li>
+<li><strong>Confidence Interval:</strong> Provides a range within which the true population parameter is likely to fall.</li>
+</ul>
+<p>In SPSS, p-values and confidence intervals are found in the output tables after running the analysis. In R, they appear in the results from the t.test() function.</p>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>The Metropolitan Police Service have implemented a new strategy to target Violence Against Women and Girls in 6 wards. The number of incidents in March across these 6 wards was 100, 102, 104, 106, and 108. After the implementation of the new strategy the number of incidents in April across these 6 wards was 110, 111, 115, 117, 120 respectively. Has the new strategy had an impact on the number of incidents?</p>
+</div>
+</div>
+</div>
+<div id="chi-square-tests" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Chi-square Tests<a href="inferential-statistics.html#chi-square-tests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Chi-square tests assess the relationship between categorical variables. In SPSS, this corresponds to the CROSSTABS function with the “Chi-square” option.</p>
+<div id="chi-square-test-of-independence" class="section level4 hasAnchor" number="7.1.2.1">
+<h4><span class="header-section-number">7.1.2.1</span> Chi-Square Test of Independence<a href="inferential-statistics.html#chi-square-test-of-independence" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The Chi-Square Test of Independence tests if two categorical variables are independent. For example, you might want to determine if there is an association between the type of crime and the borough where the crime occurred.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="inferential-statistics.html#cb87-1" tabindex="-1"></a><span class="co"># Example: Chi-square test</span></span>
+<span id="cb87-2"><a href="inferential-statistics.html#cb87-2" tabindex="-1"></a><span class="co"># Testing the association between two categorical variables</span></span>
+<span id="cb87-3"><a href="inferential-statistics.html#cb87-3" tabindex="-1"></a></span>
+<span id="cb87-4"><a href="inferential-statistics.html#cb87-4" tabindex="-1"></a><span class="co"># Example data: Crime frequencies in different boroughs</span></span>
+<span id="cb87-5"><a href="inferential-statistics.html#cb87-5" tabindex="-1"></a>crime_data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
+<span id="cb87-6"><a href="inferential-statistics.html#cb87-6" tabindex="-1"></a>  <span class="dv">100</span>, <span class="dv">50</span>, <span class="dv">30</span>,   <span class="co"># Borough 1: Crime Type A, B, C</span></span>
+<span id="cb87-7"><a href="inferential-statistics.html#cb87-7" tabindex="-1"></a>  <span class="dv">80</span>, <span class="dv">40</span>, <span class="dv">20</span>,    <span class="co"># Borough 2: Crime Type A, B, C</span></span>
+<span id="cb87-8"><a href="inferential-statistics.html#cb87-8" tabindex="-1"></a>  <span class="dv">70</span>, <span class="dv">30</span>, <span class="dv">25</span>     <span class="co"># Borough 3: Crime Type A, B, C</span></span>
+<span id="cb87-9"><a href="inferential-statistics.html#cb87-9" tabindex="-1"></a>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb87-10"><a href="inferential-statistics.html#cb87-10" tabindex="-1"></a></span>
+<span id="cb87-11"><a href="inferential-statistics.html#cb87-11" tabindex="-1"></a><span class="co"># Add row and column names</span></span>
+<span id="cb87-12"><a href="inferential-statistics.html#cb87-12" tabindex="-1"></a><span class="fu">rownames</span>(crime_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Borough 1&quot;</span>, <span class="st">&quot;Borough 2&quot;</span>, <span class="st">&quot;Borough 3&quot;</span>)</span>
+<span id="cb87-13"><a href="inferential-statistics.html#cb87-13" tabindex="-1"></a><span class="fu">colnames</span>(crime_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Crime Type A&quot;</span>, <span class="st">&quot;Crime Type B&quot;</span>, <span class="st">&quot;Crime Type C&quot;</span>)</span>
+<span id="cb87-14"><a href="inferential-statistics.html#cb87-14" tabindex="-1"></a></span>
+<span id="cb87-15"><a href="inferential-statistics.html#cb87-15" tabindex="-1"></a><span class="co"># Perform the Chi-Square Test of Independence</span></span>
+<span id="cb87-16"><a href="inferential-statistics.html#cb87-16" tabindex="-1"></a>chisq_test_independence <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(crime_data)</span>
+<span id="cb87-17"><a href="inferential-statistics.html#cb87-17" tabindex="-1"></a></span>
+<span id="cb87-18"><a href="inferential-statistics.html#cb87-18" tabindex="-1"></a><span class="co"># Print the results</span></span>
+<span id="cb87-19"><a href="inferential-statistics.html#cb87-19" tabindex="-1"></a><span class="fu">print</span>(chisq_test_independence)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  crime_data
+## X-squared = 1.9076, df = 4, p-value = 0.7527</code></pre>
+</div>
+<div id="chi-square-goodness-of-fit-test" class="section level4 hasAnchor" number="7.1.2.2">
+<h4><span class="header-section-number">7.1.2.2</span> Chi-Square Goodness-of-Fit Test:<a href="inferential-statistics.html#chi-square-goodness-of-fit-test" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The Chi-Square Goodness-of-Fit Test tests if a single categorical variable follows a specific distribution. For example, suppose you have observed the frequency of crimes across different types, and you want to test if these frequencies are uniformly distributed.</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="inferential-statistics.html#cb89-1" tabindex="-1"></a><span class="co"># Example: Chi-square test</span></span>
+<span id="cb89-2"><a href="inferential-statistics.html#cb89-2" tabindex="-1"></a><span class="co"># Testing the distribution of a categorical variable</span></span>
+<span id="cb89-3"><a href="inferential-statistics.html#cb89-3" tabindex="-1"></a></span>
+<span id="cb89-4"><a href="inferential-statistics.html#cb89-4" tabindex="-1"></a><span class="co"># Example data: Observed frequencies of crime types</span></span>
+<span id="cb89-5"><a href="inferential-statistics.html#cb89-5" tabindex="-1"></a>observed_frequencies <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">80</span>, <span class="dv">70</span>)  <span class="co"># Frequencies of Crime Type A, B, C, D</span></span>
+<span id="cb89-6"><a href="inferential-statistics.html#cb89-6" tabindex="-1"></a></span>
+<span id="cb89-7"><a href="inferential-statistics.html#cb89-7" tabindex="-1"></a><span class="co"># Expected frequencies under the null hypothesis (uniform distribution)</span></span>
+<span id="cb89-8"><a href="inferential-statistics.html#cb89-8" tabindex="-1"></a>expected_frequencies <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">sum</span>(observed_frequencies) <span class="sc">/</span> <span class="fu">length</span>(observed_frequencies), <span class="fu">length</span>(observed_frequencies))</span>
+<span id="cb89-9"><a href="inferential-statistics.html#cb89-9" tabindex="-1"></a></span>
+<span id="cb89-10"><a href="inferential-statistics.html#cb89-10" tabindex="-1"></a><span class="co"># Perform the Chi-Square Goodness-of-Fit Test</span></span>
+<span id="cb89-11"><a href="inferential-statistics.html#cb89-11" tabindex="-1"></a>chisq_test_goodness_of_fit <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(observed_frequencies, <span class="at">p =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(observed_frequencies), <span class="fu">length</span>(observed_frequencies)))</span>
+<span id="cb89-12"><a href="inferential-statistics.html#cb89-12" tabindex="-1"></a></span>
+<span id="cb89-13"><a href="inferential-statistics.html#cb89-13" tabindex="-1"></a><span class="co"># Print the results</span></span>
+<span id="cb89-14"><a href="inferential-statistics.html#cb89-14" tabindex="-1"></a><span class="fu">print</span>(chisq_test_goodness_of_fit)</span></code></pre></div>
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  observed_frequencies
+## X-squared = 38, df = 3, p-value = 2.826e-08</code></pre>
+</div>
+<div id="interpreting-chi-square-test-results" class="section level4 hasAnchor" number="7.1.2.3">
+<h4><span class="header-section-number">7.1.2.3</span> Interpreting Chi-Square Test Results<a href="inferential-statistics.html#interpreting-chi-square-test-results" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>Chi-Square Statistic:</strong> Measures the deviation of observed frequencies from expected frequencies.</li>
+<li><strong>P-Value:</strong> Indicates whether the association or distribution is statistically significant. A p-value less than 0.05 suggests a significant result.</li>
+<li><strong>Degrees of Freedom (df):</strong> The number of independent values in the test, affecting the chi-square distribution.</li>
+</ul>
+<p>In SPSS, p-values and confidence intervals are found in the output tables after running the analysis. In R, they appear in the results from the chisq.test() function.</p>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>You want to identify if the number of Stop and Search performed in the month of September across 6 Boroughs where the Stop and Search occurred is Uniformly distributed. Use the following data to identify if the Number of Stop and Search performed is uniform across the 6 Boroughs.</p>
+<p>Richmond: 36 // Kingston: 25 // Merton: 28 // Sutton: 34 // Croydon: 42 // Wandsworth: 32</p>
+</div>
+</div>
+</div>
+<div id="anova-analysis-of-variance" class="section level3 hasAnchor" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> ANOVA (Analysis of Variance)<a href="inferential-statistics.html#anova-analysis-of-variance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>ANOVA tests are used to compare the means of three or more groups. This is analogous to the ONE-WAY ANOVA function in SPSS.</p>
+<p>For example, let us review the number of crimes reported in three geographic areas over a four week period. We will perform a one-way ANOVA to determine if there are significant differences in the average number of crimes reported across these districts.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="inferential-statistics.html#cb91-1" tabindex="-1"></a><span class="co"># Example: One-way ANOVA</span></span>
+<span id="cb91-2"><a href="inferential-statistics.html#cb91-2" tabindex="-1"></a><span class="co"># Comparing scores across three different groups</span></span>
+<span id="cb91-3"><a href="inferential-statistics.html#cb91-3" tabindex="-1"></a></span>
+<span id="cb91-4"><a href="inferential-statistics.html#cb91-4" tabindex="-1"></a>ward1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">150</span>, <span class="dv">155</span>, <span class="dv">160</span>, <span class="dv">158</span>) <span class="co">#Ward 1</span></span>
+<span id="cb91-5"><a href="inferential-statistics.html#cb91-5" tabindex="-1"></a>ward2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">163</span>, <span class="dv">165</span>, <span class="dv">172</span>, <span class="dv">174</span>) <span class="co">#Ward 2</span></span>
+<span id="cb91-6"><a href="inferential-statistics.html#cb91-6" tabindex="-1"></a>ward3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">178</span>, <span class="dv">172</span>, <span class="dv">183</span>, <span class="dv">153</span>) <span class="co">#Ward 3</span></span>
+<span id="cb91-7"><a href="inferential-statistics.html#cb91-7" tabindex="-1"></a></span>
+<span id="cb91-8"><a href="inferential-statistics.html#cb91-8" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb91-9"><a href="inferential-statistics.html#cb91-9" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(ward1, ward2, ward3),</span>
+<span id="cb91-10"><a href="inferential-statistics.html#cb91-10" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each =</span> <span class="dv">4</span>))</span>
+<span id="cb91-11"><a href="inferential-statistics.html#cb91-11" tabindex="-1"></a>)</span>
+<span id="cb91-12"><a href="inferential-statistics.html#cb91-12" tabindex="-1"></a>anova_result <span class="ot">&lt;-</span> <span class="fu">aov</span>(score <span class="sc">~</span> group, <span class="at">data =</span> data)</span>
+<span id="cb91-13"><a href="inferential-statistics.html#cb91-13" tabindex="-1"></a><span class="fu">summary</span>(anova_result)</span></code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## group        2  559.5  279.75   3.822 0.0629 .
+## Residuals    9  658.7   73.19                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div id="interpreting-anova-results" class="section level4 hasAnchor" number="7.1.3.1">
+<h4><span class="header-section-number">7.1.3.1</span> Interpreting ANOVA Results<a href="inferential-statistics.html#interpreting-anova-results" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>F-Value:</strong> Indicates the ratio of variance between the groups to the variance within the groups. A higher F-value suggests a greater likelihood that the group means are different.</li>
+<li><strong>P-Value:</strong> Indicates whether the group means are significantly different. A p-value less than 0.05 usually suggests that there is a significant difference among group means.</li>
+</ul>
+<p>In SPSS, p-values and confidence intervals are found in the output tables after running the analysis. In R, they appear in the results from the summary() function for ANOVA.</p>
+</div>
+<div id="post-hoc-anova-analysis-if-significant" class="section level4 hasAnchor" number="7.1.3.2">
+<h4><span class="header-section-number">7.1.3.2</span> Post-Hoc ANOVA Analysis (if significant)<a href="inferential-statistics.html#post-hoc-anova-analysis-if-significant" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>If the ANOVA test is significant, you may want to perform a post-hoc test to identify which specific groups differ from each other. A common post-hoc test is Tukey’s Honest Significant Difference (HSD) test.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="inferential-statistics.html#cb93-1" tabindex="-1"></a><span class="co"># Perform Tukey&#39;s HSD test for post-hoc analysis</span></span>
+<span id="cb93-2"><a href="inferential-statistics.html#cb93-2" tabindex="-1"></a>tukey_result <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(anova_result)</span>
+<span id="cb93-3"><a href="inferential-statistics.html#cb93-3" tabindex="-1"></a></span>
+<span id="cb93-4"><a href="inferential-statistics.html#cb93-4" tabindex="-1"></a><span class="co"># Print the results of Tukey&#39;s HSD test</span></span>
+<span id="cb93-5"><a href="inferential-statistics.html#cb93-5" tabindex="-1"></a><span class="fu">print</span>(tukey_result)</span></code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = score ~ group, data = data)
+## 
+## $group
+##      diff        lwr      upr     p adj
+## 2-1 12.75  -4.140416 29.64042 0.1431152
+## 3-1 15.75  -1.140416 32.64042 0.0670591
+## 3-2  3.00 -13.890416 19.89042 0.8750277</code></pre>
+<p><strong>Interpreting Tukey’s HSD Results</strong></p>
+<ul>
+<li><strong>Pairwise Comparisons:</strong> Tukey’s HSD provides pairwise comparisons between all groups. Significant differences are indicated where the confidence intervals for the difference between group means do not contain zero.</li>
+<li><strong>Adjusted p-Values:</strong> The test adjusts for multiple comparisons to control the family-wise error rate.</li>
+</ul>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>Local residents in 3 boroughs were asked to rate their confidence in the Metropolitan Police Service rating their scores from 0 to 10. The average score across a 3 month period is as follows.</p>
+<ul>
+<li>Kingston : 7.0, 7.5, 8.2</li>
+<li>Richmond : 8.3, 6.4, 7.9</li>
+<li>Sutton : 6.4, 4.5, 5.8</li>
+</ul>
+<p>Does the mean confidence level across the 3 month preiod differ between the three boroughs?</p>
+</div>
+</div>
+</div>
+</div>
+<div id="correlation-analysis" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Correlation Analysis<a href="inferential-statistics.html#correlation-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Correlation analysis measures the strength and direction of the relationship between two variables. The most common methods are Pearson and Spearman correlations, which are available in both SPSS and R.</p>
+<div id="pearson-correlation" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Pearson Correlation<a href="inferential-statistics.html#pearson-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Pearson correlation measures the linear relationship between two continuous variables. It’s equivalent to BIVARIATE CORRELATIONS in SPSS.</p>
+<p>For example, suppose you have data on the number of crimes reported and the number of police patrol hours in different beats and you want to see if there’s a linear relationship between these two variables.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="inferential-statistics.html#cb95-1" tabindex="-1"></a><span class="co"># Example: Pearson correlation</span></span>
+<span id="cb95-2"><a href="inferential-statistics.html#cb95-2" tabindex="-1"></a><span class="co"># Measuring the correlation between two continuous variables</span></span>
+<span id="cb95-3"><a href="inferential-statistics.html#cb95-3" tabindex="-1"></a></span>
+<span id="cb95-4"><a href="inferential-statistics.html#cb95-4" tabindex="-1"></a><span class="co"># Create example data: Crime rate and police patrol hours</span></span>
+<span id="cb95-5"><a href="inferential-statistics.html#cb95-5" tabindex="-1"></a>data_beat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb95-6"><a href="inferential-statistics.html#cb95-6" tabindex="-1"></a>  <span class="at">patrol_hours =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">25</span>, <span class="dv">40</span>, <span class="dv">35</span>, <span class="dv">45</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">55</span>, <span class="dv">65</span>),  <span class="co"># Hours of patrol</span></span>
+<span id="cb95-7"><a href="inferential-statistics.html#cb95-7" tabindex="-1"></a>  <span class="at">crime_rate =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">22</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">28</span>, <span class="dv">35</span>, <span class="dv">32</span>, <span class="dv">40</span>)     <span class="co"># Number of crimes</span></span>
+<span id="cb95-8"><a href="inferential-statistics.html#cb95-8" tabindex="-1"></a>)</span>
+<span id="cb95-9"><a href="inferential-statistics.html#cb95-9" tabindex="-1"></a></span>
+<span id="cb95-10"><a href="inferential-statistics.html#cb95-10" tabindex="-1"></a><span class="co"># View the dataset</span></span>
+<span id="cb95-11"><a href="inferential-statistics.html#cb95-11" tabindex="-1"></a><span class="fu">print</span>(data_beat)</span></code></pre></div>
+<pre><code>##    patrol_hours crime_rate
+## 1            20         15
+## 2            30         22
+## 3            25         18
+## 4            40         25
+## 5            35         20
+## 6            45         30
+## 7            50         28
+## 8            60         35
+## 9            55         32
+## 10           65         40</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="inferential-statistics.html#cb97-1" tabindex="-1"></a><span class="fu">cor</span>(data_beat<span class="sc">$</span>patrol_hours, data_beat<span class="sc">$</span>crime_rate, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 0.9766032</code></pre>
+<p><strong>Interpreting Pearson Correlation</strong></p>
+<ul>
+<li><strong>Correlation Coefficient (r):</strong> Ranges from -1 to 1. A value close to 1 indicates a strong positive correlation, while a value close to -1 indicates a strong negative correlation. A value around 0 suggests no linear correlation.</li>
+<li><strong>P-Value:</strong> Tests if the observed correlation is significantly different from zero.</li>
+</ul>
+<p>In SPSS, the correlation coefficient and p-value are reported together in a table. In R, these can be accessed using the cor.test() function if you need detailed statistical outputs.</p>
+</div>
+<div id="spearman-correlation" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Spearman Correlation<a href="inferential-statistics.html#spearman-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Spearman correlation is a non-parametric measure of rank correlation, useful when the data is not normally distributed or the relationship is not linear.</p>
+<p>We will use the same dataset to see if there is a monotonic relationship between crime rates and patrol hours.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="inferential-statistics.html#cb99-1" tabindex="-1"></a><span class="co"># Example: Spearman correlation</span></span>
+<span id="cb99-2"><a href="inferential-statistics.html#cb99-2" tabindex="-1"></a><span class="co"># Measuring the correlation between two variables using ranks</span></span>
+<span id="cb99-3"><a href="inferential-statistics.html#cb99-3" tabindex="-1"></a><span class="fu">cor</span>(data_beat<span class="sc">$</span>patrol_hours, data_beat<span class="sc">$</span>crime_rate, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 0.9757576</code></pre>
+<p><strong>Interpreting Spearman Correlation</strong></p>
+<ul>
+<li><strong>Spearman’s Rank Correlation Coefficient (ρ):</strong> Ranges from -1 to 1, similar to Pearson. It measures how well the relationship between two variables can be described by a monotonic function.</li>
+</ul>
+<p>In SPSS, the correlation coefficient and p-value are reported together in a table. In R, these can be accessed using the cor.test() function if you need detailed statistical outputs.</p>
+</div>
+<div id="pearson-vs-spearman" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> Pearson vs Spearman?<a href="inferential-statistics.html#pearson-vs-spearman" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pearson’s correlation coefficient is used when you want to measure the strength and direction of a linear relationship between two continuous variables that are normally distributed. It assesses how well the relationship between the variables can be described by a straight line. Use Pearson’s correlation when the data is interval or ratio and there is a linear relationship.</p>
+<p>Spearman’s rank correlation coefficient is suitable when the relationship between the variables is monotonic but not necessarily linear, or when the data does not meet the assumptions required for Pearson’s correlation, such as normality or interval scale. Spearman’s correlation assesses how well the relationship between the variables can be described by a monotonic function, which means it evaluates whether higher ranks in one variable correspond to higher ranks in another, regardless of the exact form of the relationship.</p>
+<p>In summary, use Pearson’s correlation for linear relationships with continuous data and Spearman’s correlation for monotonic relationships or when data is ordinal or not normally distributed.</p>
+</div>
+<div id="visualising-correlations" class="section level3 hasAnchor" number="7.2.4">
+<h3><span class="header-section-number">7.2.4</span> Visualising Correlations<a href="inferential-statistics.html#visualising-correlations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Visualising correlations can help in understanding the relationship between multiple variables. The corrplot package in R provides a convenient way to create correlation matrices.</p>
+<p>Using the same beat dataset used above.</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="inferential-statistics.html#cb101-1" tabindex="-1"></a><span class="co"># Example: Correlation matrix visualization</span></span>
+<span id="cb101-2"><a href="inferential-statistics.html#cb101-2" tabindex="-1"></a><span class="co"># Creating and visualizing a correlation matrix</span></span>
+<span id="cb101-3"><a href="inferential-statistics.html#cb101-3" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb101-4"><a href="inferential-statistics.html#cb101-4" tabindex="-1"></a></span>
+<span id="cb101-5"><a href="inferential-statistics.html#cb101-5" tabindex="-1"></a><span class="co"># Compute the correlation matrix</span></span>
+<span id="cb101-6"><a href="inferential-statistics.html#cb101-6" tabindex="-1"></a>cor_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(data_beat)</span>
+<span id="cb101-7"><a href="inferential-statistics.html#cb101-7" tabindex="-1"></a></span>
+<span id="cb101-8"><a href="inferential-statistics.html#cb101-8" tabindex="-1"></a><span class="co"># Visualize the correlation matrix</span></span>
+<span id="cb101-9"><a href="inferential-statistics.html#cb101-9" tabindex="-1"></a><span class="fu">corrplot</span>(cor_matrix, <span class="at">method =</span> <span class="st">&quot;circle&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<p><strong>Interpreting the Correlation Matrix Plot</strong></p>
+<ul>
+<li><strong>Colours and Sizes:</strong> Represent the strength and direction of the correlation. Positive correlations are typically shown in one colour and negative correlations in another.</li>
+<li><strong>Magnitude of Correlation:</strong> Larger circles or stronger colours indicate stronger correlations.</li>
+</ul>
+<div class="infobox caution">
+<p><strong>Exercise!</strong></p>
+<p>You have data on the number of community outreach programs conducted in 6 boroughs as well as the associated crime rates. You want to determine if there’s a linear relationship between these two variables. Use the data below to perform a correlation analysis.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Borough</th>
+<th>Community Programs</th>
+<th>Number of Crimes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Kingston</td>
+<td>4</td>
+<td>145</td>
+</tr>
+<tr class="even">
+<td>Merton</td>
+<td>5</td>
+<td>154</td>
+</tr>
+<tr class="odd">
+<td>Sutton</td>
+<td>8</td>
+<td>218</td>
+</tr>
+<tr class="even">
+<td>Croydon</td>
+<td>19</td>
+<td>255</td>
+</tr>
+<tr class="odd">
+<td>Lambeth</td>
+<td>17</td>
+<td>234</td>
+</tr>
+<tr class="even">
+<td>Wandsworth</td>
+<td>15</td>
+<td>189</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="conclusion-6" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Conclusion<a href="inferential-statistics.html#conclusion-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this chapter, you’ve learned how to perform common inferential statistical tests in R, including t-tests, chi-square tests, and ANOVA, as well as how to conduct and visualise correlation analyses. Each test has an equivalent function in SPSS, but R provides more flexibility and control over the analysis process. This chapter has laid the groundwork for applying these techniques to your own data analyses, building on your existing knowledge from SPSS.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="survey-analysis-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regression-analysis-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/07-inferential.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
