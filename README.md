@@ -83,7 +83,7 @@ Welcome to the "Introduction to R" book! This resource is designed specifically 
     
 ## How to Access
 
-You can access the full book online via the following link: [Introduction to R]([https://github.com/yourusername/your-repo-name](https://mopac-ds.github.io/LearningResource-Intro-to-R/)
+You can access the full book online via the following link: [Introduction to R](https://mopac-ds.github.io/LearningResource-Intro-to-R/)
 
 ## Installation
 
@@ -92,7 +92,7 @@ To view the book locally, you will need to clone this repository and render the 
 1. **Clone the Repository**
 
    ```bash
-   git clone [https://github.com/yourusername/your-repo-name.git](https://github.com/MOPAC-DS/LearningResource-Intro-to-R)
+   git clone [https://github.com/MOPAC-DS/LearningResource-Intro-to-R.git](https://github.com/MOPAC-DS/LearningResource-Intro-to-R)
    ```
    
 2. **Install Required Packages**
