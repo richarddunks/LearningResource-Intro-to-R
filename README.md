@@ -1,6 +1,6 @@
-# Introduction to R
+# Introduction to R for Crime Analysts
 
-Welcome to the "Introduction to R" book! This resource is designed specifically for crime analysts who are transitioning from SPSS to R. The book is published as a Bookdown project on GitHub and provides a comprehensive guide to getting started with R, including practical examples and tips tailored to crime analysis.
+Welcome to the "Introduction to R for Crime Analysts" book! This resource is designed specifically for crime analysts who are transitioning from SPSS to R. The book is published as a Bookdown project on GitHub and provides a comprehensive guide to getting started with R, including practical examples and tips tailored to crime analysis.
 
 ## Table of Contents
 
@@ -83,7 +83,7 @@ Welcome to the "Introduction to R" book! This resource is designed specifically 
     
 ## How to Access
 
-You can access the full book online via the following link: [Introduction to R](https://mopac-ds.github.io/LearningResource-Intro-to-R/)
+You can access the full book online via the following link: [Introduction to R for Crime Analysts](https://mopac-ds.github.io/LearningResource-Intro-to-R/)
 
 ## Installation
 
