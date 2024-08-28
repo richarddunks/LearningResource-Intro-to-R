@@ -593,7 +593,7 @@ Y = \beta_0 + \beta_1 X_1 + \epsilon
 <span id="cb110-3"><a href="regression-analysis-1.html#cb110-3" tabindex="-1"></a></span>
 <span id="cb110-4"><a href="regression-analysis-1.html#cb110-4" tabindex="-1"></a><span class="co">#Add horizontal line at y = 0</span></span>
 <span id="cb110-5"><a href="regression-analysis-1.html#cb110-5" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
 </div>
 <div id="assumption-2-normality-of-residuals" class="section level3 hasAnchor" number="8.4.2">
 <h3><span class="header-section-number">8.4.2</span> Assumption 2: Normality of Residuals<a href="regression-analysis-1.html#assumption-2-normality-of-residuals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -604,7 +604,7 @@ Y = \beta_0 + \beta_1 X_1 + \epsilon
 <span id="cb111-3"><a href="regression-analysis-1.html#cb111-3" tabindex="-1"></a></span>
 <span id="cb111-4"><a href="regression-analysis-1.html#cb111-4" tabindex="-1"></a><span class="co">#Add Q-Q line</span></span>
 <span id="cb111-5"><a href="regression-analysis-1.html#cb111-5" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">resid</span>(model_multiple), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
 </div>
 <div id="assumption-3-homoscedasticity" class="section level3 hasAnchor" number="8.4.3">
 <h3><span class="header-section-number">8.4.3</span> Assumption 3: Homoscedasticity<a href="regression-analysis-1.html#assumption-3-homoscedasticity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -612,7 +612,7 @@ Y = \beta_0 + \beta_1 X_1 + \epsilon
 <p><strong>How to Check:</strong> The Scale-Location plot helps diagnose this. Look for a horizontal line with equally spread points.</p>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="regression-analysis-1.html#cb112-1" tabindex="-1"></a><span class="co">#Plot Scale-Location plot</span></span>
 <span id="cb112-2"><a href="regression-analysis-1.html#cb112-2" tabindex="-1"></a><span class="fu">plot</span>(model_multiple, <span class="at">which =</span> <span class="dv">3</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
 </div>
 <div id="assumption-4-independence-of-errors" class="section level3 hasAnchor" number="8.4.4">
 <h3><span class="header-section-number">8.4.4</span> Assumption 4: Independence of Errors<a href="regression-analysis-1.html#assumption-4-independence-of-errors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -757,7 +757,7 @@ Y = \beta_0 + \beta_1 X_1 + \epsilon
 <span id="cb128-8"><a href="regression-analysis-1.html#cb128-8" tabindex="-1"></a><span class="fu">plot</span>(data_arrests<span class="sc">$</span>Police_On_Duty, logit,</span>
 <span id="cb128-9"><a href="regression-analysis-1.html#cb128-9" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Police on Duty&quot;</span>,</span>
 <span id="cb128-10"><a href="regression-analysis-1.html#cb128-10" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Logit of Predicted Probability&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
 <p>If the relationship is not linear, consider transforming the predictor or adding a nonlinear term.</p>
 </div>
 <div id="assumption-2-independence-of-observations" class="section level3 hasAnchor" number="8.7.2">

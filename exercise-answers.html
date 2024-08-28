@@ -676,7 +676,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb191-5"><a href="exercise-answers.html#cb191-5" tabindex="-1"></a><span class="fu">ggplot</span>(police_activity_data, <span class="fu">aes</span>(<span class="at">x =</span> Borough)) <span class="sc">+</span></span>
 <span id="cb191-6"><a href="exercise-answers.html#cb191-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
 <span id="cb191-7"><a href="exercise-answers.html#cb191-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Bar Chart Displaying the Number of Incidents in Each Borough in August 2024&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Borough&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Number of Incidents&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-131-1.png" width="672" />
+<p><img src="_main_files/figure-html/unnamed-chunk-134-1.png" width="672" />
 &gt; The NORTH borough had the most incidents in the period in question.</p>
 </div>
 <div id="exercise-5.3" class="section level3 unnumbered hasAnchor">
@@ -685,7 +685,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="exercise-answers.html#cb192-1" tabindex="-1"></a><span class="fu">ggplot</span>(police_activity_data, <span class="fu">aes</span>(<span class="at">x =</span> ResponseTime)) <span class="sc">+</span></span>
 <span id="cb192-2"><a href="exercise-answers.html#cb192-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">4</span>, <span class="at">fill =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb192-3"><a href="exercise-answers.html#cb192-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Histogram of Response Time&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Response Time (Minutes)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frequency&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
 <blockquote>
 <p>The histogram shows the distribution of response times, with most values concentrated between 8 and 16 minutes. The distribution appears roughly normal, with no strong skewness, indicating a fairly even spread of response times across this range. The tails on both sides are shorter, suggesting fewer instances of very short (less than 5 minutes) or very long (more than 20 minutes) response times.</p>
 </blockquote>
@@ -696,7 +696,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="exercise-answers.html#cb193-1" tabindex="-1"></a><span class="fu">ggplot</span>(police_activity_data, <span class="fu">aes</span>(<span class="at">x =</span> Borough, <span class="at">y =</span> ResponseTime)) <span class="sc">+</span></span>
 <span id="cb193-2"><a href="exercise-answers.html#cb193-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb193-3"><a href="exercise-answers.html#cb193-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Boxplot of Response Time by Borough&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Borough&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Response Time&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-133-1.png" width="672" />
+<p><img src="_main_files/figure-html/unnamed-chunk-136-1.png" width="672" />
 &gt; The EAST borough has the lowest MEDIAN RESPONSE TIME.
 &gt; The WEST borough had the smallest RANGE OF RESPONSE TIMES.</p>
 </div>
@@ -707,7 +707,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb194-2"><a href="exercise-answers.html#cb194-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb194-3"><a href="exercise-answers.html#cb194-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Boxplot of Response Time by Borough&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Borough&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Response Time&quot;</span>) <span class="sc">+</span></span>
 <span id="cb194-4"><a href="exercise-answers.html#cb194-4" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Pastel1&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
 </div>
 <div id="exercise-5.7" class="section level3 unnumbered hasAnchor">
 <h3>Exercise 5.7<a href="exercise-answers.html#exercise-5.7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -745,7 +745,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb197-3"><a href="exercise-answers.html#cb197-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Mean Response Time by Incident Type&quot;</span>,</span>
 <span id="cb197-4"><a href="exercise-answers.html#cb197-4" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Incident Type&quot;</span>,</span>
 <span id="cb197-5"><a href="exercise-answers.html#cb197-5" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Mean Response Time&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-139-1.png" width="672" /></p>
 </div>
 <div id="excerise-5.9" class="section level3 unnumbered hasAnchor">
 <h3>Excerise 5.9<a href="exercise-answers.html#excerise-5.9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -754,7 +754,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb198-2"><a href="exercise-answers.html#cb198-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb198-3"><a href="exercise-answers.html#cb198-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Borough) <span class="sc">+</span></span>
 <span id="cb198-4"><a href="exercise-answers.html#cb198-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Histogram of Incident Severity Faceted by Borough&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-140-1.png" width="672" /></p>
 <blockquote>
 <p>The distribution of incident severity is fairly consistent across all boroughs, with most incidents falling within the mid-range of severity on the severity scale.</p>
 </blockquote>
@@ -771,7 +771,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb199-7"><a href="exercise-answers.html#cb199-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb199-8"><a href="exercise-answers.html#cb199-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Scatter Plot of Number of Crimes Across August 2024 with Regression Line&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Date&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Number of Crimes&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-138-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-141-1.png" width="672" /></p>
 </div>
 </div>
 <div id="chapter-6" class="section level2 unnumbered hasAnchor">
@@ -1038,7 +1038,7 @@ Sutton : 6.4, 4.5, 5.8</p>
 <span id="cb239-6"><a href="exercise-answers.html#cb239-6" tabindex="-1"></a></span>
 <span id="cb239-7"><a href="exercise-answers.html#cb239-7" tabindex="-1"></a><span class="co"># Visualize the correlation matrix</span></span>
 <span id="cb239-8"><a href="exercise-answers.html#cb239-8" tabindex="-1"></a><span class="fu">corrplot</span>(cor_matrix, <span class="at">method =</span> <span class="st">&quot;circle&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-143-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-146-1.png" width="672" /></p>
 <blockquote>
 <p>There is a strong positive correlation between the number of crimes and the number of community outreach programmes.</p>
 </blockquote>
@@ -1139,17 +1139,17 @@ Sutton : 6.4, 4.5, 5.8</p>
 <span id="cb248-5"><a href="exercise-answers.html#cb248-5" tabindex="-1"></a><span class="fu">plot</span>(stepwise_model<span class="sc">$</span>fitted.values, <span class="fu">resid</span>(stepwise_model))</span>
 <span id="cb248-6"><a href="exercise-answers.html#cb248-6" tabindex="-1"></a><span class="co">#Add horizontal line at y = 0</span></span>
 <span id="cb248-7"><a href="exercise-answers.html#cb248-7" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-144-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-147-1.png" width="672" /></p>
 <div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="exercise-answers.html#cb249-1" tabindex="-1"></a><span class="do">## Normality of Residuals</span></span>
 <span id="cb249-2"><a href="exercise-answers.html#cb249-2" tabindex="-1"></a><span class="co">#Create a Q-Q plot</span></span>
 <span id="cb249-3"><a href="exercise-answers.html#cb249-3" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">resid</span>(stepwise_model))</span>
 <span id="cb249-4"><a href="exercise-answers.html#cb249-4" tabindex="-1"></a><span class="co">#Add Q-Q line</span></span>
 <span id="cb249-5"><a href="exercise-answers.html#cb249-5" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">resid</span>(stepwise_model), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-144-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-147-2.png" width="672" /></p>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="exercise-answers.html#cb250-1" tabindex="-1"></a><span class="do">## Heteroscedasticity</span></span>
 <span id="cb250-2"><a href="exercise-answers.html#cb250-2" tabindex="-1"></a><span class="co">#Plot Scale-Location plot</span></span>
 <span id="cb250-3"><a href="exercise-answers.html#cb250-3" tabindex="-1"></a><span class="fu">plot</span>(stepwise_model, <span class="at">which =</span> <span class="dv">3</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-144-3.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-147-3.png" width="672" /></p>
 <div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="exercise-answers.html#cb251-1" tabindex="-1"></a><span class="do">## Independence of Errors</span></span>
 <span id="cb251-2"><a href="exercise-answers.html#cb251-2" tabindex="-1"></a><span class="co">#Load the car library</span></span>
 <span id="cb251-3"><a href="exercise-answers.html#cb251-3" tabindex="-1"></a><span class="fu">library</span>(car)</span>
@@ -1172,7 +1172,7 @@ Sutton : 6.4, 4.5, 5.8</p>
 ##     select</code></pre>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="exercise-answers.html#cb256-1" tabindex="-1"></a><span class="co">#Perform the Box-Cox transformation</span></span>
 <span id="cb256-2"><a href="exercise-answers.html#cb256-2" tabindex="-1"></a>bc <span class="ot">&lt;-</span> <span class="fu">boxcox</span>(stepwise_model, <span class="at">lambda =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="at">by =</span> <span class="fl">0.1</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-144-4.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-147-4.png" width="672" /></p>
 <div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="exercise-answers.html#cb257-1" tabindex="-1"></a><span class="co">#Find the optimal lambda</span></span>
 <span id="cb257-2"><a href="exercise-answers.html#cb257-2" tabindex="-1"></a>optimal_lambda <span class="ot">&lt;-</span> bc<span class="sc">$</span>x[<span class="fu">which.max</span>(bc<span class="sc">$</span>y)]</span>
 <span id="cb257-3"><a href="exercise-answers.html#cb257-3" tabindex="-1"></a></span>
@@ -1323,7 +1323,7 @@ Sutton : 6.4, 4.5, 5.8</p>
 <span id="cb276-10"><a href="exercise-answers.html#cb276-10" tabindex="-1"></a><span class="fu">plot</span>(data_arrests<span class="sc">$</span>Police_On_Duty, logit,</span>
 <span id="cb276-11"><a href="exercise-answers.html#cb276-11" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Police on Duty&quot;</span>,</span>
 <span id="cb276-12"><a href="exercise-answers.html#cb276-12" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Logit of Predicted Probability&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-145-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-148-1.png" width="672" /></p>
 <div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="exercise-answers.html#cb277-1" tabindex="-1"></a><span class="co"># Multicolinearity</span></span>
 <span id="cb277-2"><a href="exercise-answers.html#cb277-2" tabindex="-1"></a><span class="co">#Calculate Variance Inflation Factors</span></span>
 <span id="cb277-3"><a href="exercise-answers.html#cb277-3" tabindex="-1"></a><span class="fu">vif</span>(model_logistic)</span></code></pre></div>
@@ -1366,7 +1366,7 @@ Sutton : 6.4, 4.5, 5.8</p>
 ## 6            Coombe Hill E05000406 Kingston upon Thames E09000021  442.170          0 POLYGON ((521296.5 172258.3...</code></pre>
 <div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="exercise-answers.html#cb283-1" tabindex="-1"></a><span class="co"># Plot the spatial data</span></span>
 <span id="cb283-2"><a href="exercise-answers.html#cb283-2" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(spatial_data))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-146-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-149-1.png" width="672" /></p>
 </div>
 <div id="exercise-9.2" class="section level3 unnumbered hasAnchor">
 <h3>Exercise 9.2<a href="exercise-answers.html#exercise-9.2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1386,7 +1386,7 @@ Sutton : 6.4, 4.5, 5.8</p>
 <span id="cb284-6"><a href="exercise-answers.html#cb284-6" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> <span class="fu">st_crs</span>(<span class="dv">4326</span>)) <span class="sc">+</span></span>
 <span id="cb284-7"><a href="exercise-answers.html#cb284-7" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Geographic Ward Level Plot of London&quot;</span>, <span class="at">subtitle =</span> <span class="st">&quot;With a Light Blue Marker Indicating MOPAC HQ&quot;</span>) <span class="sc">+</span></span>
 <span id="cb284-8"><a href="exercise-answers.html#cb284-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-147-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-150-1.png" width="672" /></p>
 </div>
 <div id="exercise-9.4" class="section level3 unnumbered hasAnchor">
 <h3>Exercise 9.4<a href="exercise-answers.html#exercise-9.4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1460,7 +1460,7 @@ Sutton : 6.4, 4.5, 5.8</p>
 <span id="cb287-13"><a href="exercise-answers.html#cb287-13" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
 <span id="cb287-14"><a href="exercise-answers.html#cb287-14" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Choropleth Map Displaying Voter Turnout at London Mayoral Election&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Voter Turnout&quot;</span>) <span class="sc">+</span></span>
 <span id="cb287-15"><a href="exercise-answers.html#cb287-15" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-149-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-152-1.png" width="672" /></p>
 
 </div>
 </div>

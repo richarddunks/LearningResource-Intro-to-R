@@ -467,25 +467,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">1.2.1</span> Flexibility and Power<a href="introduction.html#flexibility-and-power" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>R is a full-fledged programming language, which means it is inherently more flexible than SPSS. While SPSS provides a user-friendly interface with point-and-click options, R allows for a deeper level of customisation and control over your analyses. You can automate tasks, create reproducible reports, and even develop new statistical methods if needed.</p>
 <p><strong>Example:</strong> In SPSS, you might run a regression using a dialog box and then manually record the output. In R, you can automate this process, run multiple regressions in a loop, and automatically output the results to a report.</p>
-<p>(Add screenshot here showing a simple regression in SPSS vs. the equivalent R code in RStudio)</p>
 </div>
 <div id="reproducibility" class="section level3 hasAnchor" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> Reproducibility<a href="introduction.html#reproducibility" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Reproducibility is a cornerstone of modern data analysis. R’s script-based workflow ensures that every step of your analysis is documented, making it easy to reproduce results or adjust your analysis if new data becomes available. This contrasts with SPSS, where much of the analysis is done through a GUI, making it harder to track and reproduce each step without explicitly saving syntax files.</p>
 <p><strong>Example: </strong> In R, you can save your entire analysis pipeline in a script, which can be rerun with new data or shared with colleagues for replication.</p>
-<p>(Add screenshot here of an R script performing a series of analyses)</p>
 </div>
 <div id="extensive-community-and-package-ecosystem" class="section level3 hasAnchor" number="1.2.3">
 <h3><span class="header-section-number">1.2.3</span> Extensive Community and Package Ecosystem<a href="introduction.html#extensive-community-and-package-ecosystem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>One of R’s greatest strengths is its vast and active community, which has contributed thousands of packages to CRAN (the Comprehensive R Archive Network). Whether you need advanced statistical techniques, machine learning algorithms, or specialised visualisations, there’s likely an R package available. This is in contrast to SPSS, where functionality is often limited to what is provided out-of-the-box or through costly add-ons.</p>
 <p><strong>Example:</strong> In R, you might use the ggplot2 package for advanced visualisations, dplyr for data manipulation, or survey for complex survey analysis. In SPSS, creating custom visualisations or handling complex survey designs might require more manual effort or external software.</p>
-<p>(Add screenshot here comparing a complex SPSS output to an R ggplot2 graph)</p>
 </div>
 <div id="cost" class="section level3 hasAnchor" number="1.2.4">
 <h3><span class="header-section-number">1.2.4</span> Cost<a href="introduction.html#cost" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>R is completely free and open-source, which is a significant advantage over SPSS, especially for organisations with budget constraints. This means you can install R on as many computers as you need, share it with colleagues, and access the latest updates and packages without any cost.</p>
 <p><strong>Example:</strong> Many organisations are moving to R not only because of its capabilities but also because it reduces software costs significantly.</p>
-<p>(Add screenshot here of the RStudio interface with a note about its cost-free nature)</p>
 </div>
 </div>
 <div id="replicating-spss-functionality-in-r" class="section level2 hasAnchor" number="1.3">
@@ -495,31 +491,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">1.3.1</span> Data Management<a href="introduction.html#data-management" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In SPSS, data management tasks such as merging datasets, recoding variables, or selecting cases are performed using a series of dialog boxes or syntax commands. In R, these tasks are handled with functions and packages like dplyr, which offer intuitive syntax for manipulating data.</p>
 <p><strong>Example:</strong> Recoding variables in SPSS might require several steps in the GUI, while in R, you can accomplish the same with a single line of code using mutate() and case_when().</p>
-<p>(Add screenshot here comparing recoding in SPSS vs. using dplyr in R)</p>
 </div>
 <div id="descriptive-statistics" class="section level3 hasAnchor" number="1.3.2">
 <h3><span class="header-section-number">1.3.2</span> Descriptive Statistics<a href="introduction.html#descriptive-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Both SPSS and R allow you to calculate descriptive statistics such as means, medians, and standard deviations. In R, you can use basic functions like mean() and sd(), or you can employ packages like psych or skimr for more detailed summaries.</p>
 <p><strong>Example:</strong> Descriptive statistics in SPSS are often displayed in tables generated by the <code>DESCRIPTIVES</code> command, whereas in R, you can achieve this with a simple script, and even automate it for multiple variables.</p>
-<p>(Add screenshot here of SPSS descriptive statistics vs. R output)</p>
 </div>
 <div id="statistical-tests" class="section level3 hasAnchor" number="1.3.3">
 <h3><span class="header-section-number">1.3.3</span> Statistical Tests<a href="introduction.html#statistical-tests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>SPSS is known for its user-friendly interfaces for running statistical tests. In R, all the same tests (t-tests, ANOVA, chi-square, etc.) are available, and you can conduct them using straightforward commands.</p>
 <p><strong>Example:</strong> Running a t-test in SPSS involves navigating through multiple menus, while in R, the same test can be executed with a simple t.test() function.</p>
-<p>(Add screenshot here comparing SPSS’s t-test dialog box with the R command)</p>
 </div>
 <div id="regression-analysis" class="section level3 hasAnchor" number="1.3.4">
 <h3><span class="header-section-number">1.3.4</span> Regression Analysis<a href="introduction.html#regression-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Regression analysis, a staple of SPSS, is fully supported in R. Whether you’re running simple linear regressions or more complex logistic regressions, R provides the tools you need. The <code>lm()</code> function is used for linear models, while <code>glm()</code> handles generalised linear models, including logistic regression.</p>
 <p><strong>Example:</strong> In SPSS, you might need to manually specify each option in the regression dialog box. In R, you have the flexibility to customise your models directly in code, making it easy to adjust your analysis as needed.</p>
-<p>(Add screenshot here of a regression output in SPSS and the equivalent R code)</p>
 </div>
 <div id="data-visualisation" class="section level3 hasAnchor" number="1.3.5">
 <h3><span class="header-section-number">1.3.5</span> Data Visualisation<a href="introduction.html#data-visualisation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>While SPSS provides basic charting capabilities, R, with its ggplot2 package, is unmatched in the realm of data visualisation. You can create everything from simple bar charts to complex multi-faceted plots, with full control over every aspect of the appearance.</p>
 <p><strong>Example:</strong> A simple bar chart in SPSS might look quite basic, whereas in R, you can use ggplot2 to add layers, colors, themes, and annotations to create publication-quality graphics.</p>
-<p>(Add screenshot here comparing an SPSS bar chart with a ggplot2 bar chart in R)</p>
 </div>
 </div>
 <div id="transitioning-from-spss-to-r" class="section level2 hasAnchor" number="1.4">
@@ -529,19 +520,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">1.4.1</span> Building Confidence in R<a href="introduction.html#building-confidence-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ll start with simple tasks, such as descriptive statistics and data manipulation, gradually moving to more advanced topics like regression analysis and survey data handling. By building on your existing knowledge of SPSS, you’ll find that learning R is not as daunting as it might seem.</p>
 <p><strong>Example:</strong> We’ll compare SPSS and R workflows for common tasks, showing how R can simplify and enhance your analytical processes.</p>
-<p>(Add screenshot here of a side-by-side comparison of an SPSS task and its R equivalent)</p>
 </div>
 <div id="leveraging-rs-ecosystem" class="section level3 hasAnchor" number="1.4.2">
 <h3><span class="header-section-number">1.4.2</span> Leveraging R’s Ecosystem<a href="introduction.html#leveraging-rs-ecosystem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>One of the goals of this course is to familiarise you with the rich ecosystem of R packages. We’ll introduce you to some of the most useful packages for data analysis, showing how they can replace or enhance the tools you’re used to in SPSS.</p>
 <p><strong>Example:</strong> For instance, you’ll see how <code>dplyr</code> can streamline your data manipulation tasks, or how <code>ggplot2</code> can elevate your data visualisation.</p>
-<p>(Add screenshot here of a few key R package logos or interfaces)</p>
 </div>
 </div>
 <div id="conclusion" class="section level2 hasAnchor" number="1.5">
 <h2><span class="header-section-number">1.5</span> Conclusion<a href="introduction.html#conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As you proceed through this course, you’ll gain the skills needed to replicate and enhance the analyses you currently perform in SPSS. Each chapter will build on the previous ones, gradually expanding your knowledge and capabilities in R. By the end of this book, you’ll be able to handle all your data analysis tasks in R with confidence, taking full advantage of its flexibility, power, and vast ecosystem of packages.</p>
-<p>(Add a final screenshot or image to inspire confidence and readiness, such as a completed analysis workflow in RStudio)</p>
 
 </div>
 </div>

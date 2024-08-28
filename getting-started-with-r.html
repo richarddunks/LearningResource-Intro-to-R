@@ -467,7 +467,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong>Environment/History Pane:</strong> The Environment pane shows the objects (e.g., data frames, variables) in your current R session. The History tab logs commands you’ve executed.</p></li>
 <li><p><strong>Files/Plots/Packages/Help Pane:</strong> This multi-functional pane lets you manage files, view plots, install/load packages, and access R’s help system.</p></li>
 </ul>
-<p>(Add screenshot here of the RStudio interface highlighting these components)</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<img src="images/RStudio_Overview.png" alt="RStudio IDE Layout" width="960" />
+<p class="caption">
+Figure 2.1: RStudio IDE Layout
+</p>
+</div>
 </div>
 <div id="console-vs.-scripts-vs.-notebooks" class="section level3 hasAnchor" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Console vs. Scripts vs. Notebooks<a href="getting-started-with-r.html#console-vs.-scripts-vs.-notebooks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -476,7 +481,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>Scripts:</strong> These are text files with R code that you can save and run as needed. Scripts are useful for documenting your workflow and making analyses reproducible.</li>
 <li><strong>Notebooks:</strong> R Notebooks combine code, output, and markdown text in one document. They are great for creating interactive reports and combining narrative with code.</li>
 </ul>
-<p>(Add screenshot here showing examples of the Console, Script Editor, and a simple R Notebook)</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
+<img src="images/RStudio_RScript.png" alt="Example R Script" width="752" />
+<p class="caption">
+Figure 2.2: Example R Script
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="images/RStudio_RNotebook.png" alt="Example R Notebook with Text, Code, and Output Areas Labelled" width="744" />
+<p class="caption">
+Figure 2.3: Example R Notebook with Text, Code, and Output Areas Labelled
+</p>
+</div>
 </div>
 </div>
 <div id="introduction-to-r-packages-and-installing-key-packages" class="section level2 hasAnchor" number="2.2">
@@ -531,6 +547,7 @@ of package names to <code>install.packages()</code>:</p>
 </div>
 <div id="coding-conventions-and-best-practices" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> Coding Conventions and Best Practices<a href="getting-started-with-r.html#coding-conventions-and-best-practices" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section we briefly touch on coding conventions and best practices. However, we recommend you check out our other book on the <a href="https://mopac-ds.github.io/Learning-Resource-Best-Coding-Practices-in-R/index.html">Best Coding Practices in R</a>.</p>
 <div id="writing-clean-and-readable-code" class="section level3 hasAnchor" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Writing Clean and Readable Code<a href="getting-started-with-r.html#writing-clean-and-readable-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Good coding practices enhance readability and maintainability. Here are some guidelines:</p>
@@ -567,7 +584,6 @@ of package names to <code>install.packages()</code>:</p>
 <span id="cb8-8"><a href="getting-started-with-r.html#cb8-8" tabindex="-1"></a></span>
 <span id="cb8-9"><a href="getting-started-with-r.html#cb8-9" tabindex="-1"></a><span class="co"># Data preparation</span></span>
 <span id="cb8-10"><a href="getting-started-with-r.html#cb8-10" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data.csv&quot;</span>)</span></code></pre></div>
-<p>(Add screenshot here of a well-commented and structured R script)</p>
 </div>
 </div>
 <div id="data-types-and-structures" class="section level2 hasAnchor" number="2.4">
@@ -589,7 +605,6 @@ of package names to <code>install.packages()</code>:</p>
 <p><strong>Factors:</strong> Used for categorical data. They store both the values and the corresponding levels.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="getting-started-with-r.html#cb12-1" tabindex="-1"></a><span class="co"># Creating a factor</span></span>
 <span id="cb12-2"><a href="getting-started-with-r.html#cb12-2" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>))</span></code></pre></div>
-<p>(Add screenshot here showing examples of each data type and structure in R)</p>
 </div>
 <div id="comparing-r-data-types-to-spss-data-types" class="section level3 hasAnchor" number="2.4.2">
 <h3><span class="header-section-number">2.4.2</span> Comparing R Data Types to SPSS Data Types<a href="getting-started-with-r.html#comparing-r-data-types-to-spss-data-types" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -605,7 +620,6 @@ of package names to <code>install.packages()</code>:</p>
 <li><strong>Lists</strong> provide more flexibility compared to SPSS’s data structures.</li>
 <li><strong>Factors</strong> are used for categorical data, similar to SPSS’s categorical variables.</li>
 </ul>
-<p>(Add screenshot here comparing SPSS data types and structures to their R equivalents)</p>
 </div>
 </div>
 <div id="basic-operations-and-functions-in-r" class="section level2 hasAnchor" number="2.5">
@@ -623,7 +637,6 @@ of package names to <code>install.packages()</code>:</p>
 <p><strong>Exercise!</strong></p>
 <p>Execute these operations in R and compare with results from SPSS’s Compute function. Can you do this in both the console and the script editor?</p>
 </div>
-<p>(Add screenshot here showing arithmetic operations in R and their SPSS equivalents)</p>
 </div>
 <div id="logical-operations" class="section level3 hasAnchor" number="2.5.2">
 <h3><span class="header-section-number">2.5.2</span> Logical Operations<a href="getting-started-with-r.html#logical-operations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -638,7 +651,6 @@ of package names to <code>install.packages()</code>:</p>
 <p><strong>Exercise!</strong></p>
 <p>Test these logical operations in R and compare them to SPSS’s logical operators.</p>
 </div>
-<p>(Add screenshot here showing logical operations in R and their SPSS equivalents)</p>
 </div>
 <div id="basic-functions" class="section level3 hasAnchor" number="2.5.3">
 <h3><span class="header-section-number">2.5.3</span> Basic Functions<a href="getting-started-with-r.html#basic-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -653,13 +665,11 @@ of package names to <code>install.packages()</code>:</p>
 <p><strong>Exercise!</strong></p>
 <p>Between January 2023 and December 2023 the number of Violent and Sexual Offences in Wandsworth were as follows: 568, 568, 603, 604, 685, 871, 697, 608, 657, 681, 630, and 720. (1) Create a vector representing the number of Violent and Sexual Offences in Wandsworth. (2) What was the mean number of crimes each month? (3) What was the total number of crimes across the year? (4) What is the length of the vector?</p>
 </div>
-<p>(Add screenshot here showing the use of basic functions in R and their SPSS equivalents)</p>
 </div>
 </div>
 <div id="conclusion-1" class="section level2 hasAnchor" number="2.6">
 <h2><span class="header-section-number">2.6</span> Conclusion<a href="getting-started-with-r.html#conclusion-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this chapter, you’ve learned about the RStudio interface, how to import data from SPSS, coding conventions, and the basics of R data types, structures, and operations. With this foundation, you’re prepared to start working with data in R and leveraging its powerful capabilities for analysis. In the next chapter, we’ll delve into more advanced data manipulation techniques to further enhance your skills.</p>
-<p>(Add a final screenshot or image to reinforce the concepts covered, such as a completed script with various operations in R)</p>
 
 </div>
 </div>

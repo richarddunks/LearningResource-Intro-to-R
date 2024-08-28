@@ -494,7 +494,7 @@ You can explore Spatial Data by using the <code>head()</code> command and previe
 <p><strong>Exercise!</strong></p>
 <p>Recreate these steps using the 2018 London Wards Shapefiles available at <a href="https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london">Statistical GIS Boundary Files for London</a>. You should get the output shown below.</p>
 <pre><code>## Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.3.1; sf_use_s2() is TRUE</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
 </div>
 </div>
 </div>
@@ -559,7 +559,7 @@ You can explore Spatial Data by using the <code>head()</code> command and previe
 <span id="cb149-4"><a href="geographic-mapping-and-spatial-analysis.html#cb149-4" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> spatial_data) <span class="sc">+</span></span>
 <span id="cb149-5"><a href="geographic-mapping-and-spatial-analysis.html#cb149-5" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
 <span id="cb149-6"><a href="geographic-mapping-and-spatial-analysis.html#cb149-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
 <p><strong>Adding Data Points to a Map:</strong></p>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="geographic-mapping-and-spatial-analysis.html#cb150-1" tabindex="-1"></a><span class="co"># Assuming data_points is a data frame with longitude and latitude columns</span></span>
 <span id="cb150-2"><a href="geographic-mapping-and-spatial-analysis.html#cb150-2" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -599,7 +599,7 @@ You can explore Spatial Data by using the <code>head()</code> command and previe
 <span id="cb153-4"><a href="geographic-mapping-and-spatial-analysis.html#cb153-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;London Ward Map Coloured by Ward Size&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;HECTARES&quot;</span>) <span class="sc">+</span></span>
 <span id="cb153-5"><a href="geographic-mapping-and-spatial-analysis.html#cb153-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb153-6"><a href="geographic-mapping-and-spatial-analysis.html#cb153-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
 </div>
 </div>
 <div id="spatial-analysis" class="section level2 hasAnchor" number="9.4">
@@ -761,7 +761,7 @@ Given a list of points you may want to identify which polygon they fall in. This
 <span id="cb163-10"><a href="geographic-mapping-and-spatial-analysis.html#cb163-10" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
 <span id="cb163-11"><a href="geographic-mapping-and-spatial-analysis.html#cb163-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Choropleth Map of Employment Rates Across London&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Employment Rate&quot;</span>) <span class="sc">+</span></span>
 <span id="cb163-12"><a href="geographic-mapping-and-spatial-analysis.html#cb163-12" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
 <div class="infobox caution">
 <p><strong>Exercise!</strong></p>
 <p>Create a choropleth map of London visualising the <code>Turnout.at.Mayoral.election...2012</code>.</p>
